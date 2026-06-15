@@ -13,24 +13,10 @@
         <%= f.text_field :name, autofocus: true, class: "form-control" %>
       </div>
 
-      <!-- 
       <div class="form-group">
-        <%= f.label :student_id, "生徒ID", class: "form-label" %>
-        <%= f.text_field :student_id, class: "form-control" %>
+        <%= f.label :email, "メール", class: "form-label" %>
+        <%= f.email_field :email, autofocus: true, class: "form-control" %>
       </div>
-      -->
-
-      <!-- 
-      <div class="form-group">
-        <%= f.label :eiken_level, "英検取得級*", class: "form-label" %>
-
-        <%= f.select :eiken_level,
-          [["まだ取得していない"], ["英検5級"], ["英検4級"], ["英検3級"],
-          ["英検準2級"], ["英検準2プラス級"], ["英検2級"], ["英検準1級"], ["英検1級"]],
-          { prompt: "選択してください" },
-          class: "form-select" %>
-      </div>
-      -->
 
       <!-- パスワード -->
       <div class="form-group">
