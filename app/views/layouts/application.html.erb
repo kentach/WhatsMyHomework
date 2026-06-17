@@ -18,10 +18,6 @@
   </head>
 
   <body>
-      <% if controller_name == "static_pages" && action_name == "top" && !user_signed_in? %>
-        <%= render "static_pages/before_login_page" %>
-      <% else %>
-        <%= yield %>
-    <% end %>
+    <%= yield %>
   </body>
 </html>
