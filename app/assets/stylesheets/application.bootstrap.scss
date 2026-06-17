@@ -1,7 +1,12 @@
 @import 'bootstrap/scss/bootstrap';
 @import 'bootstrap-icons/font/bootstrap-icons';
+
+//ヘッダー
+@import 'header/after_login_header';
+@import 'header/before_login_header';
+
 @import 'before_login';
 @import 'footer';
-@import 'hamburger_menu';
+
 
 

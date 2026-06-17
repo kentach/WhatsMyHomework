@@ -1,8 +1,8 @@
 <section class="lp-page-container">
   <div class="logo-header">
     <div class="logo">
-      <%= image_tag "/logo.png", alt: "HomeWork", width: "50px", height: "50px" %>
-      <h1>HomeWork</h1>
+      <%= image_tag "/logo.png", alt: "What's My Homework?", width: "50px", height: "50px" %>
+      <h1>What's My Homework?</h1>
     </div>
     <i class="fa-solid fa-list-ul"></i>
   </div>
@@ -11,7 +11,7 @@
       <ul>
         <li class="nav-item">
         <i class="fa-solid fa-user-plus"></i>
-          <%= link_to "#",
+          <%= link_to new_user_registration_path,
               class: "nav-link" do %>
             新規登録
           <% end %>
@@ -19,7 +19,7 @@
         
         <li class="nav-item">
         <i class="fa-solid fa-right-to-bracket"></i>
-          <%= link_to "#",
+          <%= link_to new_user_session_path,
               class: "nav-link" do %>
             ログイン
           <% end %>
@@ -34,11 +34,11 @@
     <div class="login-btn">
       <div class="cta-section-buttons fade-up delay-1 mt-5">
         <%= link_to "今すぐ始める",
-          "#",
+          new_user_registration_path,
           class: "btn btn-lg btn-cta-primary rounded-pill fw-bold shadow" %>
 
         <%= link_to "ログインする",
-          "#",
+          new_user_session_path,
           class: "btn btn-lg btn-cta-outline rounded-pill fw-bold" %>
       </div>
     </div>
@@ -147,7 +147,7 @@
       <p>宿題管理、始めませんか？</p>
       <div class="cta-section-buttons mt-5">
         <%= link_to "今すぐ始める",
-          "#",
+          new_user_registration_path,
           class: "btn btn-lg btn-cta-primary rounded-pill fw-bold shadow" %>
       </div>
   </div>

@@ -1,0 +1,232 @@
+/* =========================
+  LOGO
+========================= */
+.logo-area_after_login {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+/* =========================
+  HEADER
+========================= */
+.header_after_login {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 18px;
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  max-width: calc(100% - 40px);
+
+  @media (max-width: 768px) {
+    top: 12px;
+    left: 12px;
+    padding: 3px 14px;
+    max-width: calc(100% - 80px);
+    border-radius: 14px;
+  }
+
+  @media (max-width: 480px) {
+    top: 12px;
+    left: 12px;
+    padding: 2px 12px;
+    max-width: calc(100% - 72px);
+  }
+}
+
+/* =========================
+  HEADER CONTAINER
+========================= */
+.header-container_after_login {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+/* =========================
+  LOGO TEXT
+========================= */
+.logo-text_after_login {
+  font-size: 21px;
+  font-weight: bold;
+  color: #333;
+  text-decoration: none;
+  white-space: nowrap;
+  letter-spacing: 1px;
+  font-family: 'Helvetica Neue', 'Arial', 'YuGothic', 'Hiragino Kaku Gothic ProN', sans-serif;
+
+  @media (max-width: 768px) {
+    font-size: 16px;
+    letter-spacing: 0.5px;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 14px;
+  }
+}
+
+/* =========================
+  HAMBURGER
+========================= */
+.hamburger_after_login {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 44px;
+  height: 44px;
+  padding: 8px;
+  background: #fff;
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  -webkit-tap-highlight-color: transparent;
+  cursor: pointer;
+
+  @media (max-width: 768px) {
+    top: 12px;
+    right: 12px;
+    width: 40px;
+    height: 40px;
+    padding: 8px;
+  }
+
+  @media (max-width: 480px) {
+    top: 12px;
+    right: 12px;
+    width: 40px;
+    height: 40px;
+    padding: 8px;
+  }
+}
+
+.hamburger_after_login span {
+  width: 100%;
+  height: 3px;
+  background: #ff4545;
+  border-radius: 2px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.hamburger_after_login.active span:nth-child(1) {
+  transform: translateY(10px) rotate(45deg);
+}
+
+.hamburger_after_login.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger_after_login.active span:nth-child(3) {
+  transform: translateY(-10px) rotate(-45deg);
+}
+
+/* =========================
+  SIDE MENU
+========================= */
+.side-menu_after_login {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 360px;
+  height: 100vh;
+  padding-top: 80px;
+  background: #fff;
+  z-index: 1700;
+  box-shadow: -2px 0 8px rgba(0, 0, 0, 0.3);
+  transition: right 0.4s ease;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  display: flex;
+  flex-direction: column;
+
+  @media (max-width: 480px) {
+    width: 100%;
+    padding-top: 70px;
+  }
+}
+
+.side-menu_after_login.open {
+  right: 0;
+}
+
+/* =========================
+  MENU LINKS
+========================= */
+.side-menu_after_login a,
+.menu-link_after_login {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 20px;
+  font-size: 1.3rem;
+  font-family: 'Helvetica Neue', 'Arial', 'YuGothic', 'Hiragino Kaku Gothic ProN', sans-serif;
+  color: inherit;
+  text-decoration: none;
+  transition: background 0.2s ease;
+
+  @media (max-width: 768px) {
+    font-size: 1rem;
+    padding: 16px 20px;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 0.95rem;
+    padding: 18px 20px;
+  }
+}
+
+@media (hover: hover) {
+  .side-menu_after_login a:hover,
+  .menu-link_after_login:hover {
+    color: #ff4545;
+    background: #f5f5f5;
+  }
+}
+
+/* =========================
+  ICON
+========================= */
+.side-menu_after_login i {
+  font-size: 1.3rem;
+  opacity: 0.85;
+
+  @media (max-width: 768px) {
+    font-size: 1.1rem;
+  }
+}
+
+/* =========================
+  OVERLAY
+========================= */
+.menu-overlay_after_login {
+  position: fixed;
+  inset: 0;
+  z-index: 1400;
+  background: rgba(0, 0, 0, 0.35);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.menu-overlay_after_login.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hamburger_after_login span,
+  .side-menu_after_login,
+  .menu-overlay_after_login {
+    transition: none;
+  }
+}
