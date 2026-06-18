@@ -5,7 +5,7 @@
   <header class="homework-show-header">
     <div class="homework-show-header-inner">
       <div class="show-top">
-        <span class="hero-badge"><%= @homework.classroom.eiken_level %></span>
+        <span class="hero-badge"><%= @homework.classroom.name %></span>
         <div class="show-top-actions">
         </div>
       </div>
@@ -22,11 +22,6 @@
         </div>
       </div>
     </div>
-
-    <%# 進捗バー %>
-    <div class="show-progress-track">
-      <div class="show-progress-fill" id="showProgressFill"></div>
-    </div>
   </header>
 
   <%# ── ボディ ── %>
@@ -39,7 +34,7 @@
         <span class="show-summary-label">完了</span>
       </div>
       <div class="show-summary-card">
-        <span class="show-summary-num" id="showTotalCount"></span>
+        <span class="show-summary-num" id="showTotalCount"><%= @tasks.size %></span>
         <span class="show-summary-label">合計</span>
       </div>
       <div class="show-summary-msg" id="showProgressMsg">一つずつこなしていこう！</div>
@@ -49,7 +44,7 @@
     <div class="task-list">
       <div class="task-list-header">
         <h3>宿題リスト</h3>
-        <span class="task-list-count">タスク</span>
+        <span class="task-list-count"><%= @tasks.size %> タスク</span>
       </div>
 
       <div class="test-info">
@@ -59,6 +54,15 @@
         </ul>
       </div>
 
+      <% @tasks.each do |task| %>
+        <div id="task-<%= task.id %>" class="task-item">
+          <label class="task-check-wrap">
+            <div id="completed-button-for-task-<%= task.id %>">
+            </div>
+            <span class="task-name"><%= task.name %></span>
+          </label>
+        </div>
+      <% end %>
     </div>
 
     <%= link_to homeworks_path, class: "back-link" do %>

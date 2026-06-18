@@ -11,5 +11,6 @@ class HomeworksController < ApplicationController
 
   def show
     @homework = Homework.find(params[:id])
+    @tasks = @homework.tasks
   end
 end
