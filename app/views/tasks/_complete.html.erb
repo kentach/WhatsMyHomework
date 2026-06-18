@@ -21,7 +21,7 @@
               <div id="task-<%= task.id %>" class="task-item completed">
                 <label class="task-check-wrap">
                   <div id="completed-button-for-task-<%= task.id %>">
-                  
+                    <%= render "task_completions/completed_button", task: task %>
                   </div>
                   <span class="task-name"><%= task.name %></span>
                 </label>

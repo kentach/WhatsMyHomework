@@ -1,0 +1,38 @@
+.completed-btn {
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.2s ease;
+}
+
+.completed-btn i {
+  font-size: 28px;
+  transition: all 0.2s ease;
+}
+
+/* 未完了 */
+.completed-btn .fa-regular {
+  color: #d1d5db;
+}
+
+/* ホバー */
+.completed-btn:hover .fa-regular {
+  color: #22c55e;
+  transform: scale(1.1);
+}
+
+/* 完了 */
+.completed-btn .fa-solid {
+  color: #22c55e;
+}
+
+/* 完了済みホバー */
+.completed-btn:hover .fa-solid {
+  transform: scale(1.1);
+}

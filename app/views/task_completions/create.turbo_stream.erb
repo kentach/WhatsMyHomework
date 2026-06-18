@@ -1,0 +1,12 @@
+<%= turbo_stream.replace "task-#{@task.id}" do %>
+  <div id="task-<%= @task.id %>" class="task-item <%= 'completed' if current_user.completed?(@task) %>">
+
+    <label class="task-check-wrap">
+      <div id="completed-button-for-task-<%= @task.id %>">
+        <%= render 'task_completions/completed_button', task: @task %>
+        
+      </div>
+      <span class="task-name"><%= @task.name %></span>
+    </label>
+  </div>
+<% end %>
