@@ -19,24 +19,7 @@
       <span class="show-summary-label">合計</span>
     </div>
 
-    <div class="show-summary-msg" id="showProgressMsg">
-      <% if total.zero? %>
-        タスクがありません
-      <% elsif done == total %>
-        全部完了！よく頑張ったね
-      <% else %>
-        一つずつこなしていこう！
-      <% end %>
-    </div>
-
   </div>
-
-  <!-- タブ -->
-    <div class="task-index-tabs">
-      <button class="task-index-tab active" data-tab="all">すべて</button>
-      <button class="task-index-tab" data-tab="incomplete">未完了</button>
-      <button class="task-index-tab" data-tab="completed">完了</button>
-    </div>
 
   <!-- =========================
       タスク一覧
@@ -54,27 +37,12 @@
       </ul>
     </div>
 
-    <!-- タスク -->
-    <% @tasks.each do |task| %>
-      <% status = current_user.completed?(task) ? "completed" : "incomplete" %>
-
-      <div id="task-<%= task.id %>"
-           class="task-index-<%= 'completed' if status == 'completed' %>"
-           data-status="<%= status %>">
-
-        <label class="task-index-check-wrap">
-
-          <div id="completed-button-for-task-<%= task.id %>">
-            <%= render "task_completions/completed_button", task: task %>
-          </div>
-
-          <span class="task-index-name">
-            <%= task.name %>
-          </span>
-
-        </label>
-      </div>
-    <% end %>
+    <!-- タブ -->
+    <div class="task-index-tabs">
+      <button class="task-index-tab active" data-tab="all">すべて</button>
+      <button class="task-index-tab" data-tab="incomplete">未完了</button>
+      <button class="task-index-tab" data-tab="completed">完了</button>
+    </div>
 
   </div>
 </div>

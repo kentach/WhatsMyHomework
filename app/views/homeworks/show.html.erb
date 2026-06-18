@@ -27,19 +27,6 @@
   <%# ── ボディ ── %>
   <div class="homework-show-body">
 
-    <%# 進捗サマリ %>
-    <div class="show-summary-row">
-      <div class="show-summary-card">
-        <span class="show-summary-num" id="showDoneCount">0</span>
-        <span class="show-summary-label">完了</span>
-      </div>
-      <div class="show-summary-card">
-        <span class="show-summary-num" id="showTotalCount"><%= @tasks.size %></span>
-        <span class="show-summary-label">合計</span>
-      </div>
-      <div class="show-summary-msg" id="showProgressMsg">一つずつこなしていこう！</div>
-    </div>
-
     <%# タスク一覧 %>
     <div class="homework-show-task-list">
       <div class="homework-show-task-list-header">
@@ -50,7 +37,6 @@
       <div class="homework-show-test-info">
         <ul>
           <li>📌 授業前に宿題を必ずチェックしよう！</li>
-          <li>✅ 宿題が終わったらチェックを入れよう！</li>
         </ul>
       </div>
 
@@ -59,7 +45,10 @@
           <label class="homework-show-task-check-wrap">
             <div id="homework-show-completed-button-for-task-<%= task.id %>">
             </div>
-            <span class="homework-show-task-name"><%= task.name %></span>
+            <span class="homework-show-task-name">
+              <i class="fa-solid fa-square-check"></i>
+              <%= task.name %>
+            </span>
           </label>
         </div>
       <% end %>

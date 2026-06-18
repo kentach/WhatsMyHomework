@@ -1,10 +1,6 @@
 class TaskCompletionsController < ApplicationController
   before_action :set_task
 
-  def index
-    @completed_tasks = current_user.task_completions
-  end
-  
   def create
     task_record = current_user.task_completions.find_by(task: @task)
     #current_userのtask_completionsの中からtaskの一個一個を探す。
