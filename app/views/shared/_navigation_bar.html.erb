@@ -1,0 +1,16 @@
+<section id="footer" class="footer-bottom">
+  <div class="tab-menu">
+
+    <%= link_to homeworks_path,
+        class: "tab-item #{current_page?(homeworks_path) ? 'active' : ''}" do %>
+      <i class="fa-regular fa-house"></i>
+      <span>宿題一覧</span>
+    <% end %>
+
+    <%= link_to '#',
+        class: "tab-item #{current_page?('#') ? 'active' : ''}" do %>
+        <i class="fa-solid fa-user-graduate"></i>
+      <span>My ホームワーク</span>
+    <% end %>
+  </div>
+</section>

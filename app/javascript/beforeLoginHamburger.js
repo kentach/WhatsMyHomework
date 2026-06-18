@@ -1,6 +1,7 @@
 document.addEventListener('turbo:load', () => {
   const hamburgerIcon = document.querySelector('.logo-header i');
   const menu = document.getElementById('hamburger-menu');
+  if(!hamburgerIcon) return;
 
   hamburgerIcon.addEventListener('click', () => {
     menu.classList.toggle('open');
@@ -8,6 +9,5 @@ document.addEventListener('turbo:load', () => {
     hamburgerIcon.classList.toggle('fa-xmark')
     hamburgerIcon.classList.toggle("active")
   })
-
 })
 

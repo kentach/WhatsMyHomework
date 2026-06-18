@@ -1,13 +1,44 @@
 <%= render "shared/header" %>
-
 <div class="homework-index-container">
+  <!-- 検索バー -->
+    <div class="search-wrapper">
+    <%= search_form_for @q, url: homeworks_path, method: :get do |f| %>
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <%= f.search_field :title_or_content_cont,
+          placeholder: "検索",
+          class: "search-input",
+          id: "searchInput",
+          autocomplete: "off" %>
+      <%= f.submit "検索", class: "search-button" %>
+    <% end %>
+  </div>
 
-    <div class="eiken-level-tabs-wrapper">
-      <div class="eiken-level-tabs">
-      
-      </div>
-    </div>  
+  <!-- 英検級タブ -->
+  <div class="eiken-level-tabs-wrapper">
+    <div class="eiken-level-tabs">
+      <% @classrooms.each do |classroom|  %>
+        <%= link_to classroom.eiken_level, 
+            homeworks_path(classroom_id: classroom.id), 
+            class:"eiken-level-tab #{'active' if classroom == @selected_classroom}" %>
+      <% end %>
+    </div>
+  </div>  
 
-    <h1 class="page-title">宿題一覧</h1>
-    
+  <h1 class="homework-page-title">宿題一覧</h1>
+  <% @homeworks.each do |homework| %>
+      <%= link_to homework_path(homework), class: "homework-card" do %>
+        <div class="homework-card-top">
+          <span class="badge grade"><%= homework.classroom&.name %></span>
+        </div>
+        <h2 class="homework-title">
+          <%= homework.title %>
+        </h2>
+        <div class="homework-period">
+          <i class="fa-solid fa-calendar-check"></i>
+          <%= homework.test_start_date %> 〜 <%= homework.test_end_date %>
+        </div>
+      <% end %>
+  <% end %>
+
 </div>
+<%= render 'shared/navigation_bar' %>

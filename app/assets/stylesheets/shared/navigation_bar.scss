@@ -1,0 +1,77 @@
+.footer-bottom {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  background: #fff;
+  box-shadow: 0 -1px 6px rgba(0,0,0,0.1);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.tab-menu {
+  font-size: 0.9rem;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.tab-item {
+  flex: 1;
+  color: #6c757d;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60px;
+  padding: 8px 0;
+
+  transition:
+    color 0.2s,
+    background-color 0.2s;
+}
+
+.tab-item i {
+  font-size: 1.3rem;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.tab-item span {
+  font-size: 0.75rem;
+  line-height: 1; //行の高さ（行間）を文字サイズの1倍にする、行の高さ = 16px
+}
+
+.tab-item.active {
+  color: #ff5757;
+  border-top: 3px solid #ff5757;
+  background-color: rgba(40, 194, 194, 0.05);
+}
+
+.tab-item:hover {
+  color:#ff5757;
+}
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 576px) {
+
+  .tab-item {
+    min-height: 54px;
+    padding: 6px 0;
+  }
+
+  .tab-item i {
+    font-size: 1.1rem;
+    margin-bottom: 2px;
+  }
+
+  .tab-item span {
+    font-size: 0.62rem;
+  }
+
+  .tab-item:hover {
+    background-color: transparent;
+  }
+}

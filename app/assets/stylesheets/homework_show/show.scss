@@ -1,0 +1,273 @@
+$accent:    #ff5757;
+$accent-d:  #e03e3e;
+$navy:      #1a1f2e;
+$gray-50:   #f9fafb;
+$gray-100:  #f3f4f6;
+$gray-200:  #e5e7eb;
+$gray-400:  #9ca3af;
+$gray-600:  #6b7280;
+$white:     #ffffff;
+$green:     #10b981;
+$green-l:   #34d399;
+
+// ── ページ全体 ────────────────────────────
+.homework-show {
+  background: $gray-100;
+  min-height: 100vh;
+  padding-bottom: 96px;
+}
+
+// ── ヘッダー ──────────────────────────────
+.homework-show-header {
+  background: $accent;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.homework-show-header-inner {
+  padding: 40px 20px 38px;
+}
+
+.show-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  background: $accent-d;
+  color: $white;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-family: "SF Mono", "Fira Code", monospace;
+}
+
+.show-top-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.show-title {
+  font-size: 28px;
+  font-weight: 800;
+  line-height: 1.25;
+  letter-spacing: -0.03em;
+  color: $white;
+  margin-bottom: 12px;
+}
+
+.show-header-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.test-period-inline {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 18px;
+  font-weight: 600;
+  color: rgba($white, 0.65);
+
+  svg { flex-shrink: 0; }
+}
+
+.show-progress-track {
+  height: 3px;
+  background: rgba($white, 0.15);
+}
+
+.show-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, $accent, #ff8c8c);
+  transition: width 0.45s ease;
+  width: 0%;
+}
+
+// ── ボディ ───────────────────────────────
+.homework-show-body {
+  padding: 20px 16px 0;
+}
+
+// 進捗サマリ行
+.show-summary-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.show-summary-card {
+  background: $white;
+  border-radius: 10px;
+  border: 1px solid $gray-200;
+  padding: 10px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 64px;
+}
+
+.show-summary-num {
+  font-size: 22px;
+  font-weight: 800;
+  color: $accent;
+  line-height: 1;
+  margin-bottom: 2px;
+}
+
+.show-summary-label {
+  font-size: 10px;
+  font-weight: 600;
+  color: $gray-400;
+  letter-spacing: 0.04em;
+}
+
+.show-summary-msg {
+  flex: 1;
+  font-size: 13px;
+  font-weight: 600;
+  color: $gray-600;
+  line-height: 1.45;
+}
+
+// ── タスクリスト ──────────────────────────
+.task-list {
+  background: $white;
+  border-radius: 16px;
+  border: 1px solid $gray-200;
+  overflow: hidden;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+}
+
+.task-list-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  border-bottom: 1px solid $gray-200;
+
+  h3 {
+    font-size: 15px;
+    font-weight: 800;
+    color: $navy;
+    margin: 0;
+  }
+}
+
+.task-list-count {
+  font-size: 12px;
+  font-weight: 600;
+  color: $gray-400;
+  background: $gray-100;
+  padding: 2px 10px;
+  border-radius: 12px;
+}
+
+// ヒントバナー
+.test-info {
+  background: #fff8f0;
+  border-bottom: 1px solid #ffe4c0;
+  padding: 10px 16px;
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  li {
+    font-size: 12px;
+    color: #b45309;
+    font-weight: 500;
+    line-height: 1.5;
+  }
+}
+
+// タスク行
+.task-item {
+  display: block;
+  border-bottom: 1px solid $gray-200;
+  position: relative;
+  transition: background 0.15s;
+
+  &:last-child { border-bottom: none; }
+
+  // 左アクセントバー
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 4px;
+    background: linear-gradient(180deg, $accent, $accent-d);
+    border-radius: 4px 0 0 4px;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  &:hover:not(.completed) {
+    background: $gray-50;
+    &::before { opacity: 1; }
+  }
+
+  &.completed {
+    background: #f0fdf8;
+
+    &::before {
+      background: linear-gradient(180deg, $green-l, $green);
+      opacity: 1;
+    }
+
+    .task-name {
+      color: $gray-400;
+      text-decoration: line-through;
+    }
+  }
+}
+
+.task-check-wrap {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 15px 16px;
+  cursor: pointer;
+}
+
+.task-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: $navy;
+  line-height: 1.4;
+  flex: 1;
+  transition: color 0.2s;
+}
+
+// 戻るリンク
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: $gray-600;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 24px;
+  padding: 8px 0;
+  transition: color 0.15s;
+
+  &:hover { color: $navy; }
+  svg { flex-shrink: 0; }
+}

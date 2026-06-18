@@ -3,34 +3,33 @@
     <div class="logo-area_after_login">
       <%= image_tag "logoMark.png", width:"30px", height: "30px" %>
       <%= link_to homeworks_path, class: "d-flex align-items-center text-decoration-none" do %>
-      <span class="logo-text_after_login">
-        What's My Homework?
-      </span>
+        <span class="logo-text_after_login">
+          What's My Homework?
+        </span>
       <% end %>
-    </div>
-    <button 
-        class="hamburger_after_login" 
-        id="hamburger-btn-after-login"
-        aria-expanded="false"
-        aria-controls="side-menu"
-        aria-label="メニューを開く">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
     </div>
 
+    <button 
+      class="hamburger_after_login" 
+      id="hamburger-btn-after-login"
+      aria-expanded="false"
+      aria-controls="side-menu-after-login"
+      aria-label="メニューを開く">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+
   <nav id="side-menu-after-login" class="side-menu_after_login">
-      <%= link_to destroy_user_session_path, 
-                  data: { turbo_method: :delete }, 
-                  class: "menu-link_after_login" do %>
-        <i class="fa-solid fa-right-from-bracket"></i> ログアウト
-      <% end %>
-      <a href="#"><i class="fa-solid fa-star"></i> 機能紹介</a>
-      <a href="#"><i class="fa-solid fa-book-open"></i> 使い方ガイド</a>
+    <%= link_to destroy_user_session_path, 
+                data: { turbo_method: :delete }, 
+                class: "menu-link_after_login" do %>
+      <i class="fa-solid fa-right-from-bracket"></i> ログアウト
+    <% end %>
+    <a href="#"><i class="fa-solid fa-star"></i> 機能紹介</a>
+    <a href="#"><i class="fa-solid fa-book-open"></i> 使い方ガイド</a>
   </nav>
 
   <div id="menu-overlay-after-login" class="menu-overlay_after_login"></div>
-
 </header>
-  
