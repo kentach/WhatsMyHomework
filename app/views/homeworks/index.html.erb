@@ -30,7 +30,7 @@
   <% @homeworks.each do |homework| %>
       <%= link_to homework_path(homework), class: "homework-card" do %>
         <div class="homework-card-top">
-          <span class="badge grade"><%= homework.classroom&.eiken_level %></span>
+          <span class="badge grade"><%= homework.classroom&.name %></span>
         </div>
         <h2 class="homework-title">
           <%= homework.title %>
@@ -41,6 +41,10 @@
         </div>
       <% end %>
   <% end %>
+
+  <div class="pagination-wrapper">
+    <%= paginate @homeworks %>
+  </div>
 
 </div>
 <%= render 'shared/navigation_bar' %>
