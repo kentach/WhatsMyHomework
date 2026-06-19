@@ -1,0 +1,34 @@
+<div class="logo-header">
+  <i class="fa-solid fa-list-ul"></i>
+</div>
+
+<nav class="hamburger-menu" id="hamburger-menu">
+    <ul>
+      <li class="nav-item">
+      <i class="fa-solid fa-user-plus"></i>
+        <%= link_to root_path,
+            class: "nav-link" do %>
+          トップ
+        <% end %>
+      </li>
+
+      <li class="nav-item">
+      <i class="fa-solid fa-user-plus"></i>
+        <%= link_to new_user_registration_path,
+            class: "nav-link" do %>
+          新規登録
+        <% end %>
+      </li>
+      
+      <li class="nav-item">
+      <i class="fa-solid fa-right-to-bracket"></i>
+        <%= link_to new_user_session_path,
+            class: "nav-link" do %>
+          ログイン
+        <% end %>
+      </li>
+    </ul>
+</nav>
+<!-- overlay-->
+<div id="menu-overlay" class="menu-overlay"></div>
+

@@ -1,0 +1,23 @@
+ja:
+  helpers:
+    static_pages:
+
+    registrations:
+      new: ユーザー登録
+      edit: ユーザー
+      password_forget: パスワードをお忘れの方はこちら
+
+    sessions:
+      new: ログイン
+
+    homeworks:
+      index:
+        title: 宿題一覧
+      show:
+        title: 宿題詳細
+
+    tasks:
+      index:
+        title: マイタスク一覧
+      show:
+        title: マイタスク詳細

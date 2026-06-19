@@ -1,0 +1,240 @@
+// ===========================
+// Variables
+// ===========================
+$primary:       #ff5757;
+$primary-light: #ff8080;
+$primary-pale:  #fff0f0;
+$bg:            #fff8f8;
+$card-bg:       #ffffff;
+$text:          #3d3d3d;
+$text-muted:    #999999;
+$border:        #f0d0d0;
+$radius-card:   20px;
+$radius-input:  12px;
+$radius-btn:    50px;
+$shadow-card:   0 8px 32px rgba(255, 87, 87, 0.10);
+$shadow-input:  0 2px 8px rgba(255, 87, 87, 0.07);
+$transition:    0.2s ease;
+
+// ===========================
+// Page Background
+// ===========================
+.sign-up-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: $bg;
+  padding: 40px 16px;
+
+  // やわらかい背景の装飾（ぼんやりした円）
+  position: relative;
+  overflow: hidden;
+
+  &::before,
+  &::after {
+    content: '';
+    position: fixed;
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  &::before {
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(255, 87, 87, 0.08) 0%, transparent 70%);
+    top: -100px;
+    right: -100px;
+  }
+
+  &::after {
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(255, 87, 87, 0.06) 0%, transparent 70%);
+    bottom: -80px;
+    left: -80px;
+  }
+}
+
+// ===========================
+// Card
+// ===========================
+.signup-card {
+  background: $card-bg;
+  border-radius: $radius-card;
+  box-shadow: $shadow-card;
+  padding: 48px 40px 40px;
+  width: 100%;
+  max-width: 440px;
+  position: relative;
+  z-index: 1;
+
+  @media (max-width: 480px) {
+    padding: 36px 24px 32px;
+  }
+}
+
+// ===========================
+// Title
+// ===========================
+.signup-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: $text;
+  text-align: center;
+  margin: 0 0 32px;
+  letter-spacing: -0.02em;
+
+  // タイトルのアクセント下線
+  position: relative;
+  display: inline-block;
+  left: 50%;
+  transform: translateX(-50%);
+
+  &::after {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 3px;
+    background: linear-gradient(90deg, $primary, $primary-light);
+    border-radius: 2px;
+    margin: 8px auto 0;
+  }
+}
+
+// ===========================
+// Form Group
+// ===========================
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: $text;
+  margin-bottom: 6px;
+  letter-spacing: 0.01em;
+}
+
+.password-hint {
+  display: block;
+  font-size: 0.75rem;
+  color: $text-muted;
+  margin-bottom: 6px;
+}
+
+// ===========================
+// Input Fields
+// ===========================
+.form-control {
+  width: 100%;
+  padding: 12px 16px;
+  font-size: 0.95rem;
+  color: $text;
+  background: $primary-pale;
+  border: 1.5px solid $border;
+  border-radius: $radius-input;
+  box-shadow: $shadow-input;
+  box-sizing: border-box;
+  transition: border-color $transition, box-shadow $transition, background $transition;
+  outline: none;
+  appearance: none;
+
+  &::placeholder {
+    color: lighten($text-muted, 15%);
+  }
+
+  &:focus {
+    border-color: $primary;
+    background: #ffffff;
+    box-shadow: 0 0 0 3px rgba(255, 87, 87, 0.12);
+  }
+}
+
+// ===========================
+// Error Messages
+// ===========================
+#error_explanation {
+  background: #fff0f0;
+  border: 1.5px solid rgba(255, 87, 87, 0.3);
+  border-radius: $radius-input;
+  padding: 14px 18px;
+  margin-bottom: 24px;
+
+  h2 {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: $primary;
+    margin: 0 0 8px;
+  }
+
+  ul {
+    margin: 0;
+    padding-left: 18px;
+
+    li {
+      font-size: 0.82rem;
+      color: darken($primary, 10%);
+      margin-bottom: 2px;
+    }
+  }
+}
+
+// ===========================
+// Submit Button
+// ===========================
+.signup-btn {
+  display: block;
+  width: 100%;
+  padding: 14px;
+  margin-top: 28px;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #ffffff;
+  background: linear-gradient(135deg, $primary 0%, $primary-light 100%);
+  border: none;
+  border-radius: $radius-btn;
+  cursor: pointer;
+  letter-spacing: 0.03em;
+  box-shadow: 0 4px 16px rgba(255, 87, 87, 0.35);
+  transition: transform $transition, box-shadow $transition, filter $transition;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(255, 87, 87, 0.40);
+    filter: brightness(1.05);
+  }
+
+  &:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(255, 87, 87, 0.30);
+  }
+}
+
+// ===========================
+// Auth Links (Devise shared)
+// ===========================
+.auth-links {
+  margin-top: 24px;
+  text-align: center;
+  font-size: 0.85rem;
+
+  a {
+    color: $primary;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color $transition;
+
+    &:hover {
+      color: darken($primary, 10%);
+      text-decoration: underline;
+    }
+  }
+
+  // Devise の区切り文字など
+  br {
+    line-height: 2;
+  }
+}
