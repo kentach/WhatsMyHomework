@@ -1,0 +1,2 @@
+module VocabularyTestsHelper
+end

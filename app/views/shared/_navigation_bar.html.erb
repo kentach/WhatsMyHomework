@@ -12,5 +12,11 @@
         <i class="fa-solid fa-user-graduate"></i>
       <span>マイタスク</span>
     <% end %>
+
+    <%= link_to vocabulary_tests_path,
+        class: "tab-item #{current_page?(vocabulary_tests_path) ? 'active' : ''}" do %>
+        <i class="fa-solid fa-chart-line"></i>
+      <span>単語テストスコア</span>
+    <% end %>
   </div>
 </section>

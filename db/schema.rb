@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_06_18_034726) do
+ActiveRecord::Schema[7.2].define(version: 2026_06_19_090724) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -98,6 +98,18 @@ ActiveRecord::Schema[7.2].define(version: 2026_06_18_034726) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "vocabulary_tests", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "homework_id", null: false
+    t.integer "vocabulary_score", default: 0, null: false
+    t.integer "sentence_score", default: 0, null: false
+    t.date "test_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["homework_id"], name: "index_vocabulary_tests_on_homework_id"
+    t.index ["user_id"], name: "index_vocabulary_tests_on_user_id"
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "homeworks", "classrooms"
@@ -106,4 +118,6 @@ ActiveRecord::Schema[7.2].define(version: 2026_06_18_034726) do
   add_foreign_key "task_completions", "users"
   add_foreign_key "tasks", "homeworks"
   add_foreign_key "users", "classrooms"
+  add_foreign_key "vocabulary_tests", "homeworks"
+  add_foreign_key "vocabulary_tests", "users"
 end

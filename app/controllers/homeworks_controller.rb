@@ -13,7 +13,7 @@ class HomeworksController < ApplicationController
 
     @homeworks = @homeworks.order(created_at: :desc)
                            .page(params[:page])
-                           .per(3)
+                           .per(10)
   end
 
   def show
