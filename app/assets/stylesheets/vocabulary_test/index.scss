@@ -212,6 +212,8 @@ $radius: 12px;
   }
 
   .delete-btn {
+    width: 30px;
+    height:30px;
     background: $danger;
     color: $white;
     border-radius: 6px;
@@ -223,6 +225,23 @@ $radius: 12px;
 
     &:hover {
       background: darken($danger, 10%);
+    }
+  }
+
+  .edit-btn {
+    background: $accent;
+    width: 30px;
+    height:30px;
+    color: $white;
+    border-radius: 6px;
+    padding: 6px 8px;
+    font-size: 12px;
+    text-decoration: none;
+    transition: background 0.2s;
+    white-space: nowrap;
+
+    &:hover {
+      background: darken($accent, 10%);
     }
   }
 }
@@ -244,4 +263,6 @@ $radius: 12px;
 .action-menu {
   display: flex;
   justify-content: center;
+  align-items: center;
+  gap: 5px;
 }

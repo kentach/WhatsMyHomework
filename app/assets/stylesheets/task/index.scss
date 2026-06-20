@@ -10,6 +10,29 @@ $white: #ffffff;
 $green: #10b981;
 $green-l: #34d399;
 
+.badge.completed {
+  background: #ccf8d5;
+  color: #1b6516;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 6px 12px;
+  margin-left: 12px;
+  border-radius: 999px;
+  align-items: center;
+}
+
+.badge.completed i {
+  font-size: 13px;
+}
+
+.test-period-banner {
+    width: 100%;
+    background-color: #333;
+    color: #fff;
+    padding: 10px 14px;
+    border-radius: 12px;
+    margin: 16px 0px;
+}
 // ── ページ ────────────────────────────────
 .my-tasks {
   background: $gray-100;
@@ -18,9 +41,16 @@ $green-l: #34d399;
 }
 
 // ── ヘッダー ──────────────────────────────
+
+.selected-date-label {
+  color:$white;
+  padding: 0;
+  margin: 0;
+}
+
 .my-tasks-header {
   background: $navy;
-  padding: 20px 20px 0;
+  padding: 20px 30px;
   position: sticky;
   top: 0;
   z-index: 10;
@@ -86,7 +116,7 @@ $green-l: #34d399;
   text-decoration: none;
 
   &.selected {
-    background: $accent;
+    background: #fabdbd;
 
     .week-day-name,
     .week-day-num {

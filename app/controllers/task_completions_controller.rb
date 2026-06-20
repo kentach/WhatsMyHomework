@@ -3,12 +3,18 @@ class TaskCompletionsController < ApplicationController
 
   def create
     current_user.complete!(@task)
-    redirect_to tasks_path
+    respond_to do |format|
+      format.turbo_stream
+      format.html { redirect_back fallback_location: tasks_path }
+    end
   end
 
   def destroy
     current_user.incomplete!(@task)
-    redirect_to tasks_path
+    respond_to do |format|
+      format.turbo_stream
+      format.html { redirect_back fallback_location: tasks_path }
+    end
   end
 
   private

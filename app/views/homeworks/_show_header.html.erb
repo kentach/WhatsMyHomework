@@ -1,0 +1,21 @@
+<header class="homework-show-header">
+  <div class="homework-show-header-inner">
+    <div class="show-top">
+      <span class="hero-badge"><%= @homework.classroom.name %></span>
+      <div class="show-top-actions">
+      </div>
+    </div>
+    <h1 class="show-title"><%= @homework.title %></h1>
+    <div class="show-header-meta">
+      <div class="test-period-inline">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="4" width="18" height="18" rx="2"/>
+          <line x1="16" y1="2" x2="16" y2="6"/>
+          <line x1="8" y1="2" x2="8" y2="6"/>
+          <line x1="3" y1="10" x2="21" y2="10"/>
+        </svg>
+        <%= @homework.test_start_date.strftime("%Y年%m月%d日") %> 〜 <%= @homework.test_end_date.strftime("%Y年%m月%d日") %>
+      </div>
+    </div>
+  </div>
+</header>

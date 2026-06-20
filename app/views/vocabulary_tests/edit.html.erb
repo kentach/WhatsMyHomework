@@ -1,9 +1,16 @@
+<div class="score-tracker">
+  <header class="tracker-header">
+    <p class="tracker-lang">英単語</p>
+    <h1>単語テスト記録修正</h1>
+  </header>
+</div>
+
 <div class="vocabulary-tests-container">
   <div class="vocabulary-tests-form-wrapper">
-    <%= form_with model: @new_score, data: { turbo: false } do |f| %>
+    <%= form_with model: @score, data: { turbo: false } do |f| %>
     <%= render 'shared/error_message', object: f.object %>
-
       <div class="form-row">
+
         <div class="form-group">
           <%= f.label :test_date, "日付" %>
           <%= f.date_field :test_date %>
@@ -26,27 +33,19 @@
         </div>
 
         <div class="form-group align-bottom">
-          <%= f.submit "記録する", class: "new-record-btn" %>
+          <%= f.submit "更新する", class: "new-record-btn" %>
         </div>
       </div>
 
-      <% if @new_score.errors.any? %>
+      <% if @score.errors.any? %>
         <ul class="error-list">
-          <% @new_score.errors.full_messages.each do |msg| %>
+          <% @score.errors.full_messages.each do |msg| %>
             <li><%= msg %></li>
           <% end %>
         </ul>
       <% end %>
     <% end %>
-
   </div>
-
-  <% if @scores.empty? %>
-    <div class="vocabulary-tests-empty">
-      <h5>まだ記録がありません。</h5>
-      <h5>上のフォームからテスト結果を入力してください。</h5>
-    </div>
-  <% else %>
-    <%= render "vocabulary_tests/score_table" %>
-  <% end %>
+  <%= link_to "< 戻る", vocabulary_tests_path, class: "back-link" %>
 </div>
+<%= render "shared/navigation_bar" %>

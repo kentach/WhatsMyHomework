@@ -1,8 +1,21 @@
-<div class="vocabulary-tests-container">
-  <div class="vocabulary-tests-header">
-    <h2><%= current_user.name %>さんの単語テスト推移</h2>
-  </div>
+<div class="score-tracker">
+  <header class="tracker-header">
+    <p class="tracker-lang">英単語</p>
+    <h1><%= current_user.name %>さんの単語テスト記録</h1>
 
+    <% if @scores.any? %>
+      <div class="tracker-stats">
+        <div><span class="stat-label">回数</span><strong><%= @scores.size %>回</strong></div>
+        <div><span class="stat-label">平均点</span><strong></strong></div>
+        <div><span class="stat-label">最高点</span><strong></strong></div>
+      </div>
+      <div class="vocabulary-tests-header">
+        <%= link_to "< 戻る", vocabulary_tests_path, class: "vocabulary_graph" %>
+      </div>
+    <% end %>
+  </header>
+</div>
+<div class="vocabulary-tests-container">
   <% if @scores.count >= 2 %>
     <div class="vocabulary-tests-table-wrapper" style="padding: 20px;">
       <%= line_chart @score_data,
@@ -34,8 +47,8 @@
           <tr>
             <td><%= score.test_date&.strftime("%Y/%m/%d") %></td>
             <td><%= score.homework&.title %></td>
-            <td><%= score.vocabulary_score %></td>
-            <td><%= score.sentence_score %></td>
+            <td><%= score.vocabulary_score %> / 10</td>
+            <td><%= score.sentence_score %> / 2</td>
           </tr>
         <% end %>
       </tbody>

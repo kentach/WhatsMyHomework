@@ -25,6 +25,18 @@
       タスク一覧
   ========================= -->
   <div class="task-index-list">
+    <% if @homeworks.any? %>
+      <div class="test-period-banner">
+        📅 テスト期間：
+        <%= @homeworks.minimum(:test_start_date).strftime("%m月%d日") %> 〜
+        <%= @homeworks.maximum(:test_end_date).strftime("%m月%d日") %>
+      </div>
+    <% else %>
+      <div class="test-period-banner">
+        📅 現在テスト期間はありません
+      </div>
+    <% end %>
+    
     <div class="task-index-list-header">
       <h3><%= current_user.classroom.eiken_level %> 宿題リスト</h3>
       <span class="task-index-list-count"><%= total %> タスク</span>
@@ -58,7 +70,6 @@
           <%= task.name %>
         </span>
       </label>
-
     </div>
   <% end %>
 

@@ -6,21 +6,21 @@ User.delete_all
 Classroom.delete_all
 
 classrooms = [
-  ['Pre1', '準1級'],
-  ['STEP2', '2級'],
-  ['Pre2 plus', '準2級プラス'],
-  ['Pre2', '準2級'],
-  ['JH1 STEP3', '中学生3級'],
-  ['JH1 STEP4', '中学生4級'],
-  ['JH1 Beginner', '中学生5級'],
-  ['EH STEP2', '小学生2級'],
-  ['EH Pre2 plus', '小学生準2級プラス'],
-  ['EH pre2', '小学生準2級'],
-  ['EH3', '小学生3級'],
-  ['EH4', '小学生高学年4級'],
-  ['EL4', '小学生低学年4級'],
-  ['EH5', '小学生高学年5級'],
-  ['EL5', '小学生低学年5級']
+  [ 'Pre1', '準1級' ],
+  [ 'STEP2', '2級' ],
+  [ 'Pre2 plus', '準2級プラス' ],
+  [ 'Pre2', '準2級' ],
+  [ 'JH1 STEP3', '中学生3級' ],
+  [ 'JH1 STEP4', '中学生4級' ],
+  [ 'JH1 Beginner', '中学生5級' ],
+  [ 'EH STEP2', '小学生2級' ],
+  [ 'EH Pre2 plus', '小学生準2級プラス' ],
+  [ 'EH pre2', '小学生準2級' ],
+  [ 'EH3', '小学生3級' ],
+  [ 'EH4', '小学生高学年4級' ],
+  [ 'EL4', '小学生低学年4級' ],
+  [ 'EH5', '小学生高学年5級' ],
+  [ 'EL5', '小学生低学年5級' ]
 ]
 
 created_classrooms = classrooms.map do |name, level|
@@ -46,13 +46,11 @@ task_templates = [
 ]
 
 created_classrooms.each do |classroom|
-
   4.times do |week|
-
     homework = classroom.homeworks.create!(
       title: "#{classroom.eiken_level} Week#{week + 1}",
       test_start_date: Date.today + week.weeks,
-      test_end_date: Date.today + week.weeks + 7.days,
+      test_end_date: Date.today + week.weeks + 6.days,
       user_id: user1.id,
       status: "published"
     )

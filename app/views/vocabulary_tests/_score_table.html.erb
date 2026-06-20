@@ -14,13 +14,16 @@
           <tr>
             <td><%= score.test_date&.strftime("%Y/%m/%d") %></td>
             <td><%= score.homework&.title %></td>
-            <td><%= score.vocabulary_score %></td>
-            <td><%= score.sentence_score %></td>
+            <td><%= score.vocabulary_score %> / 10</td>
+            <td><%= score.sentence_score %> / 2</td>
             <td>
               <div class="action-menu">
-                <%= link_to "削除", vocabulary_test_path(score),
-                    class: "delete-btn",
-                    data: { turbo_method: :delete, turbo_confirm: "削除しますか？" } %>
+                <%= link_to edit_vocabulary_test_path(score), class:"edit-btn" do %>
+                  <i class="fa-solid fa-pen-to-square"></i>
+                <% end %>
+                <%= link_to vocabulary_test_path(score), class: "delete-btn", data: { turbo_method: :delete, turbo_confirm: "削除しますか？" } do %>
+                  <i class="fa-solid fa-trash-can"></i>
+                <% end %>
               </div>
             </td>
           </tr>
