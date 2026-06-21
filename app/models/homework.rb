@@ -8,6 +8,8 @@ class Homework < ApplicationRecord
   has_many :tasks, dependent: :destroy
   has_many :vocabulary_tests, dependent: :destroy
 
+  accepts_nested_attributes_for :tasks, allow_destroy: true, reject_if: :all_blank
+
   # ransack
   # 検索可能なカラムを許可する
   def self.ransackable_attributes(auth_object = nil)

@@ -6,6 +6,9 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <style>
+      a[href="#main"], a[href="#navigation"] { display: none !important; }
+    </style>
 
     <%= yield :head %>
 

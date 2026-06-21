@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= page_title(yield(:title), admin: true) %></title>
+  <%= stylesheet_link_tag "admin", media: "all" %>
+</head>
+<body class="layout-fixed sidebar-expand-lg bg-body-tertiary">
+
+  <div class="app-wrapper">
+    <!-- 上部ナビゲーションバー -->
+    <%= render "admin/shared/header_bar" %>
+    <!-- Sidebar -->
+    <%= render "admin/shared/sidebar" %>
+
+    <!-- Content Wrapper -->
+    <main class="app-main">
+      <div class="app-content-header">
+        <div class="container-fluid">
+          <h3 class="mb-0">宿題管理</h3>
+        </div>
+      </div>
+
+      <div class="app-content">
+        <div class="container-fluid">
+          <%= render "shared/flash_message" %>
+          <%= yield %>
+        </div>
+      </div>
+    </main>
+  </div>
+  <%= javascript_include_tag "admin", type: "module" %>
+</body>
+</html>

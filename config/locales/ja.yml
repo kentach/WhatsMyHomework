@@ -1,0 +1,24 @@
+ja:
+  views:
+    registrations:
+      new: 
+        title: 新規登録
+      edit: 
+        title: ユーザー編集
+
+    sessions:
+      new: 
+        title: ログイン
+    homeworks:
+      index:
+        title: 宿題一覧
+      show:
+        title: 宿題詳細
+
+    tasks:
+      index:
+        title: マイタスク一覧
+
+    vocabulary_tests:
+      index:
+        title: 単語テスト記録

@@ -1,0 +1,13 @@
+<div class="task-fields border rounded p-3 mb-2">
+  <%= f.hidden_field :id %>
+  <div class="mb-2">
+    <%= f.label :name, "タスク名", class: "form-label" %>
+    <%= f.text_field :name, class: "form-control" %>
+  </div>
+  <div class="mb-2">
+    <%= f.label :pdf, "PDF", class: "form-label" %>
+    <%= f.file_field :pdf, class: "form-control", accept: "application/pdf" %>
+  </div>
+  <%= f.hidden_field :_destroy, class: "destroy-flag" %>
+  <button type="button" class="btn btn-outline-danger btn-sm remove-task">削除</button>
+</div>

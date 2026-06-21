@@ -25,4 +25,6 @@ class User < ApplicationRecord
     return false if homework.tasks.empty?
     homework.tasks.count == task_completions.where(task: homework.tasks).count
   end
+
+  enum role: { student: 0, admin: 1 }
 end

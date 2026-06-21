@@ -1,0 +1,22 @@
+<aside class="app-sidebar bg-body-secondary shadow">
+    <div class="sidebar-brand">
+      <a href="/admin" class="brand-link">
+        <span class="brand-text fw-light">宿題管理画面</span>
+      </a>
+    </div>
+    <div class="sidebar-wrapper">
+      <nav class="mt-2">
+        <ul class="nav sidebar-menu flex-column" data-lte-toggle="treeview" role="menu">
+          <li class="nav-item">
+            <%= link_to "宿題管理ページ", admin_root_path, class:"nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "宿題一覧", admin_homeworks_path, class:"nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "宿題を作成", new_admin_homework_path, class:"nav-link" %>
+          </li>
+        </ul>
+      </nav>
+    </div>
+</aside>

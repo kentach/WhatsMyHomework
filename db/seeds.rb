@@ -34,7 +34,8 @@ user1 = User.create!(
   name: "片山",
   email: "saitama3181@example.com",
   password: "saitama3181",
-  classroom: created_classrooms.first
+  classroom: created_classrooms.first,
+  role: 1
 )
 
 task_templates = [
