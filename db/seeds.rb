@@ -25,8 +25,8 @@ classrooms = [
 
 created_classrooms = classrooms.map do |name, level|
   Classroom.create!(
-    name: name,
-    eiken_level: level
+    eiken_level: level,
+    name: name
   )
 end
 
