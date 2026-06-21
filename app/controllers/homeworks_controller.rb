@@ -1,7 +1,7 @@
 class HomeworksController < ApplicationController
   def index
-    @classrooms = Classroom.all # タブ作成
-    @q = Homework.ransack(params[:q]) # 検索機能ransack。ransack(params[:q])にすること。
+    @classrooms = Classroom.all #タブ
+    @q = Homework.where(status:"published").ransack(params[:q])
     @homeworks = @q.result(distinct: true).includes(:classroom)
     @selected_classroom = Classroom.find_by(id: params[:classroom_id])
 
