@@ -12,7 +12,7 @@
       <div class="card">
         <div class="card-header">
           <h3 class="card-title">
-            <i class="fas fa-edit mr-1"></i>下書き中の宿題
+            <i class="fas fa-edit mr-1"></i> 下書き中の宿題
             <%= @homeworks.count %>件
           </h3>
           <div class="card-tools">
@@ -42,7 +42,7 @@
                 <% @homeworks.each do |homework| %>
                   <tr>
                     <td><%= homework.title %></td>
-                    <td><%= homework.classroom&.name %></td>
+                    <td><%= homework.classroom&.eiken_level %></td>
                     <td><%= homework.test_start_date&.strftime("%Y/%m/%d") %></td>
                     <td><%= homework.test_end_date.strftime("%Y/%m/%d") %></td>
                     <td><%= homework.created_at.strftime("%Y/%m/%d") %></td>

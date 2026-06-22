@@ -22,7 +22,13 @@
             <% @homeworks.each do |homework| %>
               <tr>
                 <td><%= homework.title %></td>
-                <td><%= homework.status %></td>
+                <td>
+                  <% if homework.status == "published" %>
+                    <span class="badge bg-success">公開中</span>
+                  <% else %>
+                    <span class="badge bg-warning">下書き</span>
+                  <% end %>
+                </td>
                 <td><%= homework.classroom&.eiken_level %></td>
                 <td><%= homework.test_start_date&.strftime("%Y/%m/%d") %></td>
                 <td><%= homework.test_end_date&.strftime("%Y/%m/%d") %></td>
