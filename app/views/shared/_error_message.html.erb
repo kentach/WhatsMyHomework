@@ -1,5 +1,12 @@
 <% if object.errors.any? %>
-  <div class="alert alert-danger">
+  <div class="alert alert-danger alert-dismissible" id="error-alert">
+    
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      onclick="document.getElementById('error-alert').remove();">
+    </button>
 
     <ul class="mb-0">
       <% object.errors.full_messages.each do |message| %>

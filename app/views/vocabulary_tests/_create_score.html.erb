@@ -1,7 +1,13 @@
 <div class="vocabulary-tests-container">
   <div class="vocabulary-tests-form-wrapper">
     <%= form_with model: @new_score, data: { turbo: false } do |f| %>
-    <%= render 'shared/error_message', object: f.object %>
+      <% if @new_score.errors.any? %>
+        <ul class="error-list">
+          <% @new_score.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      <% end %>
 
       <div class="form-row">
         <div class="form-group">
@@ -29,14 +35,6 @@
           <%= f.submit "記録する", class: "new-record-btn" %>
         </div>
       </div>
-
-      <% if @new_score.errors.any? %>
-        <ul class="error-list">
-          <% @new_score.errors.full_messages.each do |msg| %>
-            <li><%= msg %></li>
-          <% end %>
-        </ul>
-      <% end %>
     <% end %>
 
   </div>

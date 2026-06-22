@@ -2,7 +2,7 @@ class VocabularyTestsController < ApplicationController
   def index
     @new_score = VocabularyTest.new(test_date: Date.today)
     @homeworks = Homework.where(classroom_id: current_user.classroom_id).order(created_at: :desc)
-    @scores = VocabularyTest.includes(:homework).order(test_date: :desc, created_at: :desc)
+    @scores = VocabularyTest.includes(:homework).order(homework_id: :desc)
   end
 
   def new
