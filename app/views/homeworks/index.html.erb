@@ -2,19 +2,16 @@
 <%= render "shared/header" %>
 
 <div class="homework-index-container">
-  <!-- 検索バー -->
   <%= render "homeworks/search_bar" %>
-  <!-- モーダル -->
   <%= render "homeworks/modal" %>
-  <!-- 英検級タブ -->
   <%= render "homeworks/eiken_tab" %>
-
   <h1 class="homework-page-title">宿題一覧</h1>
-    <!-- 宿題リスト -->
-    <%= render "homeworks/homework_lists" %>
+  <%= render "homeworks/homework_lists" %>
 
-  <div class="pagination-wrapper">
-    <%= paginate @homeworks %>
+  <!-- ぺジネーション -->
+  <div class="d-flex justify-content-center mt-4">
+    <%= paginate @homeworks, theme: 'bootstrap-5', window: 6, outer_window: 3 %>
   </div>
+  
 </div>
 <%= render 'shared/navigation_bar' %>

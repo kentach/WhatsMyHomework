@@ -331,8 +331,8 @@ $green-l: #34d399;
 }
 
 .test-index-info {
-  background: $white;
-  border: 1px solid $gray-200;
+  background: #fff8f0;;
+  border: 1px solid #e07b00;
   border-radius: 10px;
   padding: 10px 12px;
   margin-bottom: 10px;
@@ -341,7 +341,11 @@ $green-l: #34d399;
     margin: 0;
     padding-left: 16px;
     font-size: 18px;
-    color: $gray-600;
+    color: #b35c00;
+  }
+
+  li {
+    list-style: none
   }
 }
 // ── タスク ────────────────────────────────

@@ -56,7 +56,7 @@
       <button class="task-index-tab" data-tab="completed">完了</button>
     </div>
 
-  <% @tasks.each do |task| %>
+    <% @tasks.each do |task| %>
     <div
       id="task-<%= task.id %>"
       class="task-index-item <%= 'completed' if current_user.completed?(task) %>"
