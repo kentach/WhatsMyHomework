@@ -2,10 +2,9 @@ class VocabularyTestsController < ApplicationController
   def index
     @new_score = VocabularyTest.new(test_date: Date.today)
     @scores = VocabularyTest.includes(:homework).order(homework_id: :desc)
-    
     # 登録済みの宿題はリストに表示しない設定
     # pluck 指定したカラムだけを配列で取り出す
-    registered_homework_ids = current_user.vocabulary_tests.pluck(:homework_id) 
+    registered_homework_ids = current_user.vocabulary_tests.pluck(:homework_id)
     @homeworks = Homework.where(classroom_id: current_user.classroom_id)
                          .where.not(id: registered_homework_ids)
   end
