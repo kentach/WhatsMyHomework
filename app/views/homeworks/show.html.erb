@@ -8,6 +8,7 @@
         <h3><%= @homework.title %> 宿題リスト</h3>
         <span class="homework-showtask-list-count"><%= @tasks.size %> タスク</span>
       </div>
+      <p class="homework-created-by">作成者：<span><%= @homework.user&.name %>先生</span></p>
       <div class="homeworks-show-test-period">📅 テスト期間：
           <%= @homework.test_start_date.strftime("%m月%d日") %> 〜
           <%= @homework.test_end_date.strftime("%m月%d日") %>

@@ -5,6 +5,7 @@ class Homework < ApplicationRecord
   validates :test_end_date, presence: true
 
   belongs_to :classroom
+  belongs_to :user
   has_many :tasks, dependent: :destroy
   has_many :vocabulary_tests, dependent: :destroy
 

@@ -81,6 +81,19 @@ $green-l:   #34d399;
   svg { flex-shrink: 0; }
 }
 
+.homework-created-by {
+  margin: 0;
+  padding: 0 16px 12px;
+}
+
+.homework-created-by span {
+  color:green;
+  font-size: 14px;
+  background-color: rgb(205, 247, 205);
+  border-radius: 14px;
+  padding: 3px 10px;
+}
+
 
 // ── ボディ ───────────────────────────────
 .homework-show-body {
@@ -143,7 +156,6 @@ $green-l:   #34d399;
   align-items: center;
   justify-content: space-between;
   padding: 14px 16px;
-  border-bottom: 1px solid $gray-200;
 
   h3 {
     font-size: 20px;

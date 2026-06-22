@@ -15,6 +15,7 @@
               <th>宿題開始日</th>
               <th>宿題終了日</th>
               <th>最終更新</th>
+              <th>作成者</th>
               <th>編集</th>
               <th>削除</th>
             </tr>
@@ -45,6 +46,7 @@
                 <td><%= homework.updated_at.strftime("%Y/%m/%d %H:%M") %>
                   （<%= %w(日 月 火 水 木 金 土)[homework.updated_at.wday] %>）
                 </td>
+                <td><%= homework.user&.name %></td>
 
                 <td>
                   <%= link_to "編集", edit_admin_homework_path(homework), class: "btn btn-sm btn-warning" %>
