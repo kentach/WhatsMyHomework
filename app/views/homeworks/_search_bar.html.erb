@@ -1,0 +1,12 @@
+<div class="search-wrapper">
+    <%= search_form_for @q, url: homeworks_path, method: :get do |f| %>
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <%= f.search_field :title_or_content_cont,
+          placeholder: "検索",
+          class: "search-input",
+          id: "searchInput",
+          autocomplete: "off" %>
+      <%= f.submit "検索", class: "search-button" %>
+    <% end %>
+    <i id="search-question" class="fa-solid fa-circle-question"></i>
+</div>

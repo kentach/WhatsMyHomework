@@ -1,0 +1,21 @@
+<% @homeworks.each do |homework| %>
+    <%= link_to homework_path(homework), class: "homework-card" do %>
+      <div>
+        <div class="homework-card-top">
+          <span class="badge grade"><%= homework.classroom&.eiken_level %></span>
+        </div>
+        <h2 class="homework-title">
+          <%= homework.title %>
+          <% if current_user.completed_homework?(homework) %>
+            <span class="badge completed">
+              <i class="fa-solid fa-flag-checkered"></i> Done
+            </span>
+          <% end %>     
+        </h2>
+        <div class="homework-period">
+          <i class="fa-solid fa-calendar-check"></i>
+          <%= homework.test_start_date.strftime("%-m月%-d日") %> 〜 <%= homework.test_end_date.strftime("%-m月%-d日") %>
+        </div>
+      </div>
+    <% end %>
+<% end %>

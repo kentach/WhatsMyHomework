@@ -1,0 +1,9 @@
+<div class="eiken-level-tabs-wrapper">
+  <div class="eiken-level-tabs">
+    <% @classrooms.each do |classroom|  %>
+      <%= link_to classroom.name, 
+          homeworks_path(classroom_id: classroom.id), 
+          class:"eiken-level-tab #{'active' if classroom == @selected_classroom}" %>
+    <% end %>
+  </div>
+</div>  

@@ -3,81 +3,18 @@
 
 <div class="homework-index-container">
   <!-- 検索バー -->
-    <div class="search-wrapper">
-      <%= search_form_for @q, url: homeworks_path, method: :get do |f| %>
-        <i class="fa-solid fa-magnifying-glass"></i>
-        <%= f.search_field :title_or_content_cont,
-            placeholder: "検索",
-            class: "search-input",
-            id: "searchInput",
-            autocomplete: "off" %>
-        <%= f.submit "検索", class: "search-button" %>
-      <% end %>
-      <i id="search-question" class="fa-solid fa-circle-question"></i>
-    </div>
-
-    <!-- モーダル -->
-    <div class="modal-background" id="modal">
-      <div class="modal-inner">
-        <i id="modal-close" class="fa-solid fa-circle-xmark"></i>
-        <div class="search-tip">
-          <h3>
-            <i class="fa-solid fa-magnifying-glass"></i>
-            検索のコツ
-          </h3>
-          <p>💡 数字は「半角」で入力！</p>
-          <p>💡「全角」「漢数字」は検索で引っかかりません。</p>
-
-          <div class="search-tip-item">
-            <strong>☑️ クラス名で探す</strong>
-            <p>例：小学生高学年5級、3級、準2級</p>
-          </div>
-
-          <div class="search-tip-item">
-            <strong>☑️ Weekで探す</strong>
-            <p>例：準1級 Week10、Week24</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 英検級タブ -->
-    <div class="eiken-level-tabs-wrapper">
-      <div class="eiken-level-tabs">
-        <% @classrooms.each do |classroom|  %>
-          <%= link_to classroom.name, 
-              homeworks_path(classroom_id: classroom.id), 
-              class:"eiken-level-tab #{'active' if classroom == @selected_classroom}" %>
-        <% end %>
-      </div>
-    </div>  
+  <%= render "homeworks/search_bar" %>
+  <!-- モーダル -->
+  <%= render "homeworks/modal" %>
+  <!-- 英検級タブ -->
+  <%= render "homeworks/eiken_tab" %>
 
   <h1 class="homework-page-title">宿題一覧</h1>
-  <% @homeworks.each do |homework| %>
-      <%= link_to homework_path(homework), class: "homework-card" do %>
-        <div>
-          <div class="homework-card-top">
-            <span class="badge grade"><%= homework.classroom&.eiken_level %></span>
-          </div>
-          <h2 class="homework-title">
-            <%= homework.title %>
-            <% if current_user.completed_homework?(homework) %>
-              <span class="badge completed">
-                <i class="fa-solid fa-flag-checkered"></i> Done
-              </span>
-            <% end %>     
-          </h2>
-          <div class="homework-period">
-            <i class="fa-solid fa-calendar-check"></i>
-            <%= homework.test_start_date.strftime("%-m月%-d日") %> 〜 <%= homework.test_end_date.strftime("%-m月%-d日") %>
-          </div>
-        </div>
-      <% end %>
-  <% end %>
+    <!-- 宿題リスト -->
+    <%= render "homeworks/homework_lists" %>
 
   <div class="pagination-wrapper">
     <%= paginate @homeworks %>
   </div>
-
 </div>
 <%= render 'shared/navigation_bar' %>
