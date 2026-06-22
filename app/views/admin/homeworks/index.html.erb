@@ -5,6 +5,55 @@
         <h3 class="card-title">宿題一覧 <%= @homeworks.size %>件</h3>
         <%= link_to "宿題を新しく作成", new_admin_homework_path, class: "btn btn-primary btn-sm" %>
       </div>
+
+      <div class="card-body border-bottom">
+        <%= search_form_for @q, url: admin_homeworks_path, method: :get do |f| %>
+          <div class="row g-2">
+
+            <%# タイトル %>
+            <div class="col-md-3">
+              <%= f.search_field :title_cont,
+                  placeholder: "タイトル",
+                  class: "form-control form-control-sm" %>
+            </div>
+
+              <%# ステータス %>
+              <div class="col-md-2">
+                <%= f.select :status_eq,
+                    [["公開中", "published"], ["下書き", "draft"]],
+                    { include_blank: "すべて" },
+                    class: "form-select form-select-sm" %>
+              </div>
+
+              <%# クラス名 %>
+              <div class="col-md-1">
+                <%= f.search_field :classroom_eiken_level_cont,
+                    placeholder: "クラス名",
+                    class: "form-control form-control-sm" %>
+              </div>
+
+              <%# 開始日 %>
+              <div class="col-md-2">
+                <%= f.date_field :test_start_date_gteq,
+                    class: "form-control form-control-sm" %>
+              </div>
+
+              <%# テスト作成者 %>
+              <div class="col-md-2">
+                <%= f.search_field :user_name_cont,
+                    placeholder: "作成者",
+                    class: "form-control form-control-sm" %>
+              </div>
+
+              <%# ボタン %>
+              <div class="col-md-2 d-flex gap-1">
+                <%= f.submit "検索", class: "btn btn-primary btn-sm" %>
+                <%= link_to "リセット", admin_homeworks_path, class: "btn btn-secondary btn-sm" %>
+              </div>
+          </div>
+        <% end %>
+      </div>
+
       <div class="card-body">
         <table class="table table-bordered table-hover">
           <thead>

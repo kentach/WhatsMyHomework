@@ -35,4 +35,8 @@ class User < ApplicationRecord
   def highest_vocab_score
     vocabulary_tests.maximum(:vocabulary_score) || 0
   end
+
+  def self.ransackable_attributes(auth_object = nil)
+    %w[name]
+  end
 end

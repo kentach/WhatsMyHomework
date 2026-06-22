@@ -4,7 +4,11 @@ class Admin::HomeworksController < Admin::BaseController
   before_action :set_homework, only: [ :edit, :update, :destroy ]
 
   def index
-    @homeworks = Homework.order(updated_at: :desc).page(params[:page]).per(20)
+    @q = Homework.ransack(params[:q])
+    @homeworks = @q.result(distinct: true)
+                   .order(updated_at: :desc) # result(distinct: true)の後にorderを記述する
+                   .page(params[:page])
+                   .per(20)
   end
 
   def new
@@ -38,17 +42,19 @@ class Admin::HomeworksController < Admin::BaseController
   end
 
   def draft
-    @homeworks = Homework.where(status: "draft")
-                         .order(updated_at: :desc)
-                         .page(params[:page])
-                         .per(20)
+    @q = Homework.where(status: "draft").ransack(params[:q])
+    @homeworks = @q.result(distinct: true)
+                   .order(updated_at: :desc)
+                   .page(params[:page])
+                   .per(20)
   end
 
   def published
-    @homeworks = Homework.where(status: "published")
-                          .order(updated_at: :desc)
-                          .page(params[:page])
-                          .per(20)
+    @q = Homework.where(status: "published").ransack(params[:q])
+    @homeworks = @q.result(distinct: true)
+                   .order(updated_at: :desc)
+                   .page(params[:page])
+                   .per(20)
   end
 
   private
