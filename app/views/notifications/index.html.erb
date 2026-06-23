@@ -30,7 +30,7 @@
           <%# 対象クラス %>
           <% if notification.class_message? && notification.classrooms.any? %>
             <div class="notification_classrooms">
-              <i class="fa-solid fa-user-group"></i>
+              クラス：<i class="fa-solid fa-user-group"></i>
               <%= notification.classrooms.map(&:name).join("・") %>
             </div>
           <% end %>

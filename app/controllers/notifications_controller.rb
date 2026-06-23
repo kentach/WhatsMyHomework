@@ -1,6 +1,7 @@
 class NotificationsController < ApplicationController
   def index
     @notifications = Notification.includes(:classrooms)
+                                 .where(status: "published")
                                  .order(created_at: :desc)
                                  .page(params[:page]).per(7)
   end
