@@ -1,21 +1,22 @@
+<% types = Notification.notification_types %>
+<% filter_buttons = {
+  "すべて"         => nil,
+  "宿題の訂正"     => types["homework_correction"],
+  "月例単語テスト" => types["monthly_vocab_test"],
+  "イベント"       => types["event"],
+  "英検結果"       => types["eiken_result"],
+  "お知らせ"       => types["information"],
+  "その他"         => types["others"]
+} %>
+
 <header class="notification_header">
   <p>Messages from teachers</p>
   <h3>お知らせ <i class="fa-regular fa-comment-dots"></i></h3>
   <div class="notification_filter">
-      <%= link_to "すべて",
-            notifications_path,
-            class: "notification_filter_btn #{params.dig(:q, :notification_type_eq).blank? ? 'active' : ''}" %>
-
-      <%= link_to "宿題の訂正",
-            notifications_path(q: { notification_type_eq: "correction" }),
-            class: "notification_filter_btn correction #{params.dig(:q, :notification_type_eq) == 'correction' ? 'active' : ''}" %>
-
-      <%= link_to "月例単語テスト",
-            notifications_path(q: { notification_type_eq: "monthly_vocab_test" }),
-            class: "notification_filter_btn monthly_vocab_test #{params.dig(:q, :notification_type_eq) == 'monthly_vocab_test' ? 'active' : ''}" %>
-
-      <%= link_to "その他",
-            notifications_path(q: { notification_type_eq: "other" }),
-            class: "notification_filter_btn other #{params.dig(:q, :notification_type_eq) == 'other' ? 'active' : ''}" %>
-      </div>
+    <% filter_buttons.each do |label, value| %>
+      <%= link_to label,
+            notifications_path(value ? { q: { notification_type_eq: value } } : {}),
+            class: "notification_filter_btn #{'active' if filter_active?(value)}" %>
+    <% end %>
+  </div>
 </header>

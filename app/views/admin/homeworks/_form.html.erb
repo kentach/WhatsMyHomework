@@ -1,0 +1,59 @@
+<div class="card-body">
+        <%= form_with model: [:admin, @homework] do |f| %>
+          <% if @homework.errors.any? %>
+            <div class="alert alert-danger">
+              <% @homework.errors.full_messages.each do |msg| %>
+                <p><%= msg %></p>
+              <% end %>
+            </div>
+          <% end %>
+
+          <div class="mb-3">
+            <%= f.label :title, "タイトル", class: "form-label fw-bold" %>
+            <%= f.text_field :title, autofocus: true, placeholder: "クラス名 Week◯◯", class: "form-control" %>
+            <p class="mt-2">⚠️ 必ず「クラス名（例:小学生高学年5級）+ Week名（例:Week10）」で入力すること。</p>
+          </div>
+
+          <div class="mb-3">
+            <%= f.label :classroom_id, "クラス", class: "form-label fw-bold" %>
+            <%= f.collection_select :classroom_id, Classroom.all, :id, :name, { prompt: "クラスを選択" }, class: "form-select" %>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label fw-bold">宿題の内容</label>
+            <p>⚠️ 単語プリントがある場合は必ず添付すること</p>
+            <div id="tasks">
+              <%= f.fields_for :tasks do |task_form| %>
+                <%= render "task_fields", f: task_form %>
+              <% end %>
+            </div>
+            <button type="button" class="btn btn-outline-secondary btn-sm mt-2" id="add-task">
+              + 宿題を追加
+            </button>
+          </div>
+
+          <div class="mb-3">
+            <%= f.label :status, "ステータス", class: "form-label fw-bold" %>
+            <%= f.select :status, [["下書き", "draft"], ["公開", "published"]], {}, class: "form-select" %>
+          </div>
+
+          <div class="mb-3">
+            <%= f.label :test_start_date, "テスト開始日", class: "form-label fw-bold" %>
+            <%= f.datetime_local_field :test_start_date, class: "form-control" %>
+            <p class="mt-2 mb-0 pb-o">⚠️ カリキュラムスケジュールを必ず確認してください。</p>
+            <p class="m-0 p-0">⚠️ 時間は適当でOK</p>
+          </div>
+
+          <div class="mb-3">
+            <%= f.label :test_end_date, "テスト終了日", class: "form-label fw-bold" %>
+            <%= f.datetime_local_field :test_end_date, class: "form-control" %>
+            <p class="mt-2 mb-0 pb-o">⚠️ カリキュラムスケジュールを必ず確認してください。</p>
+            <p class="m-0 p-0">⚠️ 時間は適当でOK</p>
+          </div>
+
+          <div class="d-flex gap-2">
+            <%= f.submit "作成する", class: "btn btn-primary" %>
+            <%= link_to "キャンセル", admin_homeworks_path, class: "btn btn-secondary" %>
+          </div>
+        <% end %>
+      </div>

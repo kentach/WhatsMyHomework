@@ -5,9 +5,9 @@ class Admin::NotificationsController < Admin::BaseController
 
   def index
     @notifications = Notification.includes(:classrooms, :user).order(updated_at: :desc)
-    @draft_notifications      = @notifications.where(status: "draft")
-    @published_notifications  = @notifications.where(status: "published")
-    @scheduled_notifications  = @notifications.where(status: "scheduled")
+    @draft_notifications      = @notifications.draft
+    @scheduled_notifications  = @notifications.scheduled
+    @published_notifications  = @notifications.published
   end
 
   def new
@@ -17,7 +17,7 @@ class Admin::NotificationsController < Admin::BaseController
   def create
     @notification = current_user.notifications.build(notification_params)
     if @notification.save
-      redirect_to admin_notifications_path, notice: '通知を新しく作成しました。'
+      redirect_to admin_notifications_path, notice: "通知を新しく作成しました。"
     else
       render :new, status: :unprocessable_entity
     end
@@ -28,7 +28,7 @@ class Admin::NotificationsController < Admin::BaseController
 
   def update
     if @notification.update(notification_params)
-      redirect_to admin_notifications_path, notice: '通知を更新しました。'
+      redirect_to admin_notifications_path, notice: "通知を更新しました。"
     else
       flash.now[:danger] = "更新できませんでした。"
       render :edit, status: :unprocessable_entity
@@ -40,6 +40,21 @@ class Admin::NotificationsController < Admin::BaseController
     redirect_to admin_notifications_path, notice: "通知を削除しました。"
   end
 
+  def draft
+    @notifications = Notification.draft
+                                  .page(params[:page]).per(20)
+  end
+
+  def published
+    @notifications = Notification.published
+                                  .page(params[:page]).per(20)
+  end
+
+  def scheduled
+    @notifications = Notification.scheduled
+                                  .page(params[:page]).per(20)
+  end
+
   private
 
   def set_notification
@@ -48,8 +63,8 @@ class Admin::NotificationsController < Admin::BaseController
 
   def notification_params
     params.require(:notification).permit(
-        :title, 
-        :content, 
+        :title,
+        :content,
         :notification_type,
         :target_type,
         :published_at,

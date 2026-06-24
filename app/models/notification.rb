@@ -1,14 +1,50 @@
 class Notification < ApplicationRecord
-  validates :title, presence: true
-  validates :content, presence: true
-  validates :notification_type, presence: true
-  validates :status, presence: true
+  validates :title, presence: true                          # 通知タイトル
+  validates :content, presence: true                        # 通知内容
+  validates :notification_type, presence: true              # 通知の種別
+  validates :target_type, presence: true                    # どのクラス対象か
+  validates :status, presence: true                         # 状態
+  validates :published_at, presence: true, if: :scheduled?  # いつ公開するか
 
   belongs_to :user
   has_many :notification_classrooms, dependent: :destroy
   has_many :classrooms, through: :notification_classrooms
-  enum target_type: { all_classrooms: "全クラス", class_message: "クラス別" }
-  enum notification_type: { correction: "宿題の訂正", monthly_vocab_test: "月例単語テスト", other: "その他" }
+
+  enum target_type: {
+    all_classes: 0,       # クラス全て
+    specific_class: 1,     # 特定のクラス
+    junior_high: 2,       # 中高生クラス
+    elementary: 3         # 小学生クラス
+  }
+
+  enum notification_type: {
+    homework_correction: 0, # 宿題の訂正
+    monthly_vocab_test: 1,  # 月例単語テスト
+    event: 2,               # イベント
+    eiken_result: 3,        # 英検結果
+    information: 4,         # お知らせ
+    others: 5               # その他
+  }
+
+  enum status: {
+    draft: 0,      # 下書き
+    scheduled: 1,  # 予約投稿
+    published: 2,  # 公開中
+    archived: 3    # アーカイブ
+}
+
+  scope :visible, -> {
+    where(status: :published)
+      .or(where(status: :scheduled).where("published_at <= ?", Time.current))
+  } # 公開中・公開予定
+
+  def publish!
+    update!(status: :published, published_at: Time.current)
+  end
+
+  def schedule!(datetime)
+    update!(status: :scheduled, published_at: datetime)
+  end
 
   def self.ransackable_attributes(auth_object = nil)
     %w[
@@ -19,6 +55,6 @@ class Notification < ApplicationRecord
 
   # 関連も検索したい場合
   def self.ransackable_associations(auth_object = nil)
-    %w[classroom]
+    %w[classrooms]
   end
 end

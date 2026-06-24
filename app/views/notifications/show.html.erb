@@ -27,12 +27,11 @@
         </span>
       <% end %>
 
-      <% if @notification.classrooms.any? %>
-        <span class="notification_show_class">
-          <i class="fa-solid fa-user-group"></i>
-          該当クラス：<%= @notification.classrooms.map(&:name).join("・") %>
-        </span>
-      <% end %>
+      <span class="notification_show_class">
+        <%= notification_target_label(@notification) %>
+      </span>
+
+      <%= notification_type_badge(@notification) %>         
     </div>
 
     <hr class="notification_show_divider">

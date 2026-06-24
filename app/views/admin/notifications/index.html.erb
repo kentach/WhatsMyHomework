@@ -6,7 +6,7 @@
         <h3 class="card-title">
           <i class="fa-solid fa-bell"></i> 通知一覧
         </h3>
-        <%= link_to "+ 新しい通知を作成", new_admin_notification_path, class: "btn btn-info" %>
+        <%= link_to "+ 新しい通知を作成", new_admin_notification_path, class: "btn btn-danger" %>
       </div>
 
       <div class="card-body p-0">
@@ -27,12 +27,12 @@
             <% @notifications.each do |notification| %>
               <tr>
                 <td>
-                  <strong><%= notification.title %></strong>
+                  <strong><%= truncate(notification.title, length: 15, omission: "…")%></strong>
                 </td>
 
                 <td>
                   <% case notification.notification_type %>
-                  <% when "correction" %>
+                  <% when "homework_correction" %>
                     <span class="badge bg-primary">
                       <i class="fa-solid fa-bullhorn"></i> 宿題訂正
                     </span>
@@ -40,19 +40,43 @@
                     <span class="badge bg-warning text-dark">
                       <i class="fa-solid fa-book"></i> 月例単語テスト
                     </span>
-                  <% when "other" %>
+                  <% when "others" %>
                     <span class="badge bg-info">
                       <i class="fa-solid fa-chalkboard-user"></i> その他
                     </span>
+                  <% when "event" %>
+                    <span class="badge bg-success">
+                      <i class="fa-solid fa-calendar"></i> イベント
+                    </span>
+                  <% when "eiken_result" %>
+                    <span class="badge bg-info">
+                      <i class="fa-solid fa-star"></i> 英検結果
+                    </span>
+                  <% when "information" %>
+                    <span class="badge bg-secondary">
+                      <i class="fa-solid fa-circle-info"></i> お知らせ
+                    </span>
+                  <% when "others" %>
+                    <span class="badge bg-light text-dark">
+                      <i class="fa-solid fa-chalkboard-user"></i> その他
+                    </span>
                   <% else %>
-                    <span class="badge bg-secondary"> 未設定</span>
+                    <span class="badge bg-secondary">未設定</span>
                   <% end %>
                 </td>
 
                 <td>
-                  <% if notification.all_classrooms? %>
+                  <% if notification.all_classes? %>
                     <span class="text-muted">
                       <i class="fa-solid fa-users"></i> 全クラス
+                    </span>
+                  <% elsif notification.junior_high? %>
+                    <span>
+                      <i class="fa-solid fa-users"></i> 中高生クラス
+                    </span>
+                  <% elsif notification.elementary? %>
+                    <span>
+                      <i class="fa-solid fa-users"></i> 小学生クラス
                     </span>
                   <% else %>
                     <span>
