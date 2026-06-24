@@ -1,13 +1,10 @@
 class Admin::ClassroomsController < Admin::BaseController
   layout "admin"
   before_action :authenticate_user!
-  before_action :set_classroom, only: [ :show, :edit, :update, :destroy ]
+  before_action :set_classroom, only: [ :edit, :update, :destroy ]
 
   def index
     @classrooms = Classroom.all
-  end
-
-  def show
   end
 
   def new
