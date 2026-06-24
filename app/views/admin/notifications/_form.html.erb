@@ -1,0 +1,112 @@
+<div class="card-body">
+    <%= form_with model: [:admin, @notification] do |f| %>
+
+      <%# エラーメッセージ %>
+      <% if @notification.errors.any? %>
+        <div class="alert alert-danger">
+          <% @notification.errors.full_messages.each do |msg| %>
+            <p class="mb-0"><%= msg %></p>
+          <% end %>
+        </div>
+      <% end %>
+
+      <%# タイトル %>
+      <div class="mb-3">
+        <%= f.label :title, "タイトル", class: "form-label fw-bold" %>
+        <%= f.text_field :title,
+              autofocus: true,
+              placeholder: "例：クラス名・対象学年 / 月・Week / タイトルの順で書く。",
+              class: "form-control" %>
+        <p class="mt-2 mb-1 text-muted small">
+          ⚠️ 受講者に表示されるタイトルです。内容がわかるよう簡潔に記入してください。
+        </p>
+        <p class="mt-0 mb-1 text-muted small">
+          💡 例）中高生 ◯月 月例単語テスト ◯/◯ ~ ◯/◯ 実施
+        </p>
+        <p class="mt-0 mb-1 text-muted small">
+          💡 例）小学生高学年5級 Week◯ 宿題の修正
+        </p>
+      </div>
+
+      <%# 本文 %>
+      <div class="mb-3">
+        <%= f.label :content, "本文", class: "form-label fw-bold" %>
+        <%= f.text_area :content,
+              rows: 5,
+              placeholder: "通知の詳細内容を入力してください。",
+              class: "form-control" %>
+      </div>
+
+      <%# 通知種別 %>
+      <div class="mb-3">
+        <%= f.label :notification_type, "通知の種別", class: "form-label fw-bold" %>
+        <%= f.select :notification_type,
+              [
+                ["宿題の訂正",     "correction"],
+                ["月例単語テスト", "monthly_vocab_test"],
+                ["その他",         "other"]
+              ],
+              { prompt: "種別を選択" },
+              class: "form-select" %>
+        <p class="mt-2 text-muted small">
+          ⚠️ 種別を正しく選択してください。
+        </p>
+      </div>
+
+      <%# 送信対象  %>
+      <div class="mb-3">
+        <%= f.label :target_type, "送信対象", class: "form-label fw-bold" %>
+        <%= f.select :target_type,
+              [
+                ["全クラス",   "all_classrooms"],
+                ["クラス別",   "class_message"]
+              ],
+              {},
+              class: "form-select",
+              id: "target_type_select" %>
+      </div>
+
+      <%# クラス選択（クラス別のみ表示） %>
+      <div class="mb-3" id="classroom_select_wrapper">
+        <%= f.label :classroom_ids, "送信先クラス（複数選択可）", class: "form-label fw-bold" %>
+        <%= f.collection_check_boxes :classroom_ids, Classroom.all, :id, :name do |b| %>
+          <div class="form-check">
+            <%= b.check_box class: "form-check-input" %>
+            <%= b.label class: "form-check-label" %>
+          </div>
+        <% end %>
+        <p class="mt-2 text-muted small">
+          ⚠️「クラス別」を選択した場合は必ず1つ以上チェックしてください。
+        </p>
+      </div>
+
+      <%# ステータス %>
+      <div class="mb-3">
+        <%= f.label :status, "ステータス", class: "form-label fw-bold" %>
+        <%= f.select :status,
+              [["下書き", "draft"], ["公開", "published"], ["予約送信", "scheduled"]],
+              {},
+              class: "form-select",
+              id: "status_select" %>
+      </div>
+
+      <%# 公開日時（公開 or 予約送信時のみ表示） %>
+      <div class="mb-3" id="published_at_wrapper">
+        <%= f.label :published_at, "公開日時", class: "form-label fw-bold" %>
+        <%= f.datetime_local_field :published_at, class: "form-control" %>
+        <p class="mt-2 text-muted small mb-0">
+          ⚠️「予約送信」の場合は必ず日時を指定してください。
+        </p>
+        <p class="text-muted small m-0">
+          ⚠️「公開」の場合は今すぐ送信されます。空欄でも構いません。
+        </p>
+      </div>
+
+      <%# 送信ボタン %>
+      <div class="d-flex gap-2 mt-4">
+        <%= f.submit "作成する", class: "btn btn-primary" %>
+        <%= link_to "キャンセル", admin_notifications_path, class: "btn btn-secondary" %>
+      </div>
+
+  <% end %>
+</div>

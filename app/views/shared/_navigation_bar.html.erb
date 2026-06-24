@@ -18,5 +18,11 @@
         <i class="fa-solid fa-chart-line"></i>
       <span>単語テストスコア</span>
     <% end %>
+
+    <%= link_to notifications_path,
+        class: "tab-item #{current_page?(notifications_path) ? 'active' : ''}" do %>
+        <i class="fa-regular fa-envelope"></i>
+      <span>お知らせ</span>
+    <% end %>
   </div>
 </section>

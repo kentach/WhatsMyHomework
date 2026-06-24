@@ -1,0 +1,45 @@
+<%= render "notifications/header" %>
+
+<section class="notification_container">
+  <% if @notifications.empty? %>
+    <div class="notification_empty">
+      <i class="fa-regular fa-bell-slash"></i>
+      <p>まだお知らせはありません</p>
+    </div>
+
+  <% else %>
+    <% @notifications.each do |notification| %>
+      <%= link_to notification_path(notification), class: "notification_card_link" do %>
+        <div class="notification_card_container">
+          <div class="notification-card-header">
+            <div>
+              <h3 class="notification_title"><%= notification.title %></h3>
+            </div>
+            <p class="notification_date">
+                <%= display_time(notification.created_at) %>
+            </p>
+          </div>
+
+          <div class="notification_card_body">
+            <p><%= truncate(notification.content, length: 20, omission: "…") %></p>
+          </div>
+
+          <%# 対象クラス %>
+          <% if notification.class_message? && notification.classrooms.any? %>
+            <div class="notification_classrooms">
+              クラス：<i class="fa-solid fa-user-group"></i>
+              <%= notification.classrooms.map(&:name).join("・") %>
+            </div>
+          <% end %>
+
+        </div>
+      <% end %>
+    <% end %>
+  <% end %>
+
+  <div class="notification_pagination">
+    <%= paginate @notifications, theme: 'bootstrap-5', window: 6, outer_window: 3 %>
+  </div>
+</section>
+
+<%= render 'shared/navigation_bar' %>

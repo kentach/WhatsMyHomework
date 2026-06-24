@@ -1,0 +1,48 @@
+<header class="notification_header">
+  <p>Messages from teachers</p>
+  <h3>お知らせ <i class="fa-regular fa-comment-dots"></i></h3>
+</header>
+
+<section class="notification_show_container">
+  <div class="notification_show_card">
+    <%= link_to notifications_path, class: "back-link" do %>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="15 18 9 12 15 6"/>
+      </svg>
+      一覧に戻る
+    <% end %>
+
+    <%# メタ情報（日付・作成者・対象クラス） %>
+    <div class="notification_show_meta">
+      <span class="notification_show_date">
+        <i class="fa-regular fa-calendar"></i>
+        <%= (@notification.created_at).strftime("%-Y年%-m月%-d日") %>
+        （<%= %w(日 月 火 水 木 金 土)[(@notification.created_at).wday] %>）
+      </span>
+
+      <% if @notification.user.present? %>
+        <span class="notification_show_creator">
+          <i class="fa-solid fa-circle-user"></i>
+          作成者：<%= @notification.user.name %>先生
+        </span>
+      <% end %>
+
+      <% if @notification.classrooms.any? %>
+        <span class="notification_show_class">
+          <i class="fa-solid fa-user-group"></i>
+          該当クラス：<%= @notification.classrooms.map(&:name).join("・") %>
+        </span>
+      <% end %>
+    </div>
+
+    <hr class="notification_show_divider">
+    <h2 class="notification_show_title"><%= @notification.title %></h2>
+    <%# 本文 %>
+    <div class="notification_show_body">
+      <%= simple_format(@notification.content) %>
+    </div>
+
+  </div>
+  <%= render "notifications/navigation" %>
+</section>
+<%= render 'shared/navigation_bar' %>

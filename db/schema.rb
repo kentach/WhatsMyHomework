@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_06_20_092525) do
+ActiveRecord::Schema[7.2].define(version: 2026_06_22_132205) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -64,6 +64,28 @@ ActiveRecord::Schema[7.2].define(version: 2026_06_20_092525) do
     t.index ["user_id"], name: "index_homeworks_on_user_id"
   end
 
+  create_table "notification_classrooms", force: :cascade do |t|
+    t.bigint "notification_id", null: false
+    t.bigint "classroom_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["classroom_id"], name: "index_notification_classrooms_on_classroom_id"
+    t.index ["notification_id"], name: "index_notification_classrooms_on_notification_id"
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.string "title", null: false
+    t.text "content", null: false
+    t.string "notification_type"
+    t.string "target_type"
+    t.datetime "published_at"
+    t.string "status", default: "draft", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_notifications_on_user_id"
+  end
+
   create_table "task_completions", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "task_id", null: false
@@ -77,7 +99,6 @@ ActiveRecord::Schema[7.2].define(version: 2026_06_20_092525) do
 
   create_table "tasks", force: :cascade do |t|
     t.string "name", null: false
-    t.text "description"
     t.bigint "homework_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -116,6 +137,9 @@ ActiveRecord::Schema[7.2].define(version: 2026_06_20_092525) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "homeworks", "classrooms"
   add_foreign_key "homeworks", "users"
+  add_foreign_key "notification_classrooms", "classrooms"
+  add_foreign_key "notification_classrooms", "notifications"
+  add_foreign_key "notifications", "users"
   add_foreign_key "task_completions", "tasks"
   add_foreign_key "task_completions", "users"
   add_foreign_key "tasks", "homeworks"

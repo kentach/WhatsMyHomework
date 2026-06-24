@@ -8,6 +8,7 @@ class User < ApplicationRecord
   has_many :task_completions, dependent: :destroy
   has_many :completed_tasks, through: :task_completions, source: :task
   has_many :vocabulary_tests, dependent: :destroy
+  has_many :notifications, dependent: :destroy
 
   def completed?(task)
     task_completions.exists?(task: task)

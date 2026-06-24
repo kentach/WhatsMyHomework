@@ -1,0 +1,41 @@
+<div class="row">
+  <div class="col-lg-3 col-6">
+    <div class="small-box bg-primary">
+      <div class="inner">
+        <h3><%= @notifications.count %></h3>
+        <p>通知総数</p>
+      </div>
+      <%= link_to "一覧を見る", admin_notifications_path, class: "small-box-footer text-white" %>
+    </div>
+  </div>
+
+  <div class="col-lg-3 col-6">
+    <div class="small-box bg-success">
+      <div class="inner">
+        <h3><%= @published_notifications.count %></h3>
+        <p>公開中</p>
+      </div>
+      <%= link_to "一覧を見る", admin_published_notifications_path, class: "small-box-footer text-white" %>
+    </div>
+  </div>
+
+  <div class="col-lg-3 col-6">
+    <div class="small-box bg-warning">
+      <div class="inner">
+        <h3><%= @draft_notifications.count %></h3>
+        <p>下書き</p>
+      </div>
+      <%= link_to "一覧を見る", admin_draft_notifications_path, class: "small-box-footer text-white" %>
+    </div>
+  </div>
+
+  <div class="col-lg-3 col-6">
+    <div class="small-box bg-info">
+      <div class="inner">
+        <h3><%= @scheduled_notifications.count %></h3>
+        <p>予約済み</p>
+      </div>
+      <%= link_to "一覧を見る", admin_notifications_path(status: "scheduled"), class: "small-box-footer text-white" %>
+    </div>
+  </div>
+</div>

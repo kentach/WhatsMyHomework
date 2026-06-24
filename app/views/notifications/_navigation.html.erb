@@ -1,0 +1,17 @@
+<div class="notification_show_nav">
+  <% if @prev_notification %>
+    <%= link_to notification_path(@prev_notification), class: "notification_nav_btn" do %>
+      <i class="fa-solid fa-chevron-left"></i> 前のお知らせ
+    <% end %>
+  <% else %>
+    <span class="notification_nav_btn disabled"></span>
+  <% end %>
+
+  <% if @next_notification %>
+    <%= link_to notification_path(@next_notification), class: "notification_nav_btn" do %>
+      次のお知らせ <i class="fa-solid fa-chevron-right"></i>
+    <% end %>
+  <% else %>
+    <span class="notification_nav_btn disabled"></span>
+  <% end %>
+</div>

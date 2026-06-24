@@ -1,0 +1,220 @@
+
+.notification_container {
+  width: 100%;
+  max-width: 900px;
+  margin: 10px auto;
+  padding: 170px 10px 100px;
+}
+
+.notification_header {
+  padding: 20px 10px 10px;
+  border-radius: 0 0 20px 20px;
+  background-color: #1a1f2e;
+  color: #fff;
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 900px;
+  z-index: 100; 
+
+  p {
+    display: inline-flex;
+    align-items: center;
+    background: $accent-d;
+    color: $white;
+    margin-left: 10px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-family: "SF Mono", "Fira Code", monospace;
+  }
+
+  h3 {
+    font-size: 28px;
+    font-weight: 800;
+    line-height: 1.25;
+    padding: 0 20px;
+    letter-spacing: -0.03em;
+    margin-bottom: 12px;
+  }
+}
+
+// フィルターボタン
+.notification_filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 0 20px;
+  margin-bottom: 20px;
+}
+
+.notification_filter_btn {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 5px 14px;
+  border-radius: 20px;
+  border: 1.5px solid #e2e4e8;
+  background: #ffffff;
+  color: #555;
+  text-decoration: none;
+  transition: all 0.15s ease;
+
+  &:hover {
+    background: #f4f5f7;
+    color: #222;
+  }
+
+  &.active {
+    background: #ef4444;
+    color: #ffffff;
+    border-color: #ef4444;
+  }
+}
+
+.notification_card_link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+// カード
+.notification_card_container {
+  cursor: pointer;
+  display: block;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 20px 24px;
+  margin-bottom: 16px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 4px 12px rgba(0, 0, 0, 0.04);
+  border: 1px solid #e9eaec;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+  position: relative;
+  overflow: hidden;
+
+  &:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08), 0 12px 32px rgba(0, 0, 0, 0.06);
+    transform: translateY(-2px);
+  }
+}
+
+.notification_card_container::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 4px;
+  background-color: #1a1f2e;
+  border-radius: 4px 0 0 4px;
+}
+
+
+// 種別バッジ
+.notification_type_badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 20px;
+  margin-bottom: 8px;
+
+  &.notification_type_correction {
+    background: #fee2e2;
+    color: #b91c1c;
+  }
+
+  &.notification_type_monthly_test {
+    background: #fef9c3;
+    color: #92400e;
+  }
+
+  &.notification_type_other {
+    background: #e0f2fe;
+    color: #0369a1;
+  }
+}
+
+// カードヘッダー
+.notification-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  div {
+    display: flex;
+    gap: 10px;
+  }
+
+  i {
+    font-size: 16px;
+    margin-top: 3px;
+    color: #aab0bb;
+  }
+}
+
+.notification_title {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.notification_date {
+  font-size: 12px;
+  color: #9ca3af;
+  white-space: nowrap;
+  margin-left: 12px;
+}
+
+.notification_wday {
+  font-size: 11px;
+}
+
+// 本文
+.notification_card_body {
+  p {
+    padding: 4px 8px;
+    font-size: 14px;
+    color: #4b5563;
+    line-height: 1.7;
+    margin-bottom: 4px;
+  }
+}
+
+// 対象クラス
+.notification_classrooms {
+  font-size: 12px;
+  color: #e07b00;
+  padding: 6px 8px 2px;
+  border-top: 1px solid #f6f6f3;
+  margin-top: 4px;
+
+  i {
+    margin-right: 4px;
+  }
+}
+
+// 空状態
+.notification_empty {
+  text-align: center;
+  padding: 60px 20px;
+  color: #d1d5db;
+
+  i {
+    font-size: 48px;
+    display: block;
+    margin-bottom: 12px;
+  }
+
+  p {
+    font-size: 14px;
+  }
+}
+
+// ページネーション
+.notification_pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 24px;
+}

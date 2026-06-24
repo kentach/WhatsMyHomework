@@ -1,0 +1,41 @@
+<div class="row">
+  <div class="col-lg-3 col-6">
+    <div class="small-box bg-primary">
+      <div class="inner">
+        <h3><%= @homeworks.count %></h3>
+        <p>宿題総数</p>
+      </div>
+      <%= link_to "一覧を見る", admin_homeworks_path, class: "small-box-footer text-white" %>
+    </div>
+  </div>
+
+  <div class="col-lg-3 col-6">
+    <div class="small-box bg-success">
+      <div class="inner">
+        <h3><%= @published_homeworks.count %></h3>
+        <p>公開中</p>
+      </div>
+      <%= link_to "一覧を見る", admin_published_homeworks_path, class: "small-box-footer text-white" %>
+    </div>
+  </div>
+
+  <div class="col-lg-3 col-6">
+    <div class="small-box bg-warning">
+      <div class="inner">
+        <h3><%= @draft_homeworks.count %></h3>
+        <p>下書き</p>
+      </div>
+      <%= link_to "一覧を見る", admin_draft_homeworks_path, class: "small-box-footer text-white" %>
+    </div>
+  </div>
+
+  <div class="col-lg-3 col-6">
+    <div class="small-box bg-info">
+      <div class="inner">
+        <h3><%= @classrooms.count %></h3>
+        <p>クラス数</p>
+      </div>
+      <%= link_to "クラス一覧", admin_classrooms_path, class: "small-box-footer text-white" %>
+    </div>
+  </div>
+</div>

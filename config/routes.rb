@@ -2,9 +2,12 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :homeworks, except: [ :show ]
     resources :classrooms, except: [ :show ]
+    resources :notifications, except: [ :show ]
     root "dashboard#index"
     get "/homeworks/draft", to: "homeworks#draft", as: :draft_homeworks
     get "/homeworks/published", to: "homeworks#published", as: :published_homeworks
+    get "/notifications/draft", to: "notifications#draft", as: :draft_notifications
+    get "/notifications/published", to: "notifications#published", as: :published_notifications
   end
 
   devise_for :users, controllers: {
@@ -22,4 +25,5 @@ Rails.application.routes.draw do
   resources :tasks, only: [ :index, :show ] do
     resources :task_completions, only: [ :create, :destroy ] # turboはネストでルーティングを作ること
   end
+  resources :notifications, only: [ :index, :show ]
 end
