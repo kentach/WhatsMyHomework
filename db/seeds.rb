@@ -2,6 +2,8 @@ VocabularyTest.delete_all
 TaskCompletion.delete_all
 Task.delete_all
 Homework.delete_all
+NotificationClassroom.delete_all
+Notification.delete_all
 User.delete_all
 Classroom.delete_all
 
@@ -32,8 +34,9 @@ end
 
 user1 = User.create!(
   name: "片山",
-  email: "saitama3181@example.com",
+  student_id: "saitama3181",
   password: "saitama3181",
+  password_confirmation: "saitama3181",
   classroom: created_classrooms.first,
   role: 1
 )
