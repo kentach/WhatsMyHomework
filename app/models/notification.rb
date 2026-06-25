@@ -11,7 +11,7 @@ class Notification < ApplicationRecord
 
   enum target_type: {
     all_classes: 0,       # クラス全て
-    specific_class: 1,     # 特定のクラス
+    specific_class: 1     # 特定のクラス
   }
 
   enum notification_type: {
@@ -25,7 +25,7 @@ class Notification < ApplicationRecord
 
   enum status: {
     draft: 0,      # 下書き
-    published: 1,  # 公開中
+    published: 1  # 公開中
 }
 
   def self.ransackable_attributes(auth_object = nil)
