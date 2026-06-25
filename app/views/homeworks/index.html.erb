@@ -7,23 +7,17 @@
   <%= render "homeworks/eiken_tab" %>
 
   <% if @homeworks.empty? %>
-
     <div class="notification_empty">
       <p>まだ宿題はありません</p>
       <i class="fa-regular fa-bell-slash"></i>
     </div>
-
   <% else %>
-
     <h1 class="homework-page-title">宿題一覧</h1>
     <%= render "homeworks/homework_lists" %>
-
   <% end %>
 
-  <!-- ぺジネーション -->
   <div class="d-flex justify-content-center mt-4">
     <%= paginate @homeworks, theme: 'bootstrap-5', window: 6, outer_window: 3 %>
   </div>
-  
 </div>
 <%= render 'shared/navigation_bar' %>

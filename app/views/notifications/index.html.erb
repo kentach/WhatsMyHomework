@@ -11,7 +11,10 @@
   <% else %>
     <% @notifications.each do |notification| %>
 
-      <%= link_to notification_path(notification), class: "notification_card_link" do %>
+      <%= link_to notification_path(notification), 
+        class: "notification_card_link",
+        data: { turbo_frame: "notification_modal_frame" } do %>
+
         <div class="notification_card_container">
 
           <div class="notification-card-header">
@@ -41,4 +44,5 @@
   </div>
 </section>
 
+<%= turbo_frame_tag "notification_modal_frame" %>
 <%= render 'shared/navigation_bar' %>

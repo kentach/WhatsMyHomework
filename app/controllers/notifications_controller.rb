@@ -6,6 +6,7 @@ class NotificationsController < ApplicationController
                         .order(updated_at: :desc)
                         .page(params[:page]).per(5)
   end
+
   def show
     @notification = Notification.published
                                  .includes(:classrooms, :user)
