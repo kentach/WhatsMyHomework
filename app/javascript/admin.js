@@ -3,7 +3,7 @@ import "admin-lte";
 import "@hotwired/turbo-rails"
 
 document.addEventListener("turbo:load", initAdmin);
-document.addEventListener("DOMContentLoaded", initAdmin);
+document.addEventListener("turbo:render", initAdmin);
 
 function initAdmin() {
   // サイドバー自動ハイライト

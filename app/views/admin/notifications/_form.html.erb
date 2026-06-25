@@ -56,15 +56,12 @@
         </p>
       </div>
 
-      <%# 送信対象  %>
       <div class="mb-3">
         <%= f.label :target_type, "送信対象", class: "form-label fw-bold" %>
         <%= f.select :target_type,
               [
-                ["全クラス",     "all_classes"],
-                ["中高生クラス", "junior_high"],
-                ["小学生クラス", "elementary"],
-                ["クラス個別",   "class_message"]
+                ["全クラス",   "all_classes"],
+                ["クラス別",   "specific_class"]
               ],
               {},
               class: "form-select",
@@ -73,17 +70,16 @@
 
       <%# クラス選択（クラス別のみ表示） %>
       <div class="mb-3" id="classroom_select_wrapper">
-        <p class="mt-2 text-muted small">
-          ⚠️「クラス個別」を選択した場合は必ず1つ以上チェックしてください。
-        </p>
         <%= f.label :classroom_ids, "送信先クラス（複数選択可）", class: "form-label fw-bold" %>
-        
         <%= f.collection_check_boxes :classroom_ids, Classroom.all, :id, :name do |b| %>
           <div class="form-check">
             <%= b.check_box class: "form-check-input" %>
             <%= b.label class: "form-check-label" %>
           </div>
         <% end %>
+        <p class="mt-2 text-muted small">
+          ⚠️「クラス別」を選択した場合は必ず1つ以上チェックしてください。
+        </p>
       </div>
 
       <%# ステータス %>
@@ -92,23 +88,10 @@
         <%= f.select :status,
               [ ["下書き", "draft"], 
                 ["公開", "published"], 
-                ["予約送信", "scheduled"]
               ],
               {},
               class: "form-select",
               id: "status_select" %>
-      </div>
-
-      <%# 公開日時（公開 or 予約送信時のみ表示） %>
-      <div class="mb-3" id="published_at_wrapper">
-        <%= f.label :published_at, "公開日時", class: "form-label fw-bold" %>
-        <%= f.datetime_local_field :published_at, class: "form-control" %>
-        <p class="mt-2 text-muted small mb-0">
-          ⚠️「予約送信」の場合は必ず日時を指定してください。
-        </p>
-        <p class="text-muted small m-0">
-          ⚠️「公開」の場合は今すぐ送信されます。空欄でも構いません。
-        </p>
       </div>
 
       <%# 送信ボタン %>
@@ -119,3 +102,20 @@
 
   <% end %>
 </div>
+
+<script>
+  document.addEventListener("turbo:load", function () {
+    const targetTypeSelect   = document.getElementById("target_type_select");
+    const classroomWrapper   = document.getElementById("classroom_select_wrapper");
+    const statusSelect       = document.getElementById("status_select");
+
+    function toggleClassroom() {
+      classroomWrapper.style.display =
+        targetTypeSelect.value === "specific_class" ? "block" : "none";
+    }
+
+    targetTypeSelect.addEventListener("change", toggleClassroom);
+    // 初期表示
+    toggleClassroom();
+  });
+</script>

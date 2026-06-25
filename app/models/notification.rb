@@ -4,7 +4,6 @@ class Notification < ApplicationRecord
   validates :notification_type, presence: true              # 通知の種別
   validates :target_type, presence: true                    # どのクラス対象か
   validates :status, presence: true                         # 状態
-  validates :published_at, presence: true, if: :scheduled?  # いつ公開するか
 
   belongs_to :user
   has_many :notification_classrooms, dependent: :destroy
@@ -13,8 +12,6 @@ class Notification < ApplicationRecord
   enum target_type: {
     all_classes: 0,       # クラス全て
     specific_class: 1,     # 特定のクラス
-    junior_high: 2,       # 中高生クラス
-    elementary: 3         # 小学生クラス
   }
 
   enum notification_type: {
@@ -28,23 +25,8 @@ class Notification < ApplicationRecord
 
   enum status: {
     draft: 0,      # 下書き
-    scheduled: 1,  # 予約投稿
-    published: 2,  # 公開中
-    archived: 3    # アーカイブ
+    published: 1,  # 公開中
 }
-
-  scope :visible, -> {
-    where(status: :published)
-      .or(where(status: :scheduled).where("published_at <= ?", Time.current))
-  } # 公開中・公開予定
-
-  def publish!
-    update!(status: :published, published_at: Time.current)
-  end
-
-  def schedule!(datetime)
-    update!(status: :scheduled, published_at: datetime)
-  end
 
   def self.ransackable_attributes(auth_object = nil)
     %w[

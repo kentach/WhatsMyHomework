@@ -6,7 +6,6 @@ class Admin::NotificationsController < Admin::BaseController
   def index
     @notifications = Notification.includes(:classrooms, :user).order(updated_at: :desc)
     @draft_notifications      = @notifications.draft
-    @scheduled_notifications  = @notifications.scheduled
     @published_notifications  = @notifications.published
   end
 
@@ -50,11 +49,6 @@ class Admin::NotificationsController < Admin::BaseController
                                   .page(params[:page]).per(20)
   end
 
-  def scheduled
-    @notifications = Notification.scheduled
-                                  .page(params[:page]).per(20)
-  end
-
   private
 
   def set_notification
@@ -67,7 +61,6 @@ class Admin::NotificationsController < Admin::BaseController
         :content,
         :notification_type,
         :target_type,
-        :published_at,
         :status,
         classroom_ids: []
         )

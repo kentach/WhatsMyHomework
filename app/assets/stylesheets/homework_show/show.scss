@@ -15,18 +15,26 @@ $green-l:   #34d399;
   background: $gray-100;
   min-height: 100vh;
   padding-bottom: 96px;
+
+  // iPhoneのセーフエリア対応
+  padding-bottom: calc(96px + env(safe-area-inset-bottom));
 }
 
 // ── ヘッダー ──────────────────────────────
 .homework-show-header {
-  background: #ff5757;
-  position: sticky;
-  top: 0;
+  background: $accent;
   z-index: 10;
+
+  // iPhoneのノッチ対応
+  padding-top: env(safe-area-inset-top);
 }
 
 .homework-show-header-inner {
   padding: 40px 20px 38px;
+
+  @media (max-width: 390px) {
+    padding: 20px 16px 20px;
+  }
 }
 
 .show-top {
@@ -34,6 +42,7 @@ $green-l:   #34d399;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 12px;
+  gap: 8px;
 }
 
 .hero-badge {
@@ -47,6 +56,10 @@ $green-l:   #34d399;
   padding: 4px 12px;
   border-radius: 20px;
   font-family: "SF Mono", "Fira Code", monospace;
+
+  // 小さい画面では文字が潰れないよう
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .show-top-actions {
@@ -62,12 +75,24 @@ $green-l:   #34d399;
   letter-spacing: -0.03em;
   color: $white;
   margin-bottom: 12px;
+
+  // スマホで長いタイトルが溢れないよう
+  @media (max-width: 390px) {
+    font-size: 22px;
+  }
 }
 
 .show-header-meta {
   display: flex;
   align-items: center;
   gap: 12px;
+
+  // 狭い画面では縦並び
+  @media (max-width: 390px) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
 }
 
 .test-period-inline {
@@ -79,6 +104,10 @@ $green-l:   #34d399;
   color: rgba($white, 0.65);
 
   svg { flex-shrink: 0; }
+
+  @media (max-width: 390px) {
+    font-size: 15px;
+  }
 }
 
 .homework-created-by {
@@ -87,17 +116,20 @@ $green-l:   #34d399;
 }
 
 .homework-created-by span {
-  color:green;
+  color: green;
   font-size: 14px;
   background-color: rgb(205, 247, 205);
   border-radius: 14px;
   padding: 3px 10px;
 }
 
-
 // ── ボディ ───────────────────────────────
 .homework-show-body {
   padding: 20px 16px 0;
+
+  @media (max-width: 390px) {
+    padding: 16px 12px 0;
+  }
 }
 
 .show-summary-row {
@@ -105,6 +137,11 @@ $green-l:   #34d399;
   align-items: center;
   gap: 10px;
   margin-bottom: 16px;
+
+  // 極小画面でも崩れないよう
+  @media (max-width: 320px) {
+    flex-wrap: wrap;
+  }
 }
 
 .show-summary-card {
@@ -116,6 +153,12 @@ $green-l:   #34d399;
   flex-direction: column;
   align-items: center;
   min-width: 64px;
+
+  // タップ領域を確保
+  @media (max-width: 390px) {
+    padding: 8px 12px;
+    min-width: 56px;
+  }
 }
 
 .show-summary-num {
@@ -162,6 +205,10 @@ $green-l:   #34d399;
     font-weight: 800;
     color: $navy;
     margin: 0;
+
+    @media (max-width: 390px) {
+      font-size: 17px;
+    }
   }
 }
 
@@ -172,6 +219,7 @@ $green-l:   #34d399;
   background: $gray-100;
   padding: 2px 10px;
   border-radius: 12px;
+  white-space: nowrap;
 }
 
 // ヒントバナー
@@ -194,6 +242,10 @@ $green-l:   #34d399;
     color: #b35c00;
     font-weight: 500;
     line-height: 1.5;
+
+    @media (max-width: 390px) {
+      font-size: 13px;
+    }
   }
 }
 
@@ -223,6 +275,14 @@ $green-l:   #34d399;
     &::before { opacity: 1; }
   }
 
+  // スマホではhoverなし、タップ時のフィードバック
+  @media (hover: none) {
+    &:active:not(.completed) {
+      background: $gray-50;
+      &::before { opacity: 1; }
+    }
+  }
+
   &.completed {
     background: #f0fdf8;
 
@@ -244,6 +304,12 @@ $green-l:   #34d399;
   gap: 14px;
   padding: 15px 16px;
   cursor: pointer;
+
+  // タップ領域を広めに確保
+  @media (max-width: 390px) {
+    padding: 14px 14px;
+    gap: 12px;
+  }
 }
 
 .homework-show-task-content {
@@ -251,6 +317,7 @@ $green-l:   #34d399;
   flex-direction: column;
   gap: 6px;
   flex: 1;
+  min-width: 0; // テキストが溢れないよう
 }
 
 .homework-show-pdf-link {
@@ -266,12 +333,21 @@ $green-l:   #34d399;
   border-radius: 6px;
   width: fit-content;
 
+  // タップしやすい最小サイズ
+  min-height: 36px;
+
   i { font-size: 14px; }
 
   &:hover {
     background: rgba($accent, 0.15);
   }
-} 
+
+  @media (hover: none) {
+    &:active {
+      background: rgba($accent, 0.15);
+    }
+  }
+}
 
 .homework-details {
   margin: 0;
@@ -287,6 +363,14 @@ $green-l:   #34d399;
   line-height: 1.4;
   flex: 1;
   transition: color 0.2s;
+
+  // 長いテキストの折り返し
+  word-break: break-word;
+  overflow-wrap: break-word;
+
+  @media (max-width: 390px) {
+    font-size: 15px;
+  }
 }
 
 // 戻るリンク
@@ -300,6 +384,9 @@ $green-l:   #34d399;
   font-weight: 600;
   margin-bottom: 24px;
   padding: 8px 0;
+
+  // タップしやすいよう縦方向のパディング確保
+  min-height: 44px;
   transition: color 0.15s;
 
   &:hover { color: $navy; }
@@ -309,7 +396,15 @@ $green-l:   #34d399;
 .homeworks-show-test-period {
   width: 100%;
   background-color: #333;
-  color: #fff;
+  color: $white;
   padding: 10px 14px;
   margin: 0;
+
+  // セーフエリア左右対応
+  padding-left: max(14px, env(safe-area-inset-left));
+  padding-right: max(14px, env(safe-area-inset-right));
+
+  @media (max-width: 390px) {
+    font-size: 14px;
+  }
 }

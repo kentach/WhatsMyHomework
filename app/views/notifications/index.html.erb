@@ -1,6 +1,7 @@
 <%= render "notifications/header" %>
 
 <section class="notification_container">
+
   <% if @notifications.empty? %>
     <div class="notification_empty">
       <p>まだお知らせはありません</p>
@@ -9,29 +10,32 @@
 
   <% else %>
     <% @notifications.each do |notification| %>
-      <%= link_to notification_path(notification), class: "notification_card_link" do %>
+
+      <%= link_to notification_path(notification), 
+        class: "notification_card_link",
+        data: { turbo_frame: "notification_modal_frame" } do %>
+
         <div class="notification_card_container">
+
           <div class="notification-card-header">
-            <div>
-              <h3 class="notification_title"><%= notification.title %></h3>
-            </div>
+            <%= notification_type_badge(notification) %>
             <p class="notification_date">
               <%= display_time(notification.updated_at) %>
             </p>
           </div>
+          
+          <h3 class="notification_title"><%= notification.title %></h3>
 
           <div class="notification_card_body">
             <p><%= truncate(notification.content, length: 50, omission: "…") %></p>
           </div>
-
           <%# 対象クラス %>
           <div class="notification_classrooms">
             <%= notification_target_label(notification) %>
-            <%= notification_type_badge(notification) %>
           </div>
-
         </div>
       <% end %>
+
     <% end %>
   <% end %>
 
@@ -40,4 +44,5 @@
   </div>
 </section>
 
+<%= turbo_frame_tag "notification_modal_frame" %>
 <%= render 'shared/navigation_bar' %>

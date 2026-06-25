@@ -25,6 +25,11 @@
       タスク一覧
   ========================= -->
   <div class="task-index-list">
+    <div class="task-index-list-header">
+      <h3><%= current_user.classroom.name %> 宿題リスト</h3>
+      <span class="task-index-list-count"><%= total %> タスク</span>
+    </div>
+
     <% if @homeworks.any? %>
       <div class="test-period-banner">
         📅 テスト期間：
@@ -36,12 +41,6 @@
         📅 現在テスト期間はありません
       </div>
     <% end %>
-    
-    <div class="task-index-list-header">
-      <h3><%= current_user.classroom.name %> 宿題リスト</h3>
-      <span class="task-index-list-count"><%= total %> タスク</span>
-    </div>
-
     <div class="test-index-info">
       <ul>
         <li>📌 授業前に宿題を必ずチェックしよう！</li>

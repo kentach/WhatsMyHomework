@@ -3,18 +3,12 @@ class TaskCompletionsController < ApplicationController
 
   def create
     current_user.complete!(@task)
-    respond_to do |format|
-      format.turbo_stream
-      format.html { redirect_back fallback_location: tasks_path }
-    end
+    redirect_to tasks_path # レンダリングされないと数字が更新されない為。
   end
 
   def destroy
     current_user.incomplete!(@task)
-    respond_to do |format|
-      format.turbo_stream
-      format.html { redirect_back fallback_location: tasks_path }
-    end
+    redirect_to tasks_path
   end
 
   private

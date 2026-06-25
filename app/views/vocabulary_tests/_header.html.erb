@@ -3,11 +3,6 @@
   <h1><%= current_user.name %>さんの単語テスト記録</h1>
 
   <% if @scores.any? %>
-
     <%= render "vocabulary_tests/user_score" %>
-    <div class="vocabulary-tests-header">
-      <%= link_to "+ グラフを見る", score_graph_vocabulary_tests_path, class: "vocabulary_graph" %>
-    </div>
-
   <% end %>
 </header>

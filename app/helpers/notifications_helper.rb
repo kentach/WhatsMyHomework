@@ -14,10 +14,10 @@ module NotificationsHelper
 
   def notification_type_badge(notification)
     badge = case notification.notification_type
-    when "homework_correction" then { label: "宿題の訂正", color: "warning" }
+    when "homework_correction" then { label: "宿題の訂正", color: "info" }
     when "monthly_vocab_test"  then { label: "月例単語テスト", color: "success" }
     when "event"               then { label: "イベント", color: "primary" }
-    when "eiken_result"        then { label: "英検結果", color: "info" }
+    when "eiken_result"        then { label: "英検結果", color: "warning" }
     when "information"         then { label: "お知らせ", color: "secondary" }
     when "others"              then { label: "その他", color: "light" }
     end
@@ -32,19 +32,11 @@ module NotificationsHelper
     if notification.specific_class?
       content_tag(:span) do
         content_tag(:i, "", class: "fa-solid fa-user-group") +
-        " クラス：#{notification.classrooms.map(&:name).join("・")}"
+        " クラス #{notification.classrooms.map(&:name).join("・")}"
       end
-    elsif notification.all_classes?
+    else notification.all_classes?
       content_tag(:span) do
         content_tag(:i, "", class: "fa-solid fa-users") + " 全クラス"
-      end
-    elsif notification.junior_high?
-      content_tag(:span) do
-        content_tag(:i, "", class: "fa-solid fa-users") + " 中高生クラス"
-      end
-    elsif notification.elementary?
-      content_tag(:span) do
-        content_tag(:i, "", class: "fa-solid fa-users") + " 小学生クラス"
       end
     end
   end

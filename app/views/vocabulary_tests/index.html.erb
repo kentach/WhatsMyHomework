@@ -1,6 +1,41 @@
 <% content_for :title, I18n.t('views.vocabulary_tests.index.title') %>
+
 <div class="score-tracker">
   <%= render "vocabulary_tests/header" %>
 </div>
-<%= render "vocabulary_tests/create_score" %>
+
+<div class="vocabulary-tests-container">
+  <% if @scores.count >= 2 %>
+    <div class="vocabulary-tests-table-wrapper" style="padding: 10px;">
+      <%= line_chart @score_data,
+          height: "300px",
+          colors: ["#3B82F6", "#10B981"],
+          min: 0,
+          title: "単語テストスコア推移",
+          points: true,
+          curve: true %>
+    </div>
+  <% else %>
+    <div class="vocabulary-tests-empty">
+      <h5>グラフを表示するには2件以上の記録が必要です</h5>
+    </div>
+  <% end %>
+
+  <%# スコア表 %>
+  <%= render "vocabulary_tests/graph" %>
+
+  <%# ぺジネーション %>
+  <div class="d-flex justify-content-center mt-4">
+    <%= paginate @scores, theme: 'bootstrap-5', window: 5, outer_window: 1 %>
+  </div>
+</div>
+
+<%= link_to new_vocabulary_test_path do %>
+  <i class="fa-solid fa-circle-plus add-score-btn"></i>
+<% end %>
+
+
+
+
+
 <%= render "shared/navigation_bar" %>

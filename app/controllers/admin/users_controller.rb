@@ -1,8 +1,8 @@
 class Admin::UsersController < Admin::BaseController
-  before_action :authenticate_user!, only: %i[ new create ]
+  before_action :authenticate_user!
 
   def index
-    @users = User.all.order(created_at: :desc).page(params[:page]).per(30)
+    @users = User.all.order(created_at: :desc).page(params[:page]).per(20)
   end
 
   def show
@@ -39,7 +39,7 @@ class Admin::UsersController < Admin::BaseController
 
   def destroy
     @user = User.find(params[:id])
-    @user.destroy
+    @user.destroy!
     flash[:notice] = "ユーザーを削除しました"
     redirect_to admin_users_path
   end

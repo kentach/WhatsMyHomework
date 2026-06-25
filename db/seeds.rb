@@ -33,7 +33,7 @@ created_classrooms = classrooms.map do |name, level|
 end
 
 user1 = User.create!(
-  name: "片山",
+  name: "上拾石",
   student_id: "saitama3181",
   password: "saitama3181",
   password_confirmation: "saitama3181",

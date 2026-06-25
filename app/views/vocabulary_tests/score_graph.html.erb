@@ -13,46 +13,6 @@
     
   </header>
 </div>
-<div class="vocabulary-tests-container">
-  <% if @scores.count >= 2 %>
-    <div class="vocabulary-tests-table-wrapper" style="padding: 20px;">
-      <%= line_chart @score_data,
-          height: "300px",
-          colors: ["#3B82F6", "#10B981"],
-          min: 0,
-          title: "単語テストスコア推移",
-          points: true,
-          curve: true %>
-    </div>
-  <% else %>
-    <div class="vocabulary-tests-empty">
-      <h5>グラフを表示するには2件以上の記録が必要です</h5>
-    </div>
-  <% end %>
 
-    <div class="vocabulary-tests-table-wrapper">
-    <table class="vocabulary-tests-table">
-      <thead>
-        <tr>
-          <th>日付</th>
-          <th>宿題</th>
-          <th>単語テスト</th>
-          <th>文テスト</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @scores.each do |score| %>
-          <tr>
-            <td><%= score.test_date&.strftime("%Y/%m/%d") %></td>
-            <td><%= score.homework&.title %></td>
-            <td><%= score.vocabulary_score %> / 10</td>
-            <td><%= score.sentence_score %> / 2</td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-  </div>
-  
-</div>
 
 <%= render "shared/navigation_bar" %>

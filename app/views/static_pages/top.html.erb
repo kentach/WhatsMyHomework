@@ -1,4 +1,5 @@
 <section class="lp-page-container">
+
   <div class="logo-header">
     <div class="logo">
       <%= image_tag "/logo.png", alt: "What's My Homework?", width: "40px", height: "40px" %>
@@ -18,11 +19,11 @@
         </li>
       </ul>
   </nav>
-  <!-- overlay-->
   <div id="menu-overlay" class="menu-overlay"></div>
 
   <div class="sub-title-container">
     <h1>宿題わかる<br>って最高じゃん？</h1>
+
     <div class="login-btn">
       <div class="cta-section-buttons fade-up delay-1 mt-5">
         <%= link_to "ログインする",
@@ -30,7 +31,9 @@
           class: "btn btn-lg btn-cta-primary rounded-pill fw-bold shadow" %>
       </div>
     </div>
+    
   </div>
+
 </section>
 
 <%= render "static_pages/feature1" %>

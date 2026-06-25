@@ -1,0 +1,19 @@
+<div class="admin-login-container">
+  <div class="admin-login-card">
+    <h2>管理画面ログイン</h2>
+
+    <%= form_with url: admin_login_path, method: :post do |f| %>
+      <div class="mb-3">
+        <%= f.label :student_id, "ID" %>
+        <%= f.text_field :student_id, class: "form-control" %>
+      </div>
+
+      <div class="mb-3">
+        <%= f.label :password, "パスワード" %>
+        <%= f.password_field :password, class: "form-control" %>
+      </div>
+
+      <%= f.submit "ログイン", class: "btn btn-danger w-100" %>
+    <% end %>
+  </div>
+</div>

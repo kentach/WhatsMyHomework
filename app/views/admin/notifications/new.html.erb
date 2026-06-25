@@ -10,30 +10,3 @@
     </div>
   </div>
 </div>
-
-<%# JS: 送信対象・ステータスに応じてフィールドの表示切替 %>
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const targetTypeSelect   = document.getElementById("target_type_select");
-    const classroomWrapper   = document.getElementById("classroom_select_wrapper");
-    const statusSelect       = document.getElementById("status_select");
-    const publishedAtWrapper = document.getElementById("published_at_wrapper");
-
-    function toggleClassroom() {
-      classroomWrapper.style.display =
-        targetTypeSelect.value === "class_message" ? "block" : "none";
-    }
-
-    function togglePublishedAt() {
-      const show = ["published", "scheduled"].includes(statusSelect.value);
-      publishedAtWrapper.style.display = show ? "block" : "none";
-    }
-
-    targetTypeSelect.addEventListener("change", toggleClassroom);
-    statusSelect.addEventListener("change", togglePublishedAt);
-
-    // 初期表示
-    toggleClassroom();
-    togglePublishedAt();
-  });
-</script>

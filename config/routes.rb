@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     get "/notifications/draft", to: "notifications#draft", as: :draft_notifications
     get "/notifications/published", to: "notifications#published", as: :published_notifications
     resources :users
+
     # 管理画面ログイン
     get "login" => "user_sessions#new", :as => :login
     post "login" => "user_sessions#create"
@@ -23,11 +24,7 @@ Rails.application.routes.draw do
   root "static_pages#top"
 
   resources :homeworks, only: [ :index, :show ]
-  resources :vocabulary_tests, only: [ :index, :new, :create, :edit, :update, :destroy ] do
-    collection do
-      get :score_graph
-    end
-  end
+  resources :vocabulary_tests, only: [ :index, :new, :create, :edit, :update, :destroy ]
   resources :tasks, only: [ :index, :show ] do
     resources :task_completions, only: [ :create, :destroy ] # turboはネストでルーティングを作ること
   end

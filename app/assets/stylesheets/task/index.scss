@@ -1,3 +1,4 @@
+// ── 変数 ──────────────────────────────────
 $accent: #ff5757;
 $accent-d: #e03e3e;
 $navy: #1a1f2e;
@@ -10,6 +11,17 @@ $white: #ffffff;
 $green: #10b981;
 $green-l: #34d399;
 
+// ── ブレークポイント ───────────────────────
+// スマホ小型 (iPhone SE等)
+$bp-xs: 320px;
+// スマホ標準 (iPhone 14等)
+$bp-sm: 390px;
+// スマホ大型 (iPhone Plus / Android大型)
+$bp-md: 430px;
+// タブレット
+$bp-lg: 768px;
+
+// ── バッジ ────────────────────────────────
 .badge.completed {
   background: #ccf8d5;
   color: #1b6516;
@@ -19,45 +31,110 @@ $green-l: #34d399;
   margin-left: 12px;
   border-radius: 999px;
   align-items: center;
+
+  @media (max-width: $bp-sm) {
+    padding: 4px 8px;
+    margin-left: 6px;
+    font-size: 11px;
+  }
+
+  // 極小画面
+  @media (max-width: $bp-xs) {
+    padding: 3px 6px;
+    margin-left: 4px;
+    font-size: 10px;
+  }
 }
 
 .badge.completed i {
   font-size: 13px;
+
+  @media (max-width: $bp-xs) {
+    font-size: 11px;
+  }
 }
 
+// ── テスト期間バナー ──────────────────────
 .test-period-banner {
-    width: 100%;
-    background-color: #333;
-    color: #fff;
-    padding: 10px 14px;
-    border-radius: 12px;
-    margin: 16px 0px;
+  width: 100%;
+  background-color: #333;
+  color: #fff;
+  padding: 10px 14px;
+  border-radius: 12px;
+  margin: 6px 0;
+  font-size: 14px;
+  line-height: 1.5;
+  word-break: break-word;
+
+  // セーフエリア対応
+  padding-left: max(14px, env(safe-area-inset-left));
+  padding-right: max(14px, env(safe-area-inset-right));
+
+  @media (max-width: $bp-sm) {
+    font-size: 13px;
+    border-radius: 10px;
+  }
+
+  @media (max-width: $bp-xs) {
+    font-size: 12px;
+  }
 }
+
 // ── ページ ────────────────────────────────
 .my-tasks {
   background: $gray-100;
   min-height: 100vh;
-  padding-bottom: 96px;
+
+  // ホームバー対応
+  padding-bottom: calc(96px + env(safe-area-inset-bottom));
+
+  // タブレット以上は中央寄せ
+  @media (min-width: $bp-lg) {
+    max-width: 720px;
+    margin: 0 auto;
+    padding-bottom: 40px;
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.08);
+  }
 }
 
 // ── ヘッダー ──────────────────────────────
-
 .selected-date-label {
-  color:$white;
+  color: $white;
   padding: 0;
   margin: 0;
+  font-size: 14px;
+
+  @media (max-width: $bp-sm) {
+    font-size: 13px;
+  }
+
+  @media (max-width: $bp-xs) {
+    font-size: 12px;
+  }
 }
 
 .my-tasks-header {
   background: $navy;
-  padding: 20px 30px;
-  position: sticky;
-  top: 0;
+  border-radius: 0 0 20px 20px;
+  padding: 18px 20px;
+  padding-top: max(12px, env(safe-area-inset-top));
+  padding-left: max(16px, env(safe-area-inset-left));
+  padding-right: max(16px, env(safe-area-inset-right));
   z-index: 10;
+
+  @media (max-width: $bp-sm) {
+    padding: 16px 16px;
+    padding-top: max(10px, env(safe-area-inset-top));
+  }
+
+  @media (max-width: $bp-xs) {
+    padding: 8px 10px;
+    padding-top: max(8px, env(safe-area-inset-top));
+  }
 }
 
 .my-tasks-header-inner {
-  margin-bottom: 16px;
+  margin-bottom: 3px;
 }
 
 .my-tasks-title {
@@ -66,43 +143,83 @@ $green-l: #34d399;
   color: $white;
   letter-spacing: -0.03em;
   margin-bottom: 2px;
+
+  @media (max-width: $bp-sm) {
+    font-size: 19px;
+  }
+
+  @media (max-width: $bp-xs) {
+    font-size: 17px;
+  }
 }
 
 .my-tasks-subtitle {
   font-size: 12px;
+  margin: 0;
+  padding: 0;
   font-weight: 600;
   color: rgba($white, 0.5);
+
+  @media (max-width: $bp-xs) {
+    font-size: 11px;
+  }
 }
 
-// 週ナビゲーター
+// ── 週ナビゲーター ────────────────────────
 .week-nav {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   margin-bottom: 6px;
+
+  @media (max-width: $bp-xs) {
+    gap: 3px;
+  }
 }
 
 .week-nav-arrow {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 28px;
-  height: 28px;
+  // タップ領域を44pxに近づける（見た目は36px）
+  width: 36px;
+  height: 36px;
   border-radius: 8px;
   background: rgba($white, 0.1);
   color: rgba($white, 0.7);
   flex-shrink: 0;
   transition: background 0.15s;
+  -webkit-tap-highlight-color: transparent;
 
-  &:hover {
-    background: rgba($white, 0.2);
+  // タップ領域を視覚サイズより広くする
+  position: relative;
+  &::before {
+    content: "";
+    position: absolute;
+    inset: -4px;
+  }
+
+  &:hover { background: rgba($white, 0.2); }
+
+  @media (hover: none) {
+    &:active { background: rgba($white, 0.2); }
+  }
+
+  @media (max-width: $bp-xs) {
+    width: 30px;
+    height: 30px;
+    border-radius: 6px;
   }
 }
 
 .week-days {
   display: flex;
   flex: 1;
-  gap: 4px;
+  gap: 3px;
+
+  @media (max-width: $bp-xs) {
+    gap: 1px;
+  }
 }
 
 .week-day-cell {
@@ -114,43 +231,57 @@ $green-l: #34d399;
   padding: 6px 0;
   border-radius: 8px;
   text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+  min-width: 0;
+
+  @media (max-width: $bp-xs) {
+    padding: 4px 0;
+    border-radius: 6px;
+  }
 
   &.selected {
     background: #fabdbd;
-
     .week-day-name,
-    .week-day-num {
-      color: $white;
-    }
-    .week-day-num {
-      font-weight: 800;
-    }
+    .week-day-num { color: $white; }
+    .week-day-num { font-weight: 800; }
   }
 
   &.today {
     background: $accent;
-
     .week-day-name,
-    .week-day-num {
-      color: $white;
-    }
-    .week-day-num {
-      font-weight: 800;
-    }
+    .week-day-num { color: $white; }
+    .week-day-num { font-weight: 800; }
   }
 }
 
 .week-day-name {
-  font-size: 15px;
+  font-size: 13px;
   font-weight: 600;
-  color: #fff;
-  letter-spacing: 0.02em;
+  color: $white;
+  letter-spacing: 0.01em;
+
+  @media (max-width: $bp-sm) {
+    font-size: 11px;
+  }
+
+  @media (max-width: $bp-xs) {
+    font-size: 10px;
+    letter-spacing: 0;
+  }
 }
 
 .week-day-num {
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 700;
-  color: #fff;
+  color: $white;
+
+  @media (max-width: $bp-sm) {
+    font-size: 13px;
+  }
+
+  @media (max-width: $bp-xs) {
+    font-size: 12px;
+  }
 }
 
 .week-range-label {
@@ -159,14 +290,28 @@ $green-l: #34d399;
   color: rgba($white, 0.4);
   text-align: center;
   margin-bottom: 14px;
+
+  @media (max-width: $bp-xs) {
+    font-size: 10px;
+    margin-bottom: 10px;
+  }
 }
 
-// タブ
+// ── タブ（ヘッダー内） ─────────────────────
 .my-tasks-tabs {
   display: flex;
   gap: 0;
   border-top: 1px solid rgba($white, 0.1);
-  margin: 0 -20px;
+  // ヘッダーのpadding分を打ち消して端まで伸ばす
+  margin: 0 -16px;
+
+  @media (max-width: $bp-sm) {
+    margin: 0 -12px;
+  }
+
+  @media (max-width: $bp-xs) {
+    margin: 0 -10px;
+  }
 }
 
 .my-tasks-tab {
@@ -174,23 +319,36 @@ $green-l: #34d399;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 7px;
-  padding: 12px 0;
-  background: #fff;
+  gap: 6px;
+  padding: 12px 4px;
+  background: $white;
   border: none;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 600;
   color: #333;
   cursor: pointer;
   border-bottom: 3px solid transparent;
-  transition:
-    color 0.15s,
-    border-color 0.15s;
+  transition: color 0.15s, border-color 0.15s;
+  -webkit-tap-highlight-color: transparent;
+  min-height: 44px;
 
   &.active {
-    color: #ff5757;
+    color: $accent;
     border-bottom-color: $accent;
-    font-size: 16px;
+    font-size: 15px;
+  }
+
+  @media (max-width: $bp-sm) {
+    font-size: 13px;
+    gap: 4px;
+    &.active { font-size: 14px; }
+  }
+
+  @media (max-width: $bp-xs) {
+    font-size: 12px;
+    gap: 3px;
+    padding: 10px 2px;
+    &.active { font-size: 13px; }
   }
 }
 
@@ -206,6 +364,14 @@ $green-l: #34d399;
   font-size: 11px;
   font-weight: 700;
   color: rgba($white, 0.7);
+  flex-shrink: 0;
+
+  @media (max-width: $bp-xs) {
+    min-width: 16px;
+    height: 16px;
+    font-size: 10px;
+    padding: 0 4px;
+  }
 
   .my-tasks-tab.active & {
     background: $accent;
@@ -216,61 +382,98 @@ $green-l: #34d399;
 // ── ボディ ───────────────────────────────
 .my-tasks-body {
   padding: 16px 16px 0;
+
+  @media (max-width: $bp-sm) {
+    padding: 12px 12px 0;
+  }
+
+  @media (max-width: $bp-xs) {
+    padding: 10px 10px 0;
+  }
 }
 
 .tab-panel {
   display: none;
-  &.active {
-    display: block;
-  }
+  &.active { display: block; }
 }
 
 .homework-show-body {
   background: $gray-100;
   padding: 14px;
   width: 100%;
-  margin: 10px auto;
+  margin: 0 auto;
   max-width: 1000px;
   min-height: 100vh;
+
+  @media (max-width: $bp-sm) {
+    padding: 12px;
+  }
+
+  @media (max-width: $bp-xs) {
+    padding: 10px;
+  }
 }
 
-// ── サマリー ───────────────────────────────
+// ── サマリー ─────────────────────────────
 .show-summary-row {
   display: flex;
   gap: 8px;
   margin-bottom: 10px;
   flex-wrap: wrap;
+
+  @media (max-width: $bp-xs) {
+    gap: 6px;
+  }
+}
+
+// 共通スタイルをまとめる
+.show-summary-complete-card,
+.show-summary-incomplete-card {
+  flex: 1;
+  min-width: 80px;
+  border-radius: 12px;
+  padding: 10px;
+  text-align: center;
+
+  // 極小画面で縦並びにならないよう最小幅を下げる
+  @media (max-width: $bp-xs) {
+    min-width: 60px;
+    padding: 8px;
+    border-radius: 10px;
+  }
 }
 
 .show-summary-complete-card {
-  flex: 1;
-  min-width: 90px;
   background: #c4f3bc;
   border: 1px solid $green;
-  border-radius: 12px;
-  padding: 10px;
-  text-align: center;
 }
 
 .show-summary-incomplete-card {
-  flex: 1;
-  min-width: 90px;
   background: #fbcfcf;
   border: 1px solid $accent;
-  border-radius: 12px;
-  padding: 10px;
-  text-align: center;
 }
 
 .show-summary-num {
   font-size: 22px;
   font-weight: 800;
   color: $navy;
+
+  @media (max-width: $bp-sm) {
+    font-size: 20px;
+  }
+
+  @media (max-width: $bp-xs) {
+    font-size: 18px;
+  }
 }
 
 .show-summary-label {
   font-size: 11px;
   color: $gray-600;
+
+  @media (max-width: $bp-xs) {
+    font-size: 10px;
+  }
 }
 
 .show-summary-msg {
@@ -278,9 +481,14 @@ $green-l: #34d399;
   margin-top: 6px;
   font-size: 12px;
   color: $gray-600;
+  line-height: 1.5;
+
+  @media (max-width: $bp-xs) {
+    font-size: 11px;
+  }
 }
 
-// ── タブ ────────────────────────────────
+// ── タブ（コンテンツ内） ───────────────────
 .task-index-tabs {
   display: flex;
   background: $white;
@@ -301,69 +509,131 @@ $green-l: #34d399;
   cursor: pointer;
   transition: 0.15s;
   border-radius: 12px;
+  min-height: 34px;
+  -webkit-tap-highlight-color: transparent;
 
   &.active {
     background: $accent;
     color: $white;
     font-weight: 700;
   }
+
+  @media (max-width: $bp-xs) {
+    font-size: 12px;
+  }
+
+  @media (hover: none) {
+    &:active:not(.active) {
+      background: $gray-100;
+    }
+  }
 }
 
-// ── リスト ────────────────────────────────
+// ── リストヘッダー ─────────────────────────
 .task-index-list-header {
   display: flex;
   justify-content: space-between;
-  height: 32px;
   align-items: center;
-  margin: 16px 0;
+  height: auto;
+  margin: 16px 0 8px;
+  gap: 8px;
+
+  @media (max-width: $bp-xs) {
+    margin: 12px 0;
+  }
 
   h3 {
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 700;
     color: $navy;
-    margin-top: 8px;
+    margin: 0;
+
+    @media (max-width: $bp-sm) {
+      font-size: 18px;
+    }
+
+    @media (max-width: $bp-xs) {
+      font-size: 16px;
+    }
   }
 
   .task-index-list-count {
-    font-size: 16px;
+    font-size: 14px;
     color: $gray-600;
+    white-space: nowrap;
+    flex-shrink: 0;
+
+    @media (max-width: $bp-xs) {
+      font-size: 12px;
+    }
   }
 }
 
+// ── テスト情報 ─────────────────────────────
 .test-index-info {
-  background: #fff8f0;;
+  background: #fff8f0;
   border: 1px solid #e07b00;
   border-radius: 10px;
   padding: 10px 12px;
   margin-bottom: 10px;
 
+  @media (max-width: $bp-xs) {
+    padding: 8px 10px;
+  }
+
   ul {
     margin: 0;
     padding-left: 16px;
-    font-size: 18px;
+    font-size: 15px;
     color: #b35c00;
+    line-height: 1.6;
+
+    @media (max-width: $bp-sm) {
+      font-size: 13px;
+    }
+
+    @media (max-width: $bp-xs) {
+      font-size: 12px;
+      padding-left: 12px;
+    }
   }
 
   li {
-    list-style: none
+    list-style: none;
   }
 }
-// ── タスク ────────────────────────────────
+
+// ── タスクカード ──────────────────────────
 .task-index-check-wrap {
   display: flex;
   align-items: center;
   gap: 12px;
-
-  background: #fff;
+  background: $white;
   border-radius: 12px;
-  padding: 10px 14px;
-  margin-bottom: 16px;
-
+  padding: 12px 14px;
+  margin-bottom: 12px;
   box-shadow:
     0 1px 3px rgba(0, 0, 0, 0.06),
     0 4px 12px rgba(0, 0, 0, 0.04);
-
   border: 1px solid #e9eaec;
+  -webkit-tap-highlight-color: transparent;
+  transition: background 0.15s;
+
+  @media (max-width: $bp-sm) {
+    padding: 3px 12px;
+    gap: 10px;
+  }
+
+  @media (max-width: $bp-xs) {
+    padding: 8px 10px;
+    gap: 8px;
+    border-radius: 10px;
+    margin-bottom: 8px;
+  }
+
+  @media (hover: none) {
+    &:active { background: $gray-50; }
+  }
 }
 
 .task-index-main {
@@ -371,18 +641,48 @@ $green-l: #34d399;
   justify-content: space-between;
   align-items: center;
   flex: 1;
+  min-width: 0;
+  gap: 8px;
+
+  @media (max-width: $bp-xs) {
+    gap: 6px;
+  }
 }
 
 .task-index-name {
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 800;
   color: $navy;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  flex: 1;
+  min-width: 0;
+
+  @media (max-width: $bp-sm) {
+    font-size: 14px;
+  }
+
+  @media (max-width: $bp-xs) {
+    font-size: 13px;
+  }
 }
 
 .task-detail-link {
   font-size: 13px;
   font-weight: 500;
   color: $gray-600;
+  white-space: nowrap;
+  flex-shrink: 0;
+  // タップ領域を確保
+  min-height: 44px;
+  min-width: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  @media (max-width: $bp-xs) {
+    font-size: 12px;
+  }
 }
 
 .task-index-completed {

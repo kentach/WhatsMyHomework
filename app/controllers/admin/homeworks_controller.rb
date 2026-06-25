@@ -1,5 +1,5 @@
 class Admin::HomeworksController < Admin::BaseController
-  layout "admin"
+  layout "layouts/admin"
   before_action :authenticate_user!
   before_action :set_homework, only: [ :edit, :update, :destroy ]
 

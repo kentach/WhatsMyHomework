@@ -34,7 +34,7 @@
                     <th>種別</th>
                     <th>対象</th>
                     <th>ステータス</th>
-                    <th>公開日時</th>
+                    <th>作成日時</th>
                     <th>最終更新</th>
                     <th>作成者</th>
                     <th>操作</th>
@@ -87,14 +87,6 @@
                           <span class="text-muted">
                             <i class="fa-solid fa-users"></i> 全クラス
                           </span>
-                        <% elsif notification.junior_high? %>
-                          <span>
-                            <i class="fa-solid fa-users"></i> 中高生クラス
-                          </span>
-                        <% elsif notification.elementary? %>
-                          <span>
-                            <i class="fa-solid fa-users"></i> 小学生クラス
-                          </span>
                         <% else %>
                           <span>
                             <i class="fa-solid fa-user-group"></i>
@@ -107,19 +99,17 @@
                         <% case notification.status %>
                         <% when "published" %>
                           <span class="badge bg-success">公開中</span>
-                        <% when "scheduled" %>
-                          <span class="badge bg-info">予約済み</span>
                         <% else %>
                           <span class="badge bg-warning text-dark">公開</span>
                         <% end %>
                       </td>
 
                       <td>
-                        <% if notification.published_at.present? %>
-                          <%= notification.published_at.strftime("%Y/%m/%d %H:%M") %>
+                        <% if notification.created_at.present? %>
+                          <%= notification.created_at.strftime("%Y/%m/%d %H:%M") %>
                           <br>
                           <small class="text-muted">
-                            （<%= %w(日 月 火 水 木 金 土)[notification.published_at.wday] %>）
+                            （<%= %w(日 月 火 水 木 金 土)[notification.created_at.wday] %>）
                           </small>
                         <% else %>
                           <span class="text-muted">—</span>

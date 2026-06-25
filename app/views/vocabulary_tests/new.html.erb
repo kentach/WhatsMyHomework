@@ -1,9 +1,14 @@
+
+<div class="score-tracker">
+  <%= render "vocabulary_tests/header" %>
+</div>
+
 <div class="vocabulary-tests-container">
   <div class="vocabulary-tests-form-wrapper">
-    <%= form_with model: @new_score, data: { turbo: false } do |f| %>
-      <% if @new_score.errors.any? %>
+    <%= form_with model: @score, data: { turbo: false } do |f| %>
+      <% if @score.errors.any? %>
         <ul class="error-list">
-          <% @new_score.errors.full_messages.each do |msg| %>
+          <% @score.errors.full_messages.each do |msg| %>
             <li><%= msg %></li>
           <% end %>
         </ul>
@@ -36,15 +41,16 @@
         </div>
       </div>
     <% end %>
-
   </div>
-
-  <% if @scores.empty? %>
-    <div class="vocabulary-tests-empty">
-      <h5>まだ記録がありません。</h5>
-      <h5>上のフォームからテスト結果を入力してください。</h5>
-    </div>
-  <% else %>
-    <%= render "vocabulary_tests/score_table" %>
+  <%= link_to vocabulary_tests_path, class: "back-link" do %>
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="15 18 9 12 15 6"/>
+    </svg>
+    戻る
   <% end %>
+  
 </div>
+
+
+
+<%= render "shared/navigation_bar" %>

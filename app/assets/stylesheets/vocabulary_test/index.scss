@@ -15,31 +15,84 @@ $radius: 12px;
 }
 
 .vocabulary_graph {
-  position: absolute;
-  top: 90px;
-  right: 20px;
+  // absoluteをやめて通常フローで配置（スマホで被る問題を解消）
+  position: static;
+  display: inline-flex;
+  align-items: center;
   text-decoration: none;
-  margin-top: 16px;
+  margin-top: 12px;
   padding: 8px 16px;
   border-radius: 12px;
-  background-color:#f6abab;
+  background-color: #f6abab;
   color: $white;
+  font-size: 14px;
+  min-height: 44px; // タップ領域確保
 }
 
 /* ヘッダー */
 .tracker-header {
   position: relative;
   background: #ff5757;
-  color: #fff;
+  color: $white;
   padding: 28px 24px;
   min-height: 100px;
   border-radius: 0 0 16px 16px;
+  @media (max-width: 390px) {
+    padding: 10px 20px;
+  }
 }
-.tracker-lang { font-size: 13px; letter-spacing: .2em; color: #fff; margin: 0 0 6px; }
-.tracker-header h1 { margin: 0; font-size: 24px; }
-.tracker-stats { display: flex; gap: 24px; margin-top: 16px; }
-.tracker-stats .stat-label { display: block; font-size: 13px; color: #fff; }
-.tracker-stats strong { font-size: 20px; }
+
+.tracker-lang {
+  display: inline-flex;
+  align-items: center;
+  background: #e03e3e;
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 4px 12px;
+  border-radius: 20px;
+  margin-bottom: 6px;
+  font-family: "SF Mono", "Fira Code", monospace;
+  white-space: nowrap;
+  flex-shrink: 0
+}
+
+.tracker-header h1 {
+  margin: 0;
+  font-size: 24px;
+  word-break: break-word;
+
+  @media (max-width: 390px) {
+    font-size: 20px;
+  }
+}
+
+.tracker-stats {
+  display: flex;
+  gap: 24px;
+  margin-top: 16px;
+  flex-wrap: wrap; // 小さい画面で折り返す
+
+  @media (max-width: 390px) {
+    gap: 16px;
+    margin-top: 10px;
+  }
+}
+
+.tracker-stats .stat-label {
+  display: block;
+  font-size: 13px;
+  color: $white;
+}
+
+.tracker-stats strong {
+  font-size: 20px;
+
+  @media (max-width: 390px) {
+    font-size: 18px;
+  }
+}
 
 /* ===== コンテナ ===== */
 .vocabulary-tests-container {
@@ -51,6 +104,14 @@ $radius: 12px;
   margin-bottom: 100px;
   padding: 40px 16px 20px;
   box-sizing: border-box;
+
+  // ホームバー対応
+  padding-bottom: calc(20px + env(safe-area-inset-bottom));
+
+  @media (max-width: 390px) {
+    padding: 40px 12px;
+    padding-bottom: calc(12px + env(safe-area-inset-bottom));
+  }
 }
 
 /* ===== ヘッダー ===== */
@@ -59,13 +120,17 @@ $radius: 12px;
     font-size: 24px;
     font-weight: 700;
     text-align: center;
-    margin: 24px 0 24px;
+    margin: 24px 0;
     letter-spacing: 0.05em;
     color: #222;
 
     @media (max-width: 768px) {
       font-size: 20px;
       margin: 16px 0;
+    }
+
+    @media (max-width: 390px) {
+      font-size: 18px;
     }
   }
 }
@@ -79,11 +144,19 @@ $radius: 12px;
   margin-bottom: 24px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 
+  @media (max-width: 390px) {
+    padding: 10px;
+  }
+
   .form-row {
     display: flex;
     flex-wrap: wrap;
     gap: 12px;
     align-items: flex-end;
+
+    @media (max-width: 390px) {
+      gap: 10px;
+    }
   }
 
   .form-group {
@@ -91,7 +164,12 @@ $radius: 12px;
     flex-direction: column;
     gap: 4px;
     flex: 1;
-    min-width: 140px;
+    min-width: 130px;
+
+  
+    @media (max-width: 480px) {
+      min-width: 100%;
+    }
 
     &.align-bottom {
       justify-content: flex-end;
@@ -104,14 +182,16 @@ $radius: 12px;
     }
 
     input, select {
-      padding: 8px 10px;
+      padding: 10px 12px; // タップしやすく
       border: 1.5px solid $border;
       border-radius: 8px;
-      font-size: 14px;
+      font-size: 16px; // iOS自動ズーム防止（16px以上必須）
       color: $text;
       background: $white;
       box-sizing: border-box;
       width: 100%;
+      -webkit-appearance: none; // iOSのデフォルトスタイルをリセット
+      appearance: none;
 
       &:focus {
         outline: none;
@@ -119,20 +199,32 @@ $radius: 12px;
       }
     }
 
+    // selectは矢印を手動で追加
+    select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238A99AD' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      padding-right: 32px;
+    }
+
     input[type="submit"] {
       background: $accent;
       color: $white;
       border: none;
       border-radius: 8px;
-      font-size: 14px;
+      font-size: 15px;
       font-weight: bold;
-      padding: 9px 20px;
+      padding: 12px 20px;
       cursor: pointer;
       transition: background 0.2s;
       white-space: nowrap;
+      min-height: 44px; // タップ領域確保
+      -webkit-appearance: none;
 
-      &:hover {
-        background: darken($accent, 10%);
+      &:hover { background: darken($accent, 10%); }
+
+      @media (hover: none) {
+        &:active { background: darken($accent, 10%); }
       }
     }
   }
@@ -143,9 +235,7 @@ $radius: 12px;
     color: $danger;
     font-size: 12px;
 
-    li {
-      margin-bottom: 2px;
-    }
+    li { margin-bottom: 2px; }
   }
 }
 
@@ -159,11 +249,16 @@ $radius: 12px;
   overflow-y: visible;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   -webkit-overflow-scrolling: touch;
+
+  // スクロール可能を示すヒント（iOS）
+  @media (max-width: 600px) {
+    border-radius: $radius;
+  }
 }
 
 .vocabulary-tests-table {
   width: 100%;
-  min-width: 500px;
+  min-width: 480px;
   border-collapse: collapse;
 
   thead {
@@ -189,12 +284,11 @@ $radius: 12px;
       border-bottom: 1px solid $border;
       transition: background 0.15s;
 
-      &:last-child {
-        border-bottom: none;
-      }
+      &:last-child { border-bottom: none; }
+      &:hover { background: #F0F5FF; }
 
-      &:hover {
-        background: #F0F5FF;
+      @media (hover: none) {
+        &:active { background: #F0F5FF; }
       }
     }
 
@@ -203,6 +297,7 @@ $radius: 12px;
       font-size: 14px;
       color: $text;
       text-align: center;
+      word-break: break-word;
 
       @media (max-width: 768px) {
         padding: 10px 8px;
@@ -212,36 +307,46 @@ $radius: 12px;
   }
 
   .delete-btn {
-    width: 30px;
-    height:30px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;  // タップ領域を少し広げる
+    height: 36px;
     background: $danger;
     color: $white;
     border-radius: 6px;
-    padding: 6px 8px;
-    font-size: 12px;
+    font-size: 14px;
     text-decoration: none;
     transition: background 0.2s;
     white-space: nowrap;
+    -webkit-tap-highlight-color: transparent;
 
-    &:hover {
-      background: darken($danger, 10%);
+    &:hover { background: darken($danger, 10%); }
+
+    @media (hover: none) {
+      &:active { background: darken($danger, 10%); }
     }
   }
 
   .edit-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
     background: $accent;
-    width: 30px;
-    height:30px;
     color: $white;
     border-radius: 6px;
-    padding: 6px 8px;
-    font-size: 12px;
+    font-size: 14px;
     text-decoration: none;
     transition: background 0.2s;
     white-space: nowrap;
+    -webkit-tap-highlight-color: transparent;
 
-    &:hover {
-      background: darken($accent, 10%);
+    &:hover { background: darken($accent, 10%); }
+
+    @media (hover: none) {
+      &:active { background: darken($accent, 10%); }
     }
   }
 }
@@ -264,5 +369,27 @@ $radius: 12px;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 5px;
+  gap: 6px;
+}
+
+.add-score-btn {
+  position: fixed;
+  bottom: 120px;
+  right: 50px;
+  font-size: 60px;
+  cursor:pointer;
+  color: $primary;
+  text-decoration: none;
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  @media (max-width: 768px) {
+    bottom: 90px;
+    right: 18px;
+    font-size: 36px;
+    cursor:pointer;
+  }
+
 }

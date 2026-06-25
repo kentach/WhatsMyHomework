@@ -34,7 +34,7 @@
                     <th>種別</th>
                     <th>対象</th>
                     <th>ステータス</th>
-                    <th>公開日時</th>
+                    <th>作成日時</th>
                     <th>最終更新</th>
                     <th>作成者</th>
                     <th>操作</th>
@@ -83,47 +83,27 @@
                       </td>
 
                       <td>
-                        <% if notification.all_classes? %>
-                          <span class="text-muted">
-                            <i class="fa-solid fa-users"></i> 全クラス
-                          </span>
-                        <% elsif notification.junior_high? %>
-                          <span>
-                            <i class="fa-solid fa-users"></i> 中高生クラス
-                          </span>
-                        <% elsif notification.elementary? %>
-                          <span>
-                            <i class="fa-solid fa-users"></i> 小学生クラス
-                          </span>
-                        <% else %>
-                          <span>
-                            <i class="fa-solid fa-user-group"></i>
-                            <%= notification.classrooms.map(&:name).join("、").presence || "未設定" %>
-                          </span>
-                        <% end %>
+                        <span>
+                          <i class="fa-solid fa-user-group"></i>
+                          <%= notification.classrooms.map(&:name).join("、").presence || "未設定" %>
+                        </span>
                       </td>
 
                       <td>
                         <% case notification.status %>
                         <% when "published" %>
                           <span class="badge bg-success">公開中</span>
-                        <% when "scheduled" %>
-                          <span class="badge bg-info">予約済み</span>
                         <% else %>
                           <span class="badge bg-warning text-dark">下書き</span>
                         <% end %>
                       </td>
 
                       <td>
-                        <% if notification.published_at.present? %>
-                          <%= notification.published_at.strftime("%Y/%m/%d %H:%M") %>
-                          <br>
-                          <small class="text-muted">
-                            （<%= %w(日 月 火 水 木 金 土)[notification.published_at.wday] %>）
-                          </small>
-                        <% else %>
-                          <span class="text-muted">—</span>
-                        <% end %>
+                        <%= notification.created_at.strftime("%Y/%m/%d %H:%M") %>
+                        <br>
+                        <small class="text-muted">
+                          （<%= %w(日 月 火 水 木 金 土)[notification.created_at.wday] %>）
+                        </small>
                       </td>
 
                       <td>
@@ -151,7 +131,6 @@
                   <% if @notifications.empty? %>
                     <tr>
                       <td colspan="8" class="text-center text-muted py-4">
-                        <i class="fa-solid fa-bell-slash fa-2x mb-2 d-block"></i>
                         通知がありません。「+ 新しい通知を作成」から追加してください。
                       </td>
                     </tr>
