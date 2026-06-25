@@ -9,8 +9,8 @@ class NotificationsController < ApplicationController
 
   def show
     @notification = Notification.published
-                                 .includes(:classrooms, :user)
-                                 .find(params[:id])
+                                  .includes(:classrooms, :user)
+                                  .find(params[:id])
     base = Notification.published
                         .order(updated_at: :desc, id: :desc)
     @prev_notification = base.where(
