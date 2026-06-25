@@ -8,6 +8,7 @@ User.delete_all
 Classroom.delete_all
 
 classrooms = [
+  [ 'TOEIC', 'Toeic' ],
   [ '準1級', 'Pre1' ],
   [ '2級', 'STEP2' ],
   [ '準2級プラス', 'Pre2 plus' ],
@@ -34,35 +35,65 @@ end
 
 user1 = User.create!(
   name: "上拾石",
-  student_id: "saitama3181",
-  password: "saitama3181",
-  password_confirmation: "saitama3181",
-  classroom: created_classrooms.first,
+  student_id: "kenta555",
+  password: "kenta555",
+  password_confirmation: "kenta555",
+  classroom: created_classrooms.find { |class| class.name == "準1級" }
   role: 1
 )
 
-task_templates = [
-  "単語テスト",
-  "音読10回",
-  "英作文提出",
-  "長文問題",
-  "リスニング演習"
-]
+user2 = User.create!(
+  name: "大川",
+  student_id: "kotaro555",
+  password: "kotaro555",
+  password_confirmation: "kotaro555",
+  classroom: created_classrooms.find { |class| class.name == "2級" }
+  role: 1
+)
 
-created_classrooms.each do |classroom|
-  4.times do |week|
-    homework = classroom.homeworks.create!(
-      title: "#{classroom.name} Week#{week + 1}",
-      test_start_date: Date.today + week.weeks,
-      test_end_date: Date.today + week.weeks + 6.days,
-      user_id: user1.id,
-      status: "published"
-    )
+user3 = User.create!(
+  name: "片山",
+  student_id: "daiki555",
+  password: "daiki555",
+  password_confirmation: "daiki555",
+  classroom: created_classrooms.find { |class| class.name == "準2級" }
+  role: 1
+)
 
-    task_templates.each do |task_name|
-      homework.tasks.create!(
-        name: "#{task_name} #{week + 1}"
-      )
-    end
-  end
+user4 = User.create!(
+  name: "矢野",
+  student_id: "tsubasa555",
+  password: "tsubasa555",
+  password_confirmation: "tsubasa555",
+  classroom: created_classrooms.find { |class| class.name == "準2級プラス" }
+  role: 1
+)
+
+user5 = User.create!(
+  name: "宮田",
+  student_id: "suzuka555",
+  password: "suzuka555",
+  password_confirmation: "suzuka555",
+  classroom: created_classrooms.find { |class| class.name == "中学生3級" }
+  role: 1
+)
+
+user5 = User.create!(
+  name: "大塚",
+  student_id: "mitsuki555",
+  password: "mitsuki555",
+  password_confirmation: "mitsuki555",
+  classroom: created_classrooms.find { |class| class.name == "小学生高学年5級" }
+  role: 1
+)
+
+user6 = User.create!(
+  name: "稲荷",
+  student_id: "hinako555",
+  password: "hinako555",
+  password_confirmation: "hinako555",
+  classroom: created_classrooms.find { |class| class.name == "小学生高学年4級" }
+  role: 1
+)
+
 end
