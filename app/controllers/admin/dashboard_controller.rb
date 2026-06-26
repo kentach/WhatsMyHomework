@@ -1,9 +1,9 @@
 class Admin::DashboardController < Admin::BaseController
   def index
-    @homeworks = Homework.order(created_at: :desc)
-    @published_homeworks = Homework.published
-    @draft_homeworks = Homework.draft
-    @classrooms = Classroom.order(created_at: :asc)
-    @recent_homeworks = Homework.order(updated_at: :desc).limit(10)
+    @homeworks_count     = Homework.count # 宿題の総数
+    @recent_homeworks    = Homework.includes(:classroom).order(updated_at: :desc).limit(20) # 最近投稿した宿題
+    @draft_homeworks     = Homework.includes(:classroom).draft # 下書きの宿題
+    @published_homeworks = Homework.includes(:classroom).published # 公開中の宿題
+    @classrooms          = Classroom.all
   end
 end

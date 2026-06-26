@@ -1,13 +1,12 @@
 class HomeworksController < ApplicationController
   def index
-    @q = Homework.published.ransack(params[:q])
+    @q = Homework.published.ransack(params[:q]) #　検索
     @homeworks = @q.result(distinct: true).includes(:classroom)
-
     @classrooms = Classroom.order(created_at: :asc) # タブ
 
-    @selected_classroom = Classroom.find_by(id: params[:classroom_id])
-    if @selected_classroom
-      @homeworks = @homeworks.where(classroom_id: @selected_classroom.id)
+    if params[:classroom_id].present?
+      @selected_classroom = Classroom.find(params[:classroom_id])
+      @homeworks = @homeworks.where(classroom_id: params[:classroom_id])
     end
 
     @homeworks = @homeworks.order(created_at: :desc).page(params[:page]).per(10)

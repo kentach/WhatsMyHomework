@@ -4,7 +4,7 @@ class NotificationsController < ApplicationController
     @notifications = @q.result(distinct: true)
                         .includes(:classrooms)
                         .order(updated_at: :desc)
-                        .page(params[:page]).per(5)
+                        .page(params[:page]).per(7)
   end
 
   def show

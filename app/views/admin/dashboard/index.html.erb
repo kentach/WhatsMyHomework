@@ -23,29 +23,27 @@
           <tbody>
             <% @recent_homeworks.each do |homework| %>
               <tr>
+                <%# タイトル　%>
                 <td><%= homework.title %></td>
+                <%# 下書き or 公開　%>
                 <td>
-                  <% if homework.status == "published" %>
-                    <span class="badge bg-success">公開中</span>
-                  <% else %>
-                    <span class="badge bg-warning">下書き</span>
-                  <% end %>
+                <%= published_or_draft?(homework) %> <%# Admin:Homework.helperにロジックを記載　%>
                 </td>
+                <%# クラス名　%>
                 <td><%= homework.classroom&.eiken_level %></td>
-                <td><%= homework.test_start_date&.strftime("%Y/%m/%d") %>
-                  （<%= %w(日 月 火 水 木 金 土)[homework.test_start_date.wday] %>）
-                </td>
-                <td><%= homework.test_end_date&.strftime("%Y/%m/%d") %>
-                  （<%= %w(日 月 火 水 木 金 土)[homework.test_start_date.wday] %>）
-                </td>
-                <td><%= homework.updated_at.strftime("%Y/%m/%d %H:%M") %>
-                  （<%= %w(日 月 火 水 木 金 土)[homework.updated_at.wday] %>）
-                </td>
+                <%# 宿題開始日　%>
+                <td><%= date_format_with_weekday(homework.test_start_date) %></td> <%# Application.helperにロジックを記載　%>
+                <%# 宿題終了日　%>
+                <td><%= date_format_with_weekday(homework.test_end_date) %></td>
+                <%# 更新日　%>
+                <td><%= date_format_with_weekday(homework.updated_at) %></td>
+                <%# 作成者　%>
                 <td><%= homework.user&.name %></td>
                 <td>
                   <%= link_to "編集", edit_admin_homework_path(homework), class: "btn btn-sm btn-warning" %>
                   <%= link_to "削除", admin_homework_path(homework), data: { turbo_method: :delete, turbo_confirm: "削除しますか？" }, class: "btn btn-sm btn-danger" %>
                 </td>
+
               </tr>
             <% end %>
           </tbody>
