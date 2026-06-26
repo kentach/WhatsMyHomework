@@ -13,7 +13,7 @@
         <div class="card-header">
           <h3 class="card-title">
             <i class="fas fa-edit mr-1"></i> 下書き中の宿題
-            <%= @homeworks.count %>件
+            <%= @homeworks.total_count %>件
           </h3>
           <div class="card-tools">
             <%= link_to "公開中一覧はこちら >", published_admin_homeworks_path, class: "btn btn-sm btn-success" %>
@@ -34,37 +34,40 @@
                   <th>クラス</th>
                   <th>宿題開始日</th>
                   <th>宿題終了日</th>
-                  <th>作成日（最終更新日）</th>
+                  <th>最終更新日</th>
                   <th>操作</th>
                 </tr>
               </thead>
               <tbody>
                 <% @homeworks.each do |homework| %>
                   <tr>
+                    <%# 宿題のタイトル　%>
                     <td><%= homework.title %></td>
+
+                    <%# クラス名　%>
                     <td><%= homework.classroom&.eiken_level %></td>
-                    <td><%= homework.test_start_date&.strftime("%Y/%m/%d") %>
-                      （<%= %w(日 月 火 水 木 金 土)[homework.test_start_date.wday] %>）
-                    </td>
-                    <td><%= homework.test_end_date&.strftime("%Y/%m/%d") %>
-                      （<%= %w(日 月 火 水 木 金 土)[homework.test_start_date.wday] %>）
-                    </td>
-                    <td><%= homework.updated_at.strftime("%Y/%m/%d %H:%M") %>
-                      （<%= %w(日 月 火 水 木 金 土)[homework.updated_at.wday] %>）
-                    </td>
+
+                    <%# 宿題開始日　%>
+                    <td><%= format_date(homework.test_start_date) %></td> <%# Application.helperにロジックを記載　%>
+                
+                    <%# 宿題終了日　%>
+                    <td><%= format_date(homework.test_end_date) %></td>
+                
+                    <%# 更新日　%>
+                    <td><%= format_date(homework.updated_at, with_time: true) %></td>
+                
                     <td>
                       <%= link_to "編集", edit_admin_homework_path(homework), class: "btn btn-sm btn-warning" %>
-                      <%= link_to "削除", admin_homework_path(homework), method: :delete,
-                            data: { confirm: "削除しますか？" }, class: "btn btn-sm btn-danger" %>
-                    </td>
+                      <%= link_to "削除", admin_homework_path(homework), data: { turbo_method: :delete, turbo_confirm: "削除しますか？" },
+                                          class: "btn btn-sm btn-danger" %>
                   </tr>
                 <% end %>
+                  <div class="d-flex justify-content-center mt-4">
+                    <%= paginate @homeworks, theme: 'bootstrap-5' %>
+                  </div>
               </tbody>
             </table>
           <% end %>
-          <div class="d-flex justify-content-center mt-4">
-            <%= paginate @homeworks, theme: 'bootstrap-5' %>
-          </div>
         </div>
       </div>
     </div>

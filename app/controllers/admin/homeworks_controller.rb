@@ -3,11 +3,7 @@ class Admin::HomeworksController < Admin::BaseController
   before_action :set_classrooms, only: [ :new, :edit, :create, :update ]
 
   def index
-    @q = Homework.ransack(params[:q])
-    @homeworks = @q.result(distinct: true)
-                   .order(updated_at: :desc) # result(distinct: true)の後にorderを記述する
-                   .page(params[:page])
-                   .per(20)
+    @homeworks = paginate_homeworks(Homework.all)
   end
 
   def new # formで表示する内容
@@ -44,19 +40,11 @@ class Admin::HomeworksController < Admin::BaseController
   end
 
   def draft
-    @q = Homework.draft.ransack(params[:q])
-    @homeworks = @q.result(distinct: true)
-                   .order(updated_at: :desc)
-                   .page(params[:page])
-                   .per(20)
+    @homeworks = paginate_homeworks(Homework.draft)
   end
 
   def published
-    @q = Homework.published.ransack(params[:q])
-    @homeworks = @q.result(distinct: true)
-                   .order(updated_at: :desc)
-                   .page(params[:page])
-                   .per(20)
+    @homeworks = paginate_homeworks(Homework.published)
   end
 
   private
@@ -67,6 +55,14 @@ class Admin::HomeworksController < Admin::BaseController
 
   def set_classrooms
     @classrooms = Classroom.all
+  end
+
+  def paginate_homeworks(scope)
+    @q = scope.ransack(params[:q])
+    @q.result(distinct: true)
+    .order(updated_at: :desc)
+    .page(params[:page])
+    .per(20)
   end
 
   def homework_params
