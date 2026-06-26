@@ -1,9 +1,81 @@
 <%= render "admin/notifications/header" %>
 
-<div class="container-fluid">
-  <%= render "notifications_table",
-        notifications: @recent_notifications,
-        title: "通知一覧",
-        link_text: nil,
-        link_path: nil %>
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <h3 class="card-title">
+          <i class="fa-solid fa-bell"></i> 通知一覧
+        </h3>
+        <%= link_to "+ 新しい通知を作成", new_admin_notification_path, class: "btn btn-danger" %>
+      </div>
+
+      <div class="card-body p-0">
+        <table class="table table-hover mb-0">
+          <thead>
+            <tr>
+              <th>タイトル</th>
+              <th>種別</th>
+              <th>対象</th>
+              <th>ステータス</th>
+              <th>作成日時</th>
+              <th>最終更新</th>
+              <th>作成者</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+          <tbody>
+          <% if @recent_notifications.any? %>
+            <% @recent_notifications.each do |notification| %>
+              <tr>
+                <td>
+                  <strong><%= truncate(notification.title, length: 15, omission: "…")%></strong>
+                </td>
+
+                <td><%= notification_type_badge(notification) %></td>
+
+                <td>
+                  <% if notification.all_classes? %>
+                    <span class="text-muted">
+                      <i class="fa-solid fa-users"></i> 全クラス
+                    </span>
+                  <% else %>
+                    <span>
+                      <i class="fa-solid fa-user-group"></i>
+                      <%= classroom_names(notification, length: 10) %>
+                    </span>
+                  <% end %>
+                </td>
+
+                <td><%= published_or_draft?(notification) %></td>
+
+                <%# 通知作成日　%>
+                <td><%= format_date(notification.created_at) %></td>
+                
+                <%# 通知更新日　%>
+                <td><%= format_date(notification.updated_at) %></td>
+
+                <td><%= notification.user&.name %></td>
+
+                <td>
+                  <%= link_to "編集", edit_admin_notification_path(notification), class: "btn btn-sm btn-warning" %>
+                  <%= link_to "削除", admin_notification_path(notification), data: { turbo_method: :delete, turbo_confirm: "この通知を削除しますか？" }, class: "btn btn-sm btn-danger" %>
+                </td>
+              </tr>
+            <% end %>
+          <% else %>
+              <tr>
+                <td colspan="8" class="text-center text-muted py-4">
+                  通知がありません。「+ 新しい通知を作成」から追加してください。
+                </td>
+              </tr>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+      <div class="card-footer">
+        <%= paginate @recent_notifications %>
+      </div>
+    </div>
+  </div>
 </div>

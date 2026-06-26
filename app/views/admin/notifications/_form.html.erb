@@ -99,9 +99,10 @@
 
 <script>
   document.addEventListener("turbo:load", function () {
-    const targetTypeSelect   = document.getElementById("target_type_select");
-    const classroomWrapper   = document.getElementById("classroom_select_wrapper");
-    const statusSelect       = document.getElementById("status_select");
+    const targetTypeSelect = document.querySelector("select[name='notification[target_type]']");
+    const classroomWrapper = document.getElementById("classroom_select_wrapper");
+
+    if (!targetTypeSelect || !classroomWrapper) return; // ← nullチェック追加
 
     function toggleClassroom() {
       classroomWrapper.style.display =
@@ -109,7 +110,6 @@
     }
 
     targetTypeSelect.addEventListener("change", toggleClassroom);
-    // 初期表示
     toggleClassroom();
   });
 </script>
