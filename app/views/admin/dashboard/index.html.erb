@@ -1,4 +1,5 @@
 <%= render "admin/dashboard/navigation_header" %>
+
 <div class="row">
   <div class="col-12">
     <div class="card">
@@ -25,25 +26,31 @@
               <tr>
                 <%# タイトル　%>
                 <td><%= homework.title %></td>
+                
                 <%# 下書き or 公開　%>
                 <td>
-                <%= published_or_draft?(homework) %> <%# Admin:Homework.helperにロジックを記載　%>
+                  <%= published_or_draft?(homework) %> <%# Admin:Homework.helperにロジックを記載　%>
                 </td>
+
                 <%# クラス名　%>
                 <td><%= homework.classroom&.eiken_level %></td>
+
                 <%# 宿題開始日　%>
-                <td><%= date_format_with_weekday(homework.test_start_date) %></td> <%# Application.helperにロジックを記載　%>
+                <td><%= format_date(homework.test_start_date) %></td> <%# Application.helperにロジックを記載　%>
+                
                 <%# 宿題終了日　%>
-                <td><%= date_format_with_weekday(homework.test_end_date) %></td>
+                <td><%= format_date(homework.test_end_date) %></td>
+                
                 <%# 更新日　%>
-                <td><%= date_format_with_weekday(homework.updated_at) %></td>
+                <td><%= format_date(homework.updated_at, with_time: true) %></td>
+                
                 <%# 作成者　%>
                 <td><%= homework.user&.name %></td>
+
                 <td>
                   <%= link_to "編集", edit_admin_homework_path(homework), class: "btn btn-sm btn-warning" %>
                   <%= link_to "削除", admin_homework_path(homework), data: { turbo_method: :delete, turbo_confirm: "削除しますか？" }, class: "btn btn-sm btn-danger" %>
                 </td>
-
               </tr>
             <% end %>
           </tbody>

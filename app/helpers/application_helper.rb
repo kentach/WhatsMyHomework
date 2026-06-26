@@ -11,8 +11,12 @@ module ApplicationHelper
 
   #　管理画面の「宿題の日付」を明記するロジック
   WEEKDAYS = %w(日 月 火 水 木 金 土).freeze # オブジェクトを変更できなくするメソッド
-  def date_format_with_weekday(date)
-    return "" if date.nil?
-    "#{date.strftime('%Y/%m/%d')}（#{WEEKDAYS[date.wday]}）"
+  def format_date(date, with_time: false)
+    return "-" if date.nil?
+
+    base_format = with_time ? '%Y/%m/%d %H:%M' : '%Y/%m/%d'
+    "#{date.strftime(base_format)}（#{WEEKDAYS[date.wday]}）"
+    # date.wday  # 曜日を0〜6の数値で返す
+    # date 日付を受け取る引数
   end
 end
