@@ -16,7 +16,7 @@
 
           <div class="mb-3">
             <label class="form-label fw-bold">宿題の内容</label>
-            <p>⚠️ 単語プリントがある場合は必ず添付すること</p>
+            <p class="mt-1 mb-1">⚠️ プリントがある場合は必ず添付すること</p>
             <div id="tasks">
               <%= f.fields_for :tasks do |task_form| %>
                 <%= render "task_fields", f: task_form %>
@@ -30,6 +30,7 @@
           <div class="mb-3">
             <%= f.label :status, "ステータス", class: "form-label fw-bold" %>
             <%= f.select :status, [["下書き", "draft"], ["公開", "published"]], {}, class: "form-select" %>
+            <p class="mt-2">⚠️ 「公開」にするとすぐ投稿されます。</p>
           </div>
 
           <div class="mb-3">
