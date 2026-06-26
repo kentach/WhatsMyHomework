@@ -19,4 +19,13 @@ module ApplicationHelper
     # date.wday  # 曜日を0〜6の数値で返す
     # date 日付を受け取る引数
   end
+
+  # 通知・宿題で使う公開・非公開を分けるロジック
+  def published_or_draft?(resource)
+    if resource.published?
+      content_tag(:span, "公開中", class: "badge bg-success")
+    else
+      content_tag(:span, "下書き中", class: "badge bg-warning")
+    end
+  end
 end

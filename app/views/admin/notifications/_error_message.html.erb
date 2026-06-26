@@ -1,7 +1,0 @@
-<% if @notification.errors.any? %>
-  <div class="alert alert-danger">
-    <% @notification.errors.full_messages.each do |msg| %>
-      <p class="mb-0"><%= msg %></p>
-    <% end %>
-  </div>
-<% end %>

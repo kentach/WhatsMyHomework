@@ -21,7 +21,7 @@
                 <td><%= classroom.eiken_level %></td>
                 <td>
                   <%= link_to "編集", edit_admin_classroom_path(classroom), class: "btn btn-sm btn-warning" %>
-                  <%= link_to "削除", admin_classroom_path(classroom), data: { turbo_method: :delete, turbo_confirm: "削除しますか？" }, class: "btn btn-sm btn-danger" %>
+                  <%= link_to "削除", admin_classroom_path(classroom), data: { turbo_method: :delete, turbo_confirm: "このクラスを削除すると紐づく宿題も全て削除されます。本当に削除しますか？" }, class: "btn btn-sm btn-danger" %>
                 </td>
               </tr>
             <% end %>

@@ -2,9 +2,10 @@ class Admin::NotificationsController < Admin::BaseController
   before_action :set_notification, only: [ :edit, :update, :destroy ]
 
   def index
-    @notifications = Notification.includes(:classrooms, :user).order(updated_at: :desc)
-    @draft_notifications      = @notifications.draft
-    @published_notifications  = @notifications.published
+    @notifications_count = Notification.count
+    @recent_notifications = base_scope.page(params[:page]).per(20)
+    @draft_notifications      = base_scope.draft.limit(20)
+    @published_notifications  = base_scope.published.limit(20)
   end
 
   def new
@@ -27,7 +28,7 @@ class Admin::NotificationsController < Admin::BaseController
     if @notification.update(notification_params)
       redirect_to admin_notifications_path, notice: "通知を更新しました。"
     else
-      flash.now[:danger] = "更新できませんでした。"
+      flash.now[:alert] = "更新できませんでした。"
       render :edit, status: :unprocessable_entity
     end
   end
@@ -35,19 +36,23 @@ class Admin::NotificationsController < Admin::BaseController
   def destroy
     @notification.destroy!
     redirect_to admin_notifications_path, notice: "通知を削除しました。"
+  rescue ActiveRecord::RecordNotDestroyed
+    redirect_to admin_notifications_path, alert: "削除できませんでした。"
   end
 
   def draft
-    @notifications = Notification.draft
-                                  .page(params[:page]).per(20)
+    @notifications = base_scope.draft.page(params[:page]).per(20)
   end
 
   def published
-    @notifications = Notification.published
-                                  .page(params[:page]).per(20)
+    @notifications = base_scope.published.page(params[:page]).per(20)
   end
 
   private
+
+  def base_scope
+    Notification.includes(:user, :classrooms).order(updated_at: :desc)
+  end
 
   def set_notification
     @notification = Notification.find(params[:id])

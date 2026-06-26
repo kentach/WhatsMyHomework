@@ -29,7 +29,7 @@
                 
                 <%# 下書き or 公開　%>
                 <td>
-                  <%= published_or_draft?(homework) %> <%# Admin:Homework.helperにロジックを記載　%>
+                  <%= published_or_draft?(homework) %> <%# Application.helperにロジックを記載　%>
                 </td>
 
                 <td><%= homework.classroom&.eiken_level %></td>

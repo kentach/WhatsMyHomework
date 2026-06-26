@@ -40,4 +40,10 @@ module NotificationsHelper
       end
     end
   end
+
+  # クラス名を最初の１０文字のみ表示するロジック
+  def classroom_names(notification, length: 10)
+    names = notification.classrooms.map(&:name).join("、").presence
+    truncate(names, length: length, omission: "…") || "未設定"
+  end
 end

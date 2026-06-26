@@ -1,0 +1,73 @@
+<div class="card">
+  <div class="card-header">
+    <h3 class="card-title">
+      <i class="fas fa-edit mr-1"></i> <%= title %>
+      <%= notifications.count %>件
+    </h3>
+    <div class="card-tools">
+      <%= link_text && link_path ? link_to(link_text, link_path, class: "btn btn-sm bg-secondary") : "" %>
+    </div>
+  </div>
+
+  <div class="card-body p-0">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>タイトル</th>
+          <th>種別</th>
+          <th>対象</th>
+          <th>ステータス</th>
+          <th>作成日時</th>
+          <th>最終更新</th>
+          <th>作成者</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if notifications.any? %>
+          <% notifications.each do |notification| %>
+            <tr>
+              <td>
+                <strong><%= truncate(notification.title, length: 15, omission: "…") %></strong>
+              </td>
+              <td><%= notification_type_badge(notification) %></td>
+              <td>
+                <% if notification.all_classes? %>
+                  <span class="text-muted">
+                    <i class="fa-solid fa-users"></i> 全クラス
+                  </span>
+                <% else %>
+                  <span>
+                    <i class="fa-solid fa-user-group"></i>
+                    <%= classroom_names(notification) %>
+                  </span>
+                <% end %>
+              </td>
+              <td><%= published_or_draft?(notification) %></td>
+              <td><%= format_date(notification.created_at) %></td>
+              <td><%= format_date(notification.updated_at, with_time: true) %></td>
+              <td><%= notification.user&.name %></td>
+              <td>
+                <%= link_to "編集", edit_admin_notification_path(notification),
+                      class: "btn btn-sm mb-1 btn-warning" %>
+                <%= link_to "削除", admin_notification_path(notification),
+                      data: { turbo_method: :delete ,turbo_confirm: "この通知を削除しますか？" },
+                      class: "btn btn-sm mb-1 btn-danger" %>
+              </td>
+            </tr>
+          <% end %>
+        <% else %>
+          <tr>
+            <td colspan="8" class="text-center text-muted py-4">
+              通知がありません。
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card-footer d-flex justify-content-center">
+    <%= paginate notifications, theme: 'bootstrap-5' %>
+  </div>
+</div>

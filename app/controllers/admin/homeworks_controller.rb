@@ -36,7 +36,7 @@ class Admin::HomeworksController < Admin::BaseController
 
   def destroy
     @homework.destroy!
-    redirect_to admin_root_path, notice: "宿題を削除しました"
+    redirect_to admin_root_path, notice: "宿題を削除しました", status: :see_other
   end
 
   def draft
