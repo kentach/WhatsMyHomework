@@ -2,7 +2,7 @@ class HomeworksController < ApplicationController
   before_action :set_homework, only: [ :show ]
 
   def index
-    @q = Homework.published.ransack(params[:q]) #　検索
+    @q = Homework.published.ransack(params[:q]) # 検索
     @homeworks = @q.result(distinct: true)
     @classrooms = Classroom.order(created_at: :asc) # 級のタブ
 
