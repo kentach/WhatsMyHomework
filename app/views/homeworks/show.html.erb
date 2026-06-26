@@ -7,17 +7,15 @@
 
       <div class="homework-show-task-list-header">
         <h3><%= @homework.title %> 宿題リスト</h3>
-        <span class="homework-showtask-list-count"><%= @tasks.size %> タスク</span>
+        <span class="homework-show-task-list-count"><%= @tasks.size %> タスク</span>
       </div>
 
       <p class="homework-created-by">
-        <i class="fa-solid fa-circle-user"></i>
-        作成：<span><%= @homework.user&.name %>先生</span>
+        作成：<span><i class="fa-solid fa-circle-user"></i><%= @homework.user&.name %>先生</span>
       </p>
 
-      <div class="homeworks-show-test-period">📅 テスト期間：
-          <%= @homework.test_start_date.strftime("%m月%d日") %> 〜
-          <%= @homework.test_end_date.strftime("%m月%d日") %>
+      <div class="homeworks-show-test-period">
+        📅 テスト期間：<%= test_period(@homework) %>
       </div>
 
       <div class="homework-show-test-info">
@@ -26,8 +24,8 @@
           <li>📌 今週の宿題は「マイタスク」をチェック</li>
         </ul>
       </div>
-
-      <% @tasks.each do |task| %>
+    </div>
+      <% @homework.tasks.each do |task| %>
 
       <div id="task-<%= task.id %>" class="homework-show-task-item">
         <label class="homework-show-task-check-wrap">
@@ -38,13 +36,7 @@
               <i class="fa-solid fa-square-check"></i>
               <%= task.name %>
             </span>
-            
-            <% if task.pdf.attached? %>
-              <%= link_to url_for(task.pdf), target: "_blank", class: "homework-show-pdf-link" do %>
-                <i class="fas fa-file-pdf"></i>
-                <%= task.pdf.filename %>
-              <% end %>
-            <% end %>
+            <%= pdf_link(task) %>
           </div>
 
         </label>

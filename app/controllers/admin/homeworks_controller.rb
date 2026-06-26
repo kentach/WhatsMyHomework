@@ -1,5 +1,4 @@
 class Admin::HomeworksController < Admin::BaseController
-  layout "layouts/admin"
   before_action :set_homework, only: [ :edit, :update, :destroy ]
   before_action :set_classrooms, only: [ :new, :edit, :create, :update ]
 
@@ -22,7 +21,7 @@ class Admin::HomeworksController < Admin::BaseController
     if @homework.save
       redirect_to admin_root_path, notice: "宿題を作成しました"
     else
-      flash.now[:danger] = "更新できませんでした。"
+      flash.now[:danger] = "作成できませんでした。"
       render :new, status: :unprocessable_entity
     end
   end
@@ -34,6 +33,7 @@ class Admin::HomeworksController < Admin::BaseController
     if @homework.update(homework_params)
       redirect_to admin_root_path, notice: "宿題を更新しました"
     else
+      flash.now[:danger] = "更新できませんでした。"
       render :edit, status: :unprocessable_entity
     end
   end

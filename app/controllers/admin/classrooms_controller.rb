@@ -1,5 +1,4 @@
 class Admin::ClassroomsController < Admin::BaseController
-  layout "layouts/admin"
   before_action :set_classroom, only: [ :edit, :update, :destroy ]
 
   def index

@@ -15,8 +15,6 @@ $green-l:   #34d399;
   background: $gray-100;
   min-height: 100vh;
   padding-bottom: 96px;
-
-  // iPhoneのセーフエリア対応
   padding-bottom: calc(96px + env(safe-area-inset-bottom));
 }
 
@@ -248,14 +246,20 @@ $green-l:   #34d399;
   }
 }
 
-// タスク行
+// // タスク行
 .homework-show-task-item {
   display: block;
   border-bottom: 1px solid $gray-200;
   position: relative;
-  transition: background 0.15s;
+  background: $white;
+  margin-bottom: 6px;
+  transition: transform 0.2s ease;
 
   &:last-child { border-bottom: none; }
+
+  &:hover {
+    transform: translateY(-3px);
+  }
 
   // 左アクセントバー
   &::before {
@@ -265,35 +269,7 @@ $green-l:   #34d399;
     width: 4px;
     background: linear-gradient(180deg, $accent, $accent-d);
     border-radius: 4px 0 0 4px;
-    opacity: 0;
     transition: opacity 0.2s;
-  }
-
-  &:hover:not(.completed) {
-    background: $gray-50;
-    &::before { opacity: 1; }
-  }
-
-  // スマホではhoverなし、タップ時のフィードバック
-  @media (hover: none) {
-    &:active:not(.completed) {
-      background: $gray-50;
-      &::before { opacity: 1; }
-    }
-  }
-
-  &.completed {
-    background: #f0fdf8;
-
-    &::before {
-      background: linear-gradient(180deg, $green-l, $green);
-      opacity: 1;
-    }
-
-    .task-name {
-      color: $gray-400;
-      text-decoration: line-through;
-    }
   }
 }
 
@@ -336,12 +312,6 @@ $green-l:   #34d399;
 
   &:hover {
     background: rgba($accent, 0.15);
-  }
-
-  @media (hover: none) {
-    &:active {
-      background: rgba($accent, 0.15);
-    }
   }
 }
 

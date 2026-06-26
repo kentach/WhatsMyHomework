@@ -1,5 +1,4 @@
 class Admin::NotificationsController < Admin::BaseController
-  layout "layouts/admin"
   before_action :set_notification, only: [ :edit, :update, :destroy ]
 
   def index
