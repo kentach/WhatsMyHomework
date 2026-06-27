@@ -79,13 +79,10 @@ ActiveRecord::Schema[7.2].define(version: 2026_06_27_015334) do
     t.integer "notification_type", default: 0, null: false
     t.integer "target_type", default: 0, null: false
     t.datetime "published_at"
-    t.integer "status", default: 0, null: false
+    t.string "status", default: "draft", null: false
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["published_at"], name: "index_notifications_on_published_at"
-    t.index ["status"], name: "index_notifications_on_status"
-    t.index ["target_type"], name: "index_notifications_on_target_type"
     t.index ["user_id"], name: "index_notifications_on_user_id"
   end
 
@@ -102,7 +99,6 @@ ActiveRecord::Schema[7.2].define(version: 2026_06_27_015334) do
 
   create_table "tasks", force: :cascade do |t|
     t.string "name", null: false
-    t.text "description"
     t.bigint "homework_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

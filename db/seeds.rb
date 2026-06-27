@@ -1,12 +1,3 @@
-VocabularyTest.delete_all
-TaskCompletion.delete_all
-Task.delete_all
-Homework.delete_all
-NotificationClassroom.delete_all
-Notification.delete_all
-User.delete_all
-Classroom.delete_all
-
 classrooms = [
   [ 'TOEIC', 'Toeic' ],
   [ '準1級', 'Pre1' ],
@@ -26,81 +17,11 @@ classrooms = [
   [ '小学生低学年5級', 'EL5' ]
 ]
 
-created_classrooms = classrooms.map do |name, level|
-  Classroom.create!(
-    eiken_level: level,
-    name: name
-  )
+classrooms.each do |name, level|
+  Classroom.find_or_create_by!(eiken_level: level) do |c|
+    c.name = name
+  end
 end
 
-user1 = User.create!(
-  name: "上拾石",
-  student_id: "kenta555",
-  password: "kenta555",
-  password_confirmation: "kenta555",
-  classroom: created_classrooms.find { |c| c.name == "準1級" },
-  role: 1
-)
-
-user2 = User.create!(
-  name: "大川",
-  student_id: "kotaro555",
-  password: "kotaro555",
-  password_confirmation: "kotaro555",
-  classroom: created_classrooms.find { |c| c.name == "2級" },
-  role: 1
-)
-
-user3 = User.create!(
-  name: "片山",
-  student_id: "daiki555",
-  password: "daiki555",
-  password_confirmation: "daiki555",
-  classroom: created_classrooms.find { |c| c.name == "準2級" },
-  role: 1
-)
-
-user4 = User.create!(
-  name: "矢野",
-  student_id: "tsubasa555",
-  password: "tsubasa555",
-  password_confirmation: "tsubasa555",
-  classroom: created_classrooms.find { |c| c.name == "準2級プラス" },
-  role: 1
-)
-
-user5 = User.create!(
-  name: "宮田",
-  student_id: "suzuka555",
-  password: "suzuka555",
-  password_confirmation: "suzuka555",
-  classroom: created_classrooms.find { |c| c.name == "中学生3級" },
-  role: 1
-)
-
-user5 = User.create!(
-  name: "大塚",
-  student_id: "mitsuki555",
-  password: "mitsuki555",
-  password_confirmation: "mitsuki555",
-  classroom: created_classrooms.find { |c| c.name == "小学生高学年5級" },
-  role: 1
-)
-
-user6 = User.create!(
-  name: "稲荷",
-  student_id: "hinako555",
-  password: "hinako555",
-  password_confirmation: "hinako555",
-  classroom: created_classrooms.find { |c| c.name == "小学生高学年4級" },
-  role: 1
-)
-
-user7 = User.create!(
-  name: "ゲスト",
-  student_id: "guest555",
-  password: "guest555",
-  password_confirmation: "guest555",
-  classroom: created_classrooms.find { |c| c.name == "小学生3級" },
-  role: 1
-)
+env_seed = Rails.root.join("db/seeds/#{Rails.env}.rb")
+load(env_seed) if File.exist?(env_seed)
