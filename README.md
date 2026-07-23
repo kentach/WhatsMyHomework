@@ -1,12 +1,12 @@
 ## サービス名 「宿題確認アプリ What's My Homework?」
 ### URL： [What's My Homework?](https://whatsmyhomework.onrender.com/)
 ### ※ ゲストログインの方（student ID/ password: guest555でログインしてください。）
-## ロゴ
-<img src="https://i.gyazo.com/201a1e51b74a205f536de44d4495ce02.png" width="500" alt="Image from Gyazo">
---- 
 
-## 広告デザイン
-<img src="https://i.gyazo.com/c0acd75731d0cd3e76d7615d10a91c34.png" width="500">
+| デザイン | 画像 |
+| --- | --- |
+| ロゴ | <img src="https://i.gyazo.com/201a1e51b74a205f536de44d4495ce02.png" width="500" alt="ロゴ"> |
+| 広告デザイン | <img src="https://i.gyazo.com/c0acd75731d0cd3e76d7615d10a91c34.png" width="500" alt="広告デザイン"> |
+
 ---
 ## ER図
 [![Image from Gyazo](https://i.gyazo.com/a9763c02a850dbbb5d238f6071d0e264.png)](https://i.gyazo.com/a9763c02a850dbbb5d238f6071d0e264)
@@ -331,6 +331,7 @@
 - 何が問題になりそうか：携帯を持っていない小学生や制限がかかっている携帯の場合、保護者がいないと宿題ができない状況が生まれる。
 - そのために考えている対策：そうした生徒には紙ベースで、宿題を配布する。
 
+---
 
 ## 9. 今後の展開・発展の方向性
 ### 今後の開発について（本リリース）
@@ -361,11 +362,11 @@
 | フロントエンド | HTML / CSS / JavaScript |
 | バックエンド | Ruby |
 | フレームワーク | Ruby on Rails |
-| 認証 | devise |
+| 認証 | Devise |
 | 環境構築 | Docker |
 | データベース | PostgreSQL |
 | デプロイ | Render |
-| 使用ライブラリ | devise（認証機能）<br>Chartkick（グラフ表示）<br>Active Storage（画像アップロード）<br>Ransack（検索機能）<br>Kaminari（ページネーション） |
+| 使用ライブラリ | Devise（認証機能）<br>Chartkick（グラフ表示）<br>Active Storage（画像アップロード）<br>Ransack（検索機能）<br>Kaminari（ページネーション） |
 | その他 | Bootstrap / rubocop / AdminLTE（管理画面のCSSフレームワーク）
 
 ### 10-2. 技術選定の理由
@@ -375,31 +376,19 @@ Ruby / Ruby on Rails
 Railsの「設定より規約」という原則により、アプリケーションの詳細な設定を大幅に減らせて、開発時間を短縮できると思ったため採用しました。
 また、RailsはWebアプリケーションに必要な標準機能（Gemなど）を提供しており、迅速にアプケーションを構築できると思いました。
 
-1. **開発速度が速い**
-   - 「設定より規約（Convention over Configuration）」の考え方により、少ないコード量で開発できるため。
-
-2. **学習コストが低い**
-   - Rubyは自然言語に近い文法で可読性が高く、初学者でも理解しやすい。
-
-3. **AIとの相性が良い**
-   - Ruby on Railsは利用者が多く、AIによるコード補完やエラー解析の精度が高いため。
-
-4. **豊富なGem（ライブラリ）が利用できる**
-   - DeviseやRansackなどのGemを活用することで、認証や検索機能などを効率的に実装できるため。
-
-5. **MVCアーキテクチャを採用している**
-   - 役割ごとにコードを分離でき、保守性・拡張性の高いアプリケーションを開発できるため。
+- **開発速度が速い**：「設定より規約（Convention over Configuration）」の考え方により、少ないコード量で開発できるため。
+- **学習コストが低い**：Rubyは自然言語に近い文法で可読性が高く、初学者でも理解しやすい。
+- **AIとの相性が良い**：Ruby on Railsは利用者が多く、AIによるコード補完やエラー解析の精度が高いため。
+- **豊富なGem（ライブラリ）が利用できる**：DeviseやRansackなどのGemを活用することで、認証や検索機能などを効率的に実装できるため。
+- **MVCアーキテクチャを採用している**：役割ごとにコードを分離でき、保守性・拡張性の高いアプリケーションを開発できるため。
 
 #### 【インフラ】
 Docker
-**環境構築を容易にするため**
-  - `docker compose up` を実行するだけで、RailsやPostgreSQLなどの必要なサービスをまとめて起動できるため。
+- **環境構築を容易にするため**: `docker compose up` を実行するだけで、RailsやPostgreSQLなどの必要なサービスをまとめて起動できるため。
 
 #### PostgreSQL
 
-- **Ruby on Railsとの親和性が高いため**
-  - Railsで広く利用されており、公式ドキュメントやチュートリアルでも採用例が多く、安心して利用できるため。
+- **Ruby on Railsとの親和性が高いため**：Railsで広く利用されており、公式ドキュメントやチュートリアルでも採用例が多く、安心して利用できるため。
 
-- **高い信頼性と安定性を備えているため**
-  - データの整合性を保つ機能が充実しており、本番環境でも多くのWebサービスで利用されているため。
+- **高い信頼性と安定性を備えているため**：データの整合性を保つ機能が充実しており、本番環境でも多くのWebサービスで利用されているため。
 ---
