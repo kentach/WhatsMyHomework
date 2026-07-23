@@ -398,7 +398,7 @@ DEPENDENCIES
   kaminari (= 1.2.2)
   pg (~> 1.1)
   puma (>= 5.0)
-  rails (~> 7.2.3, >= 7.2.3.1)
+  rails (~> 7.2)
   rails-i18n (~> 7.0.0)
   ransack
   rspec-rails
