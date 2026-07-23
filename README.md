@@ -2,10 +2,9 @@
 ### URL： [What's My Homework?](https://whatsmyhomework.onrender.com/)
 ### ※ ゲストログインの方（student ID/ password: guest555でログインしてください。）
 
-| デザイン | 画像 |
+| ロゴ | 広告デザイン |
 | --- | --- |
-| ロゴ | <img src="https://i.gyazo.com/201a1e51b74a205f536de44d4495ce02.png" width="500" alt="ロゴ"> |
-| 広告デザイン | <img src="https://i.gyazo.com/c0acd75731d0cd3e76d7615d10a91c34.png" width="500" alt="広告デザイン"> |
+| <img src="https://i.gyazo.com/201a1e51b74a205f536de44d4495ce02.png" width="300" alt="ロゴ"> | <img src="https://i.gyazo.com/c0acd75731d0cd3e76d7615d10a91c34.png" width="300" alt="広告デザイン"> |
 
 ---
 ## ER図
