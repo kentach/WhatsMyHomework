@@ -331,6 +331,7 @@
 - 何が問題になりそうか：携帯を持っていない小学生や制限がかかっている携帯の場合、保護者がいないと宿題ができない状況が生まれる。
 - そのために考えている対策：そうした生徒には紙ベースで、宿題を配布する。
 
+---
 
 ## 9. 今後の展開・発展の方向性
 ### 今後の開発について（本リリース）
@@ -361,11 +362,11 @@
 | フロントエンド | HTML / CSS / JavaScript |
 | バックエンド | Ruby |
 | フレームワーク | Ruby on Rails |
-| 認証 | devise |
+| 認証 | Devise |
 | 環境構築 | Docker |
 | データベース | PostgreSQL |
 | デプロイ | Render |
-| 使用ライブラリ | devise（認証機能）<br>Chartkick（グラフ表示）<br>Active Storage（画像アップロード）<br>Ransack（検索機能）<br>Kaminari（ページネーション） |
+| 使用ライブラリ | Devise（認証機能）<br>Chartkick（グラフ表示）<br>Active Storage（画像アップロード）<br>Ransack（検索機能）<br>Kaminari（ページネーション） |
 | その他 | Bootstrap / rubocop / AdminLTE（管理画面のCSSフレームワーク）
 
 ### 10-2. 技術選定の理由
