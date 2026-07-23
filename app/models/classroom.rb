@@ -1,4 +1,5 @@
 class Classroom < ApplicationRecord
+  validates :name, presence: true
   has_many :users, dependent: :nullify
   has_many :homeworks, dependent: :destroy
   has_many :notification_classrooms, dependent: :destroy
