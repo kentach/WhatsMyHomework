@@ -2,10 +2,9 @@
 ### URL： [What's My Homework?](https://whatsmyhomework.onrender.com/)
 ### ※ ゲストログインの方（student ID/ password: guest555でログインしてください。）
 
-| デザイン | 画像 |
+| ロゴ | 広告デザイン |
 | --- | --- |
-| ロゴ | <img src="https://i.gyazo.com/201a1e51b74a205f536de44d4495ce02.png" width="500" alt="ロゴ"> |
-| 広告デザイン | <img src="https://i.gyazo.com/c0acd75731d0cd3e76d7615d10a91c34.png" width="500" alt="広告デザイン"> |
+| <img src="https://i.gyazo.com/201a1e51b74a205f536de44d4495ce02.png" width="300" alt="ロゴ"> | <img src="https://i.gyazo.com/c0acd75731d0cd3e76d7615d10a91c34.png" width="300" alt="広告デザイン"> |
 
 ---
 ## ER図
@@ -371,8 +370,7 @@
 
 ### 10-2. 技術選定の理由
 
-#### 【バックエンド】
-Ruby / Ruby on Rails
+#### 【バックエンド】 Ruby / Ruby on Rails
 Railsの「設定より規約」という原則により、アプリケーションの詳細な設定を大幅に減らせて、開発時間を短縮できると思ったため採用しました。
 また、RailsはWebアプリケーションに必要な標準機能（Gemなど）を提供しており、迅速にアプケーションを構築できると思いました。
 
@@ -382,11 +380,10 @@ Railsの「設定より規約」という原則により、アプリケーショ
 - **豊富なGem（ライブラリ）が利用できる**：DeviseやRansackなどのGemを活用することで、認証や検索機能などを効率的に実装できるため。
 - **MVCアーキテクチャを採用している**：役割ごとにコードを分離でき、保守性・拡張性の高いアプリケーションを開発できるため。
 
-#### 【インフラ】
-Docker
+#### 【開発環境】 Docker
 - **環境構築を容易にするため**: `docker compose up` を実行するだけで、RailsやPostgreSQLなどの必要なサービスをまとめて起動できるため。
 
-#### PostgreSQL
+#### 【データベース】 PostgreSQL
 
 - **Ruby on Railsとの親和性が高いため**：Railsで広く利用されており、公式ドキュメントやチュートリアルでも採用例が多く、安心して利用できるため。
 
