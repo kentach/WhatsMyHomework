@@ -99,3 +99,33 @@
     font-size: 33px;
   }
 }
+
+/* ボタン */
+.btn-cta-primary {
+  background-color: #ff5757;
+  border-color: #ff5757;
+  color: white;
+}
+
+
+.btn-cta-primary {
+  font-size: 1.3rem;
+  width: 36%;
+  display: block;
+  padding: 16px 50px;
+
+  @media (max-width: 768px) {
+    font-size: 1rem;
+    padding: 12px 24px;
+    margin: 10px;
+    width: 100%;
+    display: block;
+    text-align: center;
+  }
+}
+
+.btn-cta-primary:hover {
+  background-color: #ff4545;
+  border-color: #ff4545;
+  color: white;
+}

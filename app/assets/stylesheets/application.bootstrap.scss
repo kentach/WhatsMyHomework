@@ -4,6 +4,13 @@
 // top.html.rb
 @import "top/top.scss";
 @import "top/hamburger.scss";
+@import "top/feature1.scss";
+@import "top/feature2.scss";
+@import "top/feature3.scss";
+@import "top/signin_button.scss";
+
+// トップページのFeatureの共通部分
+@import "top/shared_feature.scss";
 
 //ヘッダー
 @import 'header/after_login_header';
