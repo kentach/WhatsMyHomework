@@ -1,6 +1,10 @@
 @import 'bootstrap/scss/bootstrap';
 @import 'bootstrap-icons/font/bootstrap-icons';
 
+// top.html.rb
+@import "top/top.scss";
+@import "top/hamburger.scss";
+
 //ヘッダー
 @import 'header/after_login_header';
 @import 'header/before_login_header';
