@@ -1,0 +1,26 @@
+.feature-title {
+  font-size: 50px;
+
+  @media (max-width: 768px) {
+    font-size: 28px;
+  }
+}
+
+.feature-subtitle {
+  font-size: 20px;
+  margin-top: 20px;
+
+  @media (max-width: 768px) {
+    font-size: 15px;
+  }
+}
+
+.feature-number {
+  font-size: 30px;
+  letter-spacing: 1px;
+  font-weight: bold;
+
+  @media (max-width: 768px) {
+    font-size: 20px;
+  }
+}
