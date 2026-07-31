@@ -1,5 +1,5 @@
 class NotificationsController < ApplicationController
-  before_action :set_notification
+  before_action :published_notifications
 
   def index
     @q = published_notifications.ransack(params[:q])
