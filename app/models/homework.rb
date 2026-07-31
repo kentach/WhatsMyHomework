@@ -13,6 +13,7 @@ class Homework < ApplicationRecord
 
   enum status: { draft: "draft", published: "published" }
 
+  # adminの検索機能
   def self.ransackable_attributes(auth_object = nil)
     %w[
       title
