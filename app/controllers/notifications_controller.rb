@@ -1,29 +1,36 @@
 class NotificationsController < ApplicationController
+  before_action :set_notification
+
   def index
-    @q = Notification.published.ransack(params[:q])
+    @q = published_notifications.ransack(params[:q])
     @notifications = @q.result(distinct: true)
-                        .includes(:classrooms)
+                        .includes(:classrooms) # notificationモデルにhas_many :classrooms
                         .order(updated_at: :desc)
                         .page(params[:page]).per(7)
   end
 
   def show
-    @notification = Notification.published
-                                  .includes(:classrooms, :user)
-                                  .find(params[:id])
-    base = Notification.published
-                        .order(updated_at: :desc, id: :desc)
+    @notification = published_notifications.includes(:classrooms, :user).find(params[:id])
+
+    base = published_notifications.order(updated_at: :desc, id: :desc)
     @prev_notification = base.where(
       "updated_at > ? OR (updated_at = ? AND id > ?)",
       @notification.updated_at,
       @notification.updated_at,
       @notification.id
     ).last
+
     @next_notification = base.where(
       "updated_at < ? OR (updated_at = ? AND id < ?)",
       @notification.updated_at,
       @notification.updated_at,
       @notification.id
     ).first
+  end
+
+  private
+
+  def published_notifications
+    Notification.published
   end
 end

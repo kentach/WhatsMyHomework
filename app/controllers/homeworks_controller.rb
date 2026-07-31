@@ -26,5 +26,7 @@ class HomeworksController < ApplicationController
 
   def set_homework
     @homework = Homework.published.includes(:tasks).find(params[:id])
+    # 公開されている宿題に紐づくtasksを事前に一括取得
+    # URLと一致する1件を取得
   end
 end
