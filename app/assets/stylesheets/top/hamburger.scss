@@ -2,9 +2,11 @@
   position: fixed;
   top: 0;
   right: 0;
+
   width: 400px;
   z-index: 1000;
   height: 100vh;
+  
   padding-top: 80px;
   background: #ffc0c0;
   box-shadow: -2px 0 8px rgba(0,0,0,0.1);
@@ -14,7 +16,7 @@
   @media (max-width: 768px) {
     width: 100vw;
     padding-top: 60px;
-    clip-path: circle(0 at calc(100% - 26px) 26px);  // ← 追加
+    clip-path: circle(0 at calc(100% - 26px) 26px);
   }
 }
 

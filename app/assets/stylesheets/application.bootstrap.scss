@@ -1,9 +1,20 @@
 @import 'bootstrap/scss/bootstrap';
 @import 'bootstrap-icons/font/bootstrap-icons';
 
+// top.html.rb（LPページ）
+@import "top/top.scss";
+@import "top/hamburger.scss";
+@import "top/feature1.scss";
+@import "top/feature2.scss";
+@import "top/feature3.scss";
+@import "top/signin_button.scss";
+@import 'top/footer';
+
+// トップページのFeatureの共通部分
+@import "top/shared_feature.scss";
+
 //ヘッダー
 @import 'header/after_login_header';
-@import 'header/before_login_header';
 
 // フラッシュメッセージ
 @import 'shared/flash_message';
@@ -11,9 +22,6 @@
 //ナビゲーションバー
 @import 'shared/navigation_bar';
 
-// ログイン前画面
-@import 'before_login/before_login';
-@import 'before_login/footer';
 // サインイン・サインアップ
 @import "before_login/sign_in";
 @import "before_login/sign_up";

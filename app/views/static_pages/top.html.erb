@@ -8,17 +8,19 @@
     <i class="fa-solid fa-list-ul"></i>
   </div>
 
+  <!-- ハンバーガーボタン -->
   <nav class="hamburger-menu" id="hamburger-menu">
-      <ul>        
-        <li class="nav-item">
-        <i class="fa-solid fa-right-to-bracket"></i>
-          <%= link_to new_user_session_path,
-              class: "nav-link" do %>
-            ログイン
-          <% end %>
-        </li>
-      </ul>
+    <ul>        
+      <li class="nav-item">
+      <i class="fa-solid fa-right-to-bracket"></i>
+        <%= link_to new_user_session_path,
+            class: "nav-link" do %>
+          ログイン
+        <% end %>
+      </li>
+    </ul>
   </nav>
+  
   <div id="menu-overlay" class="menu-overlay"></div>
 
   <div class="sub-title-container">

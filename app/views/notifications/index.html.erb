@@ -7,8 +7,8 @@
       <p>まだお知らせはありません</p>
       <i class="fa-regular fa-bell-slash"></i>
     </div>
-
   <% else %>
+
     <% @notifications.each do |notification| %>
 
       <%= link_to notification_path(notification), 
@@ -16,16 +16,18 @@
         data: { turbo_frame: "notification_modal_frame" } do %>
 
         <div class="notification_card_container">
-
           <div class="notification-card-header">
+            <%# 通知種別 %>
             <%= notification_type_badge(notification) %>
+
+            <%# 通知日時 %>
             <p class="notification_date">
               <%= display_time(notification.updated_at) %>
             </p>
           </div>
-          
-          <h3 class="notification_title"><%= notification.title %></h3>
 
+          <%# 通知タイトル %>
+          <h3 class="notification_title"><%= notification.title %></h3>
           <div class="notification_card_body">
             <p><%= truncate(notification.content, length: 50, omission: "…") %></p>
           </div>
@@ -36,8 +38,8 @@
           </div>
         </div>
       <% end %>
-
     <% end %>
+
   <% end %>
 
   <div class="notification_pagination">

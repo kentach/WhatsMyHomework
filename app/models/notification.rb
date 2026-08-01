@@ -24,7 +24,7 @@ class Notification < ApplicationRecord
   }
 
   enum status: {
-      draft: 0,      # 下書き
+      draft: 0,     # 下書き
       published: 1  # 公開中
   }
 
