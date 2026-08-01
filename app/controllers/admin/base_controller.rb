@@ -6,9 +6,14 @@ class Admin::BaseController < ApplicationController
   private
 
   def authenticate_admin!
-    unless current_user&.admin?
+    if current_user.nil?
       flash[:danger] = "ログインしてください。"
       redirect_to admin_login_path
+
+    elsif !current_user.admin?
+
+      flash[:danger] = "管理者権限がありません。"
+      redirect_to homeworks_path
     end
   end
 end

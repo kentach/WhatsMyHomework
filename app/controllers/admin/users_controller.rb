@@ -18,6 +18,7 @@ class Admin::UsersController < Admin::BaseController
       redirect_to admin_users_path
     else
       render :new, status: :unprocessable_entity
+      # renderは「同じフォームに、入力済みの内容とエラーメッセージを乗せて」再表示できる。
     end
   end
 
@@ -32,12 +33,14 @@ class Admin::UsersController < Admin::BaseController
       redirect_to admin_users_path
     else
       render :edit, status: :unprocessable_entity
+      # バリデーション失敗時のHTTPステータス(422)を返す
     end
   end
 
   def destroy
     @user = User.find(params[:id])
     @user.destroy!
+    # destroy!：例外(エラー)を発生させる
     flash[:notice] = "ユーザーを削除しました"
     redirect_to admin_users_path
   end
