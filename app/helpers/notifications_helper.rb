@@ -7,9 +7,11 @@ module NotificationsHelper
     end
   end
 
-  def filter_active?(value)
+  def filter_active?(value) # 
     current = params.dig(:q, :notification_type_eq)
     value.nil? ? current.blank? : current == value.to_s
+    # blank? 中身が空ならtrueを返す
+    # to_s：「文字列」に変換する
   end
 
   NOTIFICATION_TYPE_BADGES = {

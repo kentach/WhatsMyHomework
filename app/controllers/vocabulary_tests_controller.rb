@@ -1,7 +1,8 @@
 class VocabularyTestsController < ApplicationController
+  before_action :score_graph, only: [:index]
+
   def index
-    score_graph
-    @scores = current_user.vocabulary_tests.includes(:homework)
+    @scores = user_scores.includes(:homework)
                             .order(homework_id: :desc)
                             .page(params[:page]).per(5)
   end
@@ -9,14 +10,14 @@ class VocabularyTestsController < ApplicationController
   def new
     @scores = VocabularyTest.includes(:homework).order(homework_id: :desc)
     @score = VocabularyTest.new(test_date: Date.today)
-    registered_homework_ids = current_user.vocabulary_tests.pluck(:homework_id) # ログイン中のユーザーがすでに登録済みの宿題IDを配列で取得
+    registered_homework_ids = user_scores.pluck(:homework_id) # ログイン中のユーザーがすでに登録済みの宿題IDを配列で取得
     @homeworks = Homework.where(classroom_id: current_user.classroom_id)
                           .where.not(id: registered_homework_ids)
                           .order(created_at: :desc)
   end
 
   def create
-    @score = current_user.vocabulary_tests.build(score_params)
+    @score = user_scores.build(score_params)
     if @score.save
       redirect_to vocabulary_tests_path, notice: "単語テストを新しく記録しました。"
     else
@@ -27,12 +28,12 @@ class VocabularyTestsController < ApplicationController
   end
 
   def edit
-    @score = current_user.vocabulary_tests.find(params[:id])
+    @score = user_scores.find(params[:id])
     @homeworks = Homework.where(classroom_id: current_user.classroom_id).order(created_at: :desc)
   end
 
   def update
-    @score = current_user.vocabulary_tests.find(params[:id])
+    @score = user_scores.find(params[:id])
     if @score.update(score_params)
       redirect_to vocabulary_tests_path, notice: "単語テストを更新しました。"
     else
@@ -54,10 +55,14 @@ class VocabularyTestsController < ApplicationController
   end
 
   def score_graph
-    @scores = current_user.vocabulary_tests.includes(:homework).order(homework_id: :asc)
+    @scores = user_scores.includes(:homework).order(homework_id: :asc)
     @score_data = [
       { name: "単語テスト", data: @scores.map { |score| [ score.homework.title, score.vocabulary_score, score.sentence_score ] } },
       { name: "文テスト", data: @scores.map { |score| [ score.homework.title, score.sentence_score, score.sentence_score ] } }
     ]
+  end
+
+  def user_scores
+    current_user.vocabulary_tests
   end
 end

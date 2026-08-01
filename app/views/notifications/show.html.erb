@@ -1,13 +1,18 @@
 <%= turbo_frame_tag "notification_modal_frame" do %>
+
   <div class="modal fade show d-block" style="background: rgba(0,0,0,0.5);">
     <div class="modal-dialog modal-dialog-centered">
+
       <div class="modal-content">
+      <%# モーダルのヘッダー　%>
         <div class="modal-header">
           <%= notification_type_badge(@notification) %>
           <button type="button" class="btn-close" 
                   data-action="click->modal#close"
                   onclick="this.closest('.modal').remove();"></button>
         </div>
+
+        <%# モーダルのボディ %>  
         <div class="modal-body">
           <div class="notification_show_meta">
             <span class="notification_show_date">
@@ -15,22 +20,24 @@
               <%= @notification.created_at.strftime("%-Y年%-m月%-d日") %>
               （<%= %w(日 月 火 水 木 金 土)[@notification.created_at.wday] %>）
             </span>
+            <span class="notification_show_class">
+              <%= notification_target_label(@notification) %>
+            </span>
             <% if @notification.user.present? %>
               <span class="notification_show_creator">
                 <i class="fa-solid fa-circle-user"></i>
                 作成者：<%= @notification.user.name %>先生
               </span>
             <% end %>
-            <span class="notification_show_class">
-              <%= notification_target_label(@notification) %>
-            </span>
           </div>
-          <hr>
+
+          <hr> <%# 区切り線 %>
           <h5 class="notification-modal-title"><%= @notification.title %></h5>
           <div class="notification_show_body">
             <%= simple_format(@notification.content) %>
           </div>
         </div>
+
       </div>
     </div>
   </div>
