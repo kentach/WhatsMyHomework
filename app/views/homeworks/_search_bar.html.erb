@@ -1,6 +1,8 @@
 <div class="search-wrapper">
     <%= search_form_for @q, url: homeworks_path, method: :get do |f| %>
+        <%# urlにフォーム送信先のURLを指定 %> 
       <i class="fa-solid fa-magnifying-glass"></i>
+      <%# title_cont(タイトルに部分一致) %>
       <%= f.search_field :title_cont,
           placeholder: "検索",
           class: "search-input",
