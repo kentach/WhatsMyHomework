@@ -1,9 +1,9 @@
 module NotificationsHelper
   def display_time(datetime)
-    if datetime.to_date == Date.current
-      datetime.strftime("%H:%M")
+    if datetime.to_date == Date.current # Date.current: 現在の日付を返す
+      datetime.strftime("%H:%M") # strftime: 日時を好きなフォーマット(書式)の文字列に変換する」メソッド
     else
-      datetime.strftime("%-m/%-d")
+      datetime.strftime("%-m/%-d") # %- の - は「先頭の 0 を省く」
     end
   end
 
@@ -12,20 +12,21 @@ module NotificationsHelper
     value.nil? ? current.blank? : current == value.to_s
   end
 
+  NOTIFICATION_TYPE_BADGES = {
+  "homework_correction" => { label: "宿題の訂正", color: "info" },
+  "monthly_vocab_test"  => { label: "月例単語テスト", color: "success" },
+  "event"               => { label: "イベント", color: "primary" },
+  "eiken_result"        => { label: "英検結果", color: "warning" },
+  "information"         => { label: "お知らせ", color: "secondary" },
+  "others"              => { label: "その他", color: "dark" },
+  }.freeze
+
   def notification_type_badge(notification)
-    badge = case notification.notification_type
-    when "homework_correction" then { label: "宿題の訂正", color: "info" }
-    when "monthly_vocab_test"  then { label: "月例単語テスト", color: "success" }
-    when "event"               then { label: "イベント", color: "primary" }
-    when "eiken_result"        then { label: "英検結果", color: "warning" }
-    when "information"         then { label: "お知らせ", color: "secondary" }
-    when "others"              then { label: "その他", color: "dark" }
-    end
+    badge = NOTIFICATION_TYPE_BADGES[notification.notification_type]
     return unless badge
 
-    content_tag(:span, class: "badge bg-#{badge[:color]}") do
-      badge[:label]
-    end
+    content_tag(:span, badge[:label], class: "badge bg-#{badge[:color]}")
+    # content_tagはHTMLを生成する
   end
 
   def notification_target_label(notification)
@@ -45,5 +46,19 @@ module NotificationsHelper
   def classroom_names(notification, length: 10)
     names = notification.classrooms.map(&:name).join("、").presence
     truncate(names, length: length, omission: "…") || "未設定"
+  end
+
+  # 通知の種別分けボタン
+  def notification_filter_buttons
+    types = Notification.notification_types
+    {
+      "すべて"         => nil,
+      "宿題の訂正"     => types["homework_correction"],
+      "月例単語テスト" => types["monthly_vocab_test"],
+      "イベント"       => types["event"],
+      "英検結果"       => types["eiken_result"],
+      "お知らせ"       => types["information"],
+      "その他"         => types["others"]
+    }
   end
 end

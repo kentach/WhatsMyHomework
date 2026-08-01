@@ -5,7 +5,7 @@ class NotificationsController < ApplicationController
     @q = published_notifications.ransack(params[:q])
     @notifications = @q.result(distinct: true)
                         .includes(:classrooms) # notificationモデルにhas_many :classrooms
-                        .order(updated_at: :desc)
+                        .order(updated_at: :desc) # 更新された順
                         .page(params[:page]).per(7)
   end
 
