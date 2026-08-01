@@ -1,6 +1,6 @@
 class VocabularyTestsController < ApplicationController
-  before_action :score_graph, only: [:index]
-  before_action :set_user_classroom_homeworks, only: [:new, :create, :edit]
+  before_action :score_graph, only: [ :index ]
+  before_action :set_user_classroom_homeworks, only: [ :new, :create, :edit ]
 
   def index
     @scores = user_scores.includes(:homework)

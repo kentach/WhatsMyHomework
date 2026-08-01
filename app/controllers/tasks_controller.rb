@@ -2,7 +2,7 @@ class TasksController < ApplicationController
   before_action :set_date, only: :index
 
   def index
-    @classroom = current_user.classroom #　ユーザーが所属するクラス
+    @classroom = current_user.classroom # ユーザーが所属するクラス
     @homeworks = @classroom.homeworks.published.includes(:tasks).where(
       "DATE(test_start_date) <= ? AND DATE(test_end_date) >= ?",
       @selected_date,
@@ -28,7 +28,7 @@ class TasksController < ApplicationController
       elsif @week_days.include?(Date.today)
         Date.today
       else
-        week_start #　月曜日
+        week_start # 月曜日
       end
   end
 end

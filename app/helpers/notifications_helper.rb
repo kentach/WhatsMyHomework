@@ -7,7 +7,7 @@ module NotificationsHelper
     end
   end
 
-  def filter_active?(value) # 
+  def filter_active?(value)
     current = params.dig(:q, :notification_type_eq)
     value.nil? ? current.blank? : current == value.to_s
     # blank? 中身が空ならtrueを返す
@@ -20,7 +20,7 @@ module NotificationsHelper
   "event"               => { label: "イベント", color: "primary" },
   "eiken_result"        => { label: "英検結果", color: "warning" },
   "information"         => { label: "お知らせ", color: "secondary" },
-  "others"              => { label: "その他", color: "dark" },
+  "others"              => { label: "その他", color: "dark" }
   }.freeze
 
   def notification_type_badge(notification)
