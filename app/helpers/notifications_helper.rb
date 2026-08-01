@@ -25,29 +25,35 @@ module NotificationsHelper
 
   def notification_type_badge(notification)
     badge = NOTIFICATION_TYPE_BADGES[notification.notification_type]
+    # 上記のハッシュ（Hash）から値を取り出して、badgeに格納
     return unless badge
 
     content_tag(:span, badge[:label], class: "badge bg-#{badge[:color]}")
     # content_tagはHTMLを生成する
+    # ハッシュからキーを取り出す
   end
 
+  #　通知の一覧ページの種別ラベル
   def notification_target_label(notification)
     if notification.specific_class?
       content_tag(:span) do
         content_tag(:i, "", class: "fa-solid fa-user-group") +
-        " クラス #{notification.classrooms.map(&:name).join("・")}"
+        "#{notification.classrooms.map(&:name).join("・")}"
       end
     elsif notification.all_classes?
       content_tag(:span) do
-        content_tag(:i, "", class: "fa-solid fa-users") + " 全クラス"
+        content_tag(:i, "", class: "fa-solid fa-users") + "全クラス"
+        # ""の理由は、アイコンは文字が空であるから。
       end
     end
   end
 
-  # クラス名を最初の１０文字のみ表示するロジック
+  # クラス名を最初の10文字のみ表示するロジック
   def classroom_names(notification, length: 10)
     names = notification.classrooms.map(&:name).join("、").presence
+    # presence: 値が存在すればその値を返し、空なら nil を返す
     truncate(names, length: length, omission: "…") || "未設定"
+                    # 最大文字数    # 省略したことを表す文字
   end
 
   # 通知の種別分けボタン

@@ -8,6 +8,8 @@ class Admin::UserSessionsController < Admin::BaseController
   def create
     user = User.find_by(student_id: params[:student_id])
     if user&.valid_password?(params[:password]) && user.admin?
+      # &.：オブジェクトが nil の場合でもエラーにせず nil を返す
+      # valid_password?：登録されているパスワードと一致しているか
       sign_in user
       redirect_to admin_root_path, notice: "ログインしました。"
     else

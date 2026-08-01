@@ -25,7 +25,7 @@ Rails.application.routes.draw do
     # 管理画面ログイン
     get "login" => "user_sessions#new", :as => :login
     post "login" => "user_sessions#create"
-    get  "logout" => "user_sessions#destroy", :as => :logout
+    delete  "logout" => "user_sessions#destroy", :as => :logout
   end
 
   devise_for :users, controllers: {

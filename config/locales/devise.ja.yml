@@ -13,7 +13,7 @@ ja:
       last_attempt: "あと1回失敗するとアカウントがロックされます。"
       not_found_in_database: "%{authentication_keys} またはパスワードが正しくありません。"
       timeout: "セッションの有効期限が切れました。再度ログインしてください。"
-      unauthenticated: "続行するにはログインまたは新規登録が必要です。"
+      unauthenticated: "続行するにはログインが必要です。"
       unconfirmed: "続行する前にメールアドレスの確認が必要です。"
 
     mailer:

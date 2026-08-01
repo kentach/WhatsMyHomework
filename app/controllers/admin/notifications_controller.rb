@@ -52,6 +52,7 @@ class Admin::NotificationsController < Admin::BaseController
 
   def base_scope
     Notification.includes(:user, :classrooms).order(updated_at: :desc)
+    # includes(): アソシエーションで関連付けられている別のテーブルのデータを一緒に取得する
   end
 
   def set_notification

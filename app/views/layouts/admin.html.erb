@@ -9,8 +9,8 @@
   <%= stylesheet_link_tag "admin", media: "all" %>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
-<body class="layout-fixed sidebar-expand-lg bg-body-tertiary">
 
+<body class="layout-fixed sidebar-expand-lg bg-body-tertiary">
   <div class="app-wrapper">
     <%= render "admin/shared/header_bar" %>
     <%= render "admin/shared/sidebar" %>
@@ -27,6 +27,7 @@
         </div>
       </div>
     </main>
+    
   </div>
   <%= javascript_include_tag "admin", type: "module" %>
 </body>
