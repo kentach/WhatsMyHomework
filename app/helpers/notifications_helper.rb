@@ -33,7 +33,7 @@ module NotificationsHelper
     # ハッシュからキーを取り出す
   end
 
-  #　通知の一覧ページの種別ラベル
+  # 通知の一覧ページの種別ラベル
   def notification_target_label(notification)
     if notification.specific_class?
       content_tag(:span) do
@@ -53,7 +53,7 @@ module NotificationsHelper
     names = notification.classrooms.map(&:name).join("、").presence
     # presence: 値が存在すればその値を返し、空なら nil を返す
     truncate(names, length: length, omission: "…") || "未設定"
-                    # 最大文字数    # 省略したことを表す文字
+    # 最大文字数 # 省略したことを表す文字
   end
 
   # 通知の種別分けボタン
