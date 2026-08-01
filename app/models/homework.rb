@@ -9,12 +9,14 @@ class Homework < ApplicationRecord
   has_many :tasks, dependent: :destroy
   has_many :vocabulary_tests, dependent: :destroy
 
+  # 1つのフォームで親子関係にあるデータをまとめて保存したい時
   accepts_nested_attributes_for :tasks, allow_destroy: true, reject_if: :all_blank
 
   enum status: { draft: "draft", published: "published" }
 
-  # adminの検索機能
+  # adminの検索機能 検索してよいカラムの許可リスト
   def self.ransackable_attributes(auth_object = nil)
+    # %w[ ]：文字列の配列を簡単に書くためのRubyの記法
     %w[
       title
       status

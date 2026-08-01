@@ -3,17 +3,18 @@ class Admin::HomeworksController < Admin::BaseController
   before_action :set_classrooms, only: [ :new, :edit, :create, :update ]
 
   def index
-    @homeworks = paginate_homeworks(Homework.all)
+    @homeworks = paginate_homeworks(Homework.includes(:classroom))
   end
 
   def new # formで表示する内容
     @homework = Homework.new
     @homework.tasks.build
+    # 親のインスタンス.関連名.build
+    # この@homeworkに紐づく、新しいtaskを1つ作る
   end
 
   def create
-    @homework = Homework.new(homework_params) # relationが存在しないので、この書き方
-    @homework.user_id = current_user.id
+    @homework = current_user.homeworks.build(homework_params) # userモデルにhas_many :homeworks
     if @homework.save
       redirect_to admin_root_path, notice: "宿題を作成しました"
     else
@@ -40,11 +41,11 @@ class Admin::HomeworksController < Admin::BaseController
   end
 
   def draft
-    @homeworks = paginate_homeworks(Homework.draft)
+    @homeworks = paginate_homeworks(Homework.includes(:classroom).draft)
   end
 
   def published
-    @homeworks = paginate_homeworks(Homework.published)
+    @homeworks = paginate_homeworks(Homework.includes(:classroom).published)
   end
 
   private
@@ -53,16 +54,16 @@ class Admin::HomeworksController < Admin::BaseController
     @homework = Homework.find(params[:id])
   end
 
-  def set_classrooms
+  def set_classrooms # クラス一覧を取得する(プルダウン用)
     @classrooms = Classroom.all
   end
 
   def paginate_homeworks(scope)
     @q = scope.ransack(params[:q])
     @q.result(distinct: true)
-    .order(updated_at: :desc)
-    .page(params[:page])
-    .per(20)
+      .order(updated_at: :desc)
+      .page(params[:page])
+      .per(20)
   end
 
   def homework_params
@@ -73,6 +74,8 @@ class Admin::HomeworksController < Admin::BaseController
       :test_end_date,
       :classroom_id,
       tasks_attributes: [ :id, :name, :pdf, :_destroy ]
+      # 関連名_attributes: [許可するキーの配列]
+      # 関連するタスクのデータも一緒に保存できるようにするための許可設定
     )
   end
 end
